@@ -111,6 +111,11 @@ function initThemeSwitcher() {
   }
 
   themeBtn.addEventListener('click', () => {
+    // Trigger smooth 360-degree spin animation
+    themeBtn.classList.remove('animated');
+    void themeBtn.offsetWidth; // force DOM reflow
+    themeBtn.classList.add('animated');
+
     const isLight = body.classList.toggle('light-mode');
     if (isLight) {
       body.classList.remove('dark-mode');
@@ -119,6 +124,7 @@ function initThemeSwitcher() {
         icon.classList.remove('fa-moon');
         icon.classList.add('fa-sun');
       }
+      showToast('Switched to Light Gaming Mode ☀️');
     } else {
       body.classList.add('dark-mode');
       localStorage.setItem(MF_STORAGE_KEYS.THEME, 'dark');
@@ -126,6 +132,7 @@ function initThemeSwitcher() {
         icon.classList.remove('fa-sun');
         icon.classList.add('fa-moon');
       }
+      showToast('Switched to Dark Cyber Mode 🌙');
     }
   });
 }

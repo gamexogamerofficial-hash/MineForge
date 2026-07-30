@@ -6,6 +6,11 @@
   <title>MineForge — Custom Minecraft Mods & Plugins Development (1.21 to 26.30+)</title>
   <meta name="description" content="MineForge — Apne Minecraft server ya game ke liye custom Mods aur Plugins banwao. Supports all versions from 1.21 to 26.30 Chaos Cubed and 26.50+." />
   
+  <!-- Website Logo in Browser Tablist (Favicon / Icon) -->
+  <link rel="icon" type="image/png" href="assets/images/logo.png" />
+  <link rel="shortcut icon" href="assets/images/logo.png" />
+  <link rel="apple-touch-icon" href="assets/images/logo.png" />
+
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <!-- Custom Design System CSS -->
@@ -35,7 +40,7 @@
         <span>MineForge</span>
       </a>
 
-      <!-- Clean 4-Link Navigation (Reviews Removed) -->
+      <!-- Clean 4-Link Navigation -->
       <nav class="nav-menu">
         <ul id="nav-links" class="nav-links">
           <li><a href="#hero" class="nav-link active">Home</a></li>
@@ -48,7 +53,7 @@
 
       <!-- Right Navigation Actions -->
       <div class="nav-actions">
-        <!-- Theme Toggle Button (0-Lag Sun/Moon Switcher) -->
+        <!-- Theme Toggle Button with Sleek Animation -->
         <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme (Light / Dark)">
           <i class="fa-solid fa-moon"></i>
         </button>
@@ -59,7 +64,7 @@
           <span id="nav-account-label">Account</span>
         </button>
 
-        <!-- Premium Sleek Order Now Button (No Blocky Cube Icon) -->
+        <!-- Premium Sleek Order Now Button -->
         <a href="#order" class="btn-nav-order">
           <i class="fa-solid fa-bolt"></i>
           <span>Order Now</span>
@@ -80,7 +85,6 @@
        HERO SECTION (NIGHT MINECRAFT LAKE WALLPAPER)
        ========================================================================= -->
   <section id="hero" class="hero">
-    <!-- User's Night-Time Lake Background Wallpaper -->
     <div class="hero-bg" style="background-image: url('assets/images/home_bg.png');"></div>
     <div class="hero-overlay"></div>
 
@@ -288,7 +292,7 @@
   </section>
 
   <!-- =========================================================================
-       PRICING SECTION
+       PRICING SECTION (NEW UPDATED PRICING: $10 STARTER, $25 PRO ⭐, $50 ENTERPRISE)
        ========================================================================= -->
   <section id="pricing" class="pricing">
     <div class="container">
@@ -297,74 +301,83 @@
         <div class="section-tag"><i class="fa-solid fa-tag"></i> Transparent Pricing</div>
         <h2 class="section-title">Development <span class="highlight">Packages</span></h2>
         <p class="section-subtitle">
-          Apne server ke scale aur budget ke mutabik best development tier choose karen. Custom quotes bhi available hain.
+          Apne server ke scale aur budget ke mutabik best development tier choose karen. Starter, Pro aur Enterprise plans.
         </p>
       </div>
 
       <div class="pricing-grid">
         
-        <!-- Tier 1: Starter -->
-        <div class="pricing-card">
+        <!-- Tier 1: 🟢 Starter ($10 starting / $10–15 value) -->
+        <div class="pricing-card tier-starter">
           <div>
-            <h3 class="pricing-tier-name">Starter Mod / Plugin</h3>
-            <p class="pricing-subtitle">Small utility plugin ya basic single-purpose mod ke liye.</p>
+            <div class="pricing-tier-header">
+              <span class="tier-indicator green-dot">🟢</span>
+              <h3 class="pricing-tier-name">Starter</h3>
+            </div>
+            <p class="pricing-subtitle">Small utility plugin ya basic single-purpose mod feature ($10–15 value).</p>
+            <div class="pricing-price-box">
+              <span class="price-currency">$</span>
+              <span class="price-amount">10</span>
+              <span class="price-period">/ starting</span>
+            </div>
+            <div class="pricing-features">
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 1 Simple Plugin ya Mod Feature</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 1 Minecraft Version Support</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Basic Config Support</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 3 Days Bug Fix Support</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Source Code Included</div>
+            </div>
+          </div>
+          <a href="#order" class="btn btn-outline" style="width: 100%;">Get Starter Build ($10)</a>
+        </div>
+
+        <!-- Tier 2: 🔵 Pro ⭐ (Most Popular, $25 starting / $30–40 value) -->
+        <div class="pricing-card popular tier-pro">
+          <div class="popular-badge">⭐ Most Popular</div>
+          <div>
+            <div class="pricing-tier-header">
+              <span class="tier-indicator blue-dot">🔵</span>
+              <h3 class="pricing-tier-name">Pro</h3>
+            </div>
+            <p class="pricing-subtitle">Medium Plugin/Mod with multiple features, GUI aur optimization ($30–40 value).</p>
             <div class="pricing-price-box">
               <span class="price-currency">$</span>
               <span class="price-amount">25</span>
               <span class="price-period">/ starting</span>
             </div>
             <div class="pricing-features">
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Single Custom Feature / Item / GUI</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 1.21 to 26.30+ Support</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Optimized for 60+ Players</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 1 Week Free Support & Bug Fixes</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Clean Source Code Provided</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Medium Plugin / Mod Development</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Multiple Features &amp; Custom GUI</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Config Files &amp; Better Optimization</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 14 Days Bug Fix &amp; Dev Support</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Source Code Included</div>
             </div>
           </div>
-          <a href="#order" class="btn btn-outline" style="width: 100%;">Get Starter Build</a>
+          <a href="#order" class="btn btn-primary" style="width: 100%;">Order Pro Build ($25)</a>
         </div>
 
-        <!-- Tier 2: Pro (Popular) -->
-        <div class="pricing-card popular">
-          <div class="popular-badge">Most Popular</div>
+        <!-- Tier 3: 🟣 Enterprise ($50 starting / $75+ scale) -->
+        <div class="pricing-card tier-enterprise">
           <div>
-            <h3 class="pricing-tier-name">Pro Server Suite</h3>
-            <p class="pricing-subtitle">Medium server features, custom gamemodes aur PvP systems.</p>
+            <div class="pricing-tier-header">
+              <span class="tier-indicator purple-dot">🟣</span>
+              <h3 class="pricing-tier-name">Enterprise</h3>
+            </div>
+            <p class="pricing-subtitle">Large Plugin/Mod, custom systems, DB aur API integration ($75+ scale).</p>
             <div class="pricing-price-box">
               <span class="price-currency">$</span>
-              <span class="price-amount">80</span>
-              <span class="price-period">/ starting</span>
+              <span class="price-amount">50</span>
+              <span class="price-period">/ starting ($75+)</span>
             </div>
             <div class="pricing-features">
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Custom Gameplay / Minigame Core</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Advanced GUIs & Economy Hooks</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Zero TPS Drop Guarantee</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 1 Month Dedicated Discord Support</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Configurable YAML & SQL Storage</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Large Plugin / Mod Development</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Custom Systems &amp; Database</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> API Integration &amp; Documentation</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 1 Month Full Dev Support</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Source Code Included</div>
             </div>
           </div>
-          <a href="#order" class="btn btn-primary" style="width: 100%;">Order Pro Build</a>
-        </div>
-
-        <!-- Tier 3: Enterprise -->
-        <div class="pricing-card">
-          <div>
-            <h3 class="pricing-tier-name">Custom Enterprise</h3>
-            <p class="pricing-subtitle">Full server network, custom modpacks aur large-scale systems.</p>
-            <div class="pricing-price-box">
-              <span class="price-currency">$</span>
-              <span class="price-amount">200</span>
-              <span class="price-period">/ custom quote</span>
-            </div>
-            <div class="pricing-features">
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Entire Modpack / Complex Gamemode</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Custom Entities & Packet Control</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Dedicated Developer Consultation</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 3 Months VIP Maintenance & Updates</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Full IP Ownership & Documentation</div>
-            </div>
-          </div>
-          <a href="#order" class="btn btn-outline" style="width: 100%;">Request Custom Quote</a>
+          <a href="#order" class="btn btn-outline" style="width: 100%;">Order Enterprise ($50+)</a>
         </div>
 
       </div>
@@ -420,7 +433,6 @@
               </div>
               <div class="form-group">
                 <label class="form-label" for="target-version">Minecraft Version *</label>
-                <!-- Sleek dropdown/input options for exact versions -->
                 <input type="text" id="target-version" class="form-input" placeholder="e.g. 1.21.4 / 26.10 / 26.30 (Chaos Cubed)" required />
               </div>
             </div>
@@ -430,7 +442,6 @@
               <textarea id="build-desc" class="form-textarea" placeholder="Bataiye aapko kaisa mod ya plugin banwana hai, kya commands hongi, kaisa gameplay chahiye..." required></textarea>
             </div>
 
-            <!-- Drag and drop simulated file upload -->
             <div class="form-group">
               <label class="form-label">Upload Reference / Spec Document (Optional)</label>
               <div id="file-dropzone" class="file-upload-box">
