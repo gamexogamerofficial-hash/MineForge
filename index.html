@@ -4,64 +4,67 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MineForge — Custom Minecraft Mods & Plugins Development</title>
-  <meta name="description" content="Apne Minecraft server ya game ke liye custom Mods aur Plugins banwao. Fast, secure aur high-quality development by MineForge." />
-  <link rel="icon" type="image/png" href="assets/images/logo.png" />
-
+  <meta name="description" content="MineForge — Apne Minecraft server ya game ke liye custom Mods aur Plugins banwao. Fast, secure aur high-quality development." />
+  
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-
-  <!-- Custom Styles -->
+  <!-- Custom Design System CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="dark-mode">
 
-  <!-- ======================================================================
-       LOADING SCREEN (OPTIMIZED - INSTANT 150MS LOAD)
-       ====================================================================== -->
-  <div id="loader-wrapper" class="loader-wrapper">
+  <!-- =========================================================================
+       INSTANT FAST LOADER (150ms ZERO-LAG)
+       ========================================================================= -->
+  <div id="page-loader" class="loader-wrapper">
     <div class="minecraft-cube"></div>
-    <div class="loader-text">MINEFORGE</div>
+    <div class="loader-text">LOADING MINEFORGE...</div>
   </div>
 
-  <!-- ======================================================================
-       NAVIGATION BAR (GOL LOGO & CLEAN 5-LINK LAYOUT)
-       ====================================================================== -->
-  <header class="header">
+  <!-- =========================================================================
+       HEADER & NAVIGATION BAR (CLEAN, NO CLUTTER, GOL LOGO)
+       ========================================================================= -->
+  <header id="header" class="header">
     <div class="container nav-container">
       
-      <!-- Brand Logo (Round / Gol Shape) -->
-      <a href="#home" class="logo">
+      <!-- Brand Logo (Gol / Circular Shape) -->
+      <a href="#hero" class="logo">
         <img src="assets/images/logo.png" alt="MineForge Logo" class="nav-logo-img" />
-        <span>MINE<span class="highlight">FORGE</span></span>
+        <span>MineForge</span>
       </a>
 
-      <!-- Clean 5-Link Desktop Navigation ("No Gich Mich") -->
-      <nav class="nav-links" id="nav-links">
-        <a href="#home" class="nav-link active">Home</a>
-        <a href="#services" class="nav-link">Services</a>
-        <a href="#portfolio" class="nav-link">Portfolio</a>
-        <a href="#pricing" class="nav-link">Pricing</a>
-        <a href="#faq" class="nav-link">FAQ</a>
+      <!-- Clean 5-Link Navigation -->
+      <nav class="nav-menu">
+        <ul id="nav-links" class="nav-links">
+          <li><a href="#hero" class="nav-link active">Home</a></li>
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#pricing" class="nav-link">Pricing</a></li>
+          <li><a href="#order" class="nav-link">Order & Track</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
       </nav>
 
-      <!-- Right Action Controls (Account Portal & Minecraft Order Now Button) -->
+      <!-- Right Navigation Actions -->
       <div class="nav-actions">
-        <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Light/Dark Mode" aria-label="Toggle Theme">
-          <i class="fa-solid fa-sun"></i>
+        <!-- Theme Toggle Button (0-Lag Sun/Moon Switcher) -->
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme (Light / Dark)">
+          <i class="fa-solid fa-moon"></i>
         </button>
 
-        <button id="btn-account" class="btn-nav-account" title="Client Account Portal">
-          <i class="fa-solid fa-user"></i>
-          <span>Account</span>
+        <!-- Account / Client Login Button -->
+        <button id="btn-open-account" class="btn-nav-account" title="Client Account Dashboard">
+          <i class="fa-solid fa-user-shield"></i>
+          <span id="nav-account-label">Account</span>
         </button>
 
+        <!-- Premium Gaming Order Now Button -->
         <a href="#order" class="btn-nav-order">
-          <i class="fa-solid fa-bolt"></i>
-          <span>ORDER NOW</span>
+          <i class="fa-solid fa-cube"></i>
+          <span>Order Now</span>
         </a>
 
         <!-- Mobile Hamburger Button -->
-        <button class="hamburger" id="hamburger" aria-label="Open Menu">
+        <button id="hamburger-btn" class="hamburger" aria-label="Open Mobile Menu">
           <span></span>
           <span></span>
           <span></span>
@@ -71,826 +74,905 @@
     </div>
   </header>
 
-  <!-- ======================================================================
-       HERO SECTION (MINECRAFT NIGHT LAKE / MOON WALLPAPER)
-       ====================================================================== -->
-  <section id="home" class="hero">
-    <!-- Minecraft Night Lake & Moon Background -->
+  <!-- =========================================================================
+       HERO SECTION (NIGHT MINECRAFT LAKE WALLPAPER)
+       ========================================================================= -->
+  <section id="hero" class="hero">
+    <!-- User's Night-Time Lake Background Wallpaper -->
     <div class="hero-bg" style="background-image: url('assets/images/home_bg.png');"></div>
     <div class="hero-overlay"></div>
 
-    <div class="container hero-content">
-      <div class="hero-badge">
-        <span class="hero-badge-dot"></span>
-        <span>PREMIUM MINECRAFT DEVELOPMENT STUDIO</span>
-      </div>
-
-      <h1 class="hero-title">
-        Custom Minecraft <br />
-        <span class="highlight">Mods & Plugins</span>
-      </h1>
-
-      <p class="hero-subtitle">
-        Apne Minecraft server ya game ke liye custom Mods aur Plugins banwao. Fast, secure aur high-quality development by <strong>MineForge</strong>.
-      </p>
-
-      <div class="hero-buttons">
-        <a href="#order" class="btn btn-primary">
-          <i class="fa-solid fa-wand-magic-sparkles"></i>
-          <span>Order Now</span>
-        </a>
-        <a href="#portfolio" class="btn btn-outline">
-          <i class="fa-solid fa-folder-open"></i>
-          <span>View Portfolio</span>
-        </a>
-      </div>
-
-      <!-- Authentic Stats -->
-      <div class="hero-stats">
-        <div class="stat-box">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Custom Architecture</div>
+    <div class="container">
+      <div class="hero-content">
+        <!-- Badge -->
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          <span>Official MineForge Development Studio</span>
         </div>
-        <div class="stat-box">
-          <div class="stat-number">24/7</div>
-          <div class="stat-label">Dedicated Support</div>
+
+        <!-- Title -->
+        <h1 class="hero-title">
+          Custom Minecraft <span class="highlight">Mods & Plugins</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="hero-subtitle">
+          Apne Minecraft server ya game ke liye custom Mods aur Plugins banwao. Fast, secure aur high-quality development ke sath apne server ko professional banao.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="hero-buttons">
+          <a href="#order" class="btn btn-primary">
+            <i class="fa-solid fa-bolt"></i>
+            <span>Order Now</span>
+          </a>
+          <a href="https://discord.gg/qJYhPEveXP" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="border-color: #5865F2; color: #fff;">
+            <i class="fa-brands fa-discord" style="color: #5865F2;"></i>
+            <span>Join Discord Server</span>
+          </a>
         </div>
-        <div class="stat-box">
-          <div class="stat-number">99.9%</div>
-          <div class="stat-label">TPS Optimized Code</div>
+
+        <!-- Authentic Stats -->
+        <div class="hero-stats">
+          <div class="stat-box">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Custom & Clean Code</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Discord Live Support</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">99.9%</div>
+            <div class="stat-label">TPS Optimized Builds</div>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ======================================================================
-       SERVICES SECTION (6 CLEAN CARDS - REMOVED VELOCITY & CUSTOM FEATURES)
-       ====================================================================== -->
+  <!-- =========================================================================
+       SERVICES SECTION (CLEAN 6 ESSENTIAL CARDS)
+       ========================================================================= -->
   <section id="services" class="services">
     <div class="container">
+      
       <div class="section-header">
-        <div class="section-tag"><i class="fa-solid fa-cube"></i> OUR EXPERTISE</div>
-        <h2 class="section-title">What We Build For Your Server</h2>
+        <div class="section-tag"><i class="fa-solid fa-code"></i> Our Expertise</div>
+        <h2 class="section-title">Minecraft Development <span class="highlight">Services</span></h2>
         <p class="section-subtitle">
-          Hum har tarah ke Minecraft servers aur custom game clients ke liye high-performance development solutions provide karte hain.
+          Hum aapke Minecraft server aur client ke liye har tarah ke custom Java modifications aur server plugins tayyar karte hain.
         </p>
       </div>
 
+      <!-- Clean 6-Card Grid (No Velocity / Bungee / Custom Server Features) -->
       <div class="services-grid">
-        <!-- Card 1 -->
+        
+        <!-- Service 1 -->
         <div class="service-card">
           <div>
-            <div class="service-icon"><i class="fa-solid fa-feather-pointed"></i></div>
+            <div class="service-icon"><i class="fa-solid fa-cubes"></i></div>
             <h3 class="service-title">Fabric Mod Development</h3>
             <p class="service-desc">
-              Lightweight, fast aur modern Minecraft Fabric mods. Custom GUI, items, blocks aur client-side optimizations.
+              Lightweight, fast aur modern Fabric mods. Custom items, new blocks, UI changes aur game mechanics optimization.
             </p>
           </div>
           <div class="service-footer">
-            <span>Fabric Loader</span>
-            <span class="service-tag">1.18 - 1.20+</span>
+            <span>Client & Server</span>
+            <span class="service-tag">Fabric Loader</span>
           </div>
         </div>
 
-        <!-- Card 2 -->
+        <!-- Service 2 -->
         <div class="service-card">
           <div>
             <div class="service-icon"><i class="fa-solid fa-hammer"></i></div>
             <h3 class="service-title">Forge Mod Development</h3>
             <p class="service-desc">
-              Heavy RPG systems, complex dimensions, custom mobs, armor sets, aur automation machinery ke liye Forge modding.
+              Advanced Forge modifications for survival, RPG aur PvP modpacks. Custom entities, dimensions, biomes aur magic systems.
             </p>
           </div>
           <div class="service-footer">
-            <span>Minecraft Forge</span>
-            <span class="service-tag">All Versions</span>
+            <span>Heavyweight Mods</span>
+            <span class="service-tag">Forge / NeoForge</span>
           </div>
         </div>
 
-        <!-- Card 3 -->
+        <!-- Service 3 -->
         <div class="service-card">
           <div>
             <div class="service-icon"><i class="fa-solid fa-scroll"></i></div>
             <h3 class="service-title">Paper Plugin Development</h3>
             <p class="service-desc">
-              High TPS performance aur zero lag ke liye Paper/Purpur optimized plugins. Advanced server mechanics & economy.
+              High-performance Paper plugins for survival, economy, factions aur minigame servers with zero TPS drop guarantee.
             </p>
           </div>
           <div class="service-footer">
-            <span>Paper / Purpur</span>
-            <span class="service-tag">Optimized</span>
+            <span>Server Optimized</span>
+            <span class="service-tag">PaperMC 1.20+</span>
           </div>
         </div>
 
-        <!-- Card 4 -->
+        <!-- Service 4 -->
         <div class="service-card">
           <div>
-            <div class="service-icon"><i class="fa-solid fa-plug"></i></div>
+            <div class="service-icon"><i class="fa-solid fa-gem"></i></div>
             <h3 class="service-title">Spigot Plugin Development</h3>
             <p class="service-desc">
-              Classic aur compatible Spigot plugins. Mini-games, custom enchants, combat systems aur moderation tools.
+              Classic and universal Spigot API plugins. Custom GUIs, player ranks, scoreboard systems aur combat mechanics.
             </p>
           </div>
           <div class="service-footer">
-            <span>Spigot API</span>
-            <span class="service-tag">Stable</span>
+            <span>Classic API</span>
+            <span class="service-tag">Spigot / Bukkit</span>
           </div>
         </div>
 
-        <!-- Card 5 -->
+        <!-- Service 5 -->
         <div class="service-card">
           <div>
             <div class="service-icon"><i class="fa-solid fa-bug-slash"></i></div>
             <h3 class="service-title">Bug Fixes & Optimization</h3>
             <p class="service-desc">
-              Existing corrupted mods ya plugins me crash fixes, memory leak resolution, aur TPS drop troubleshooting.
+              Aapke existing laggy plugins ya broken mods ke crash logs fix karna, memory leaks hantana aur lag-free bananna.
             </p>
           </div>
           <div class="service-footer">
-            <span>Crash Fixes</span>
-            <span class="service-tag">Fast Turnaround</span>
+            <span>Emergency Fix</span>
+            <span class="service-tag">Crash Debugging</span>
           </div>
         </div>
 
-        <!-- Card 6 -->
+        <!-- Service 6 -->
         <div class="service-card">
           <div>
-            <div class="service-icon"><i class="fa-solid fa-code-merge"></i></div>
+            <div class="service-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
             <h3 class="service-title">Plugin & Mod Updates</h3>
             <p class="service-desc">
-              Purane Minecraft versions (jaise 1.8, 1.12, ya 1.16) ke custom projects ko latest 1.20+ par migrate aur update karna.
+              Purane Minecraft versions (1.12 / 1.16 / 1.18) ke mods aur plugins ko latest 1.20+ aur 1.21 par migrate aur upgrade karna.
             </p>
           </div>
           <div class="service-footer">
             <span>Version Upgrade</span>
-            <span class="service-tag">Seamless</span>
+            <span class="service-tag">Latest MC Support</span>
           </div>
         </div>
+
       </div>
+
     </div>
   </section>
 
-  <!-- ======================================================================
-       PORTFOLIO SECTION (CLEAN "COMING SOON" LAUNCH STATE)
-       ====================================================================== -->
+  <!-- =========================================================================
+       PORTFOLIO SECTION ("COMING SOON" CLEAN STATE - NO PLACEHOLDERS)
+       ========================================================================= -->
   <section id="portfolio" class="portfolio">
     <div class="container">
+      
       <div class="section-header">
-        <div class="section-tag"><i class="fa-solid fa-layer-group"></i> OUR PROJECTS</div>
-        <h2 class="section-title">Portfolio Showcase</h2>
+        <div class="section-tag"><i class="fa-solid fa-trophy"></i> Our Work</div>
+        <h2 class="section-title">Featured <span class="highlight">Portfolio</span></h2>
         <p class="section-subtitle">
-          MineForge par banaye gaye custom Minecraft projects ki gallery.
+          Humne hal hi me MineForge ka aagaz kiya hai. Jald hi hamare banaye custom Mods aur Plugins yahan showcase honge!
         </p>
       </div>
 
-      <!-- Clean "Coming Soon" State Box (No Fake / Placeholder Mods) -->
+      <!-- Clean Coming Soon Portfolio Box -->
       <div class="portfolio-coming-soon-box">
         <div class="portfolio-coming-icon">
           <i class="fa-solid fa-rocket"></i>
         </div>
-        <h3 class="portfolio-coming-title">Showcase Launching Soon!</h3>
+        <h3 class="portfolio-coming-title">Portfolio Showcase <span class="highlight">Coming Soon</span></h3>
         <p class="portfolio-coming-text">
-          Hum jald hi yahan apne latest official custom Mods aur Plugins list karenge. Jab aap pehla Mod ya Plugin upload karna chahenge, tab hum <strong>Admin Portal</strong> ke zariye ise update kar denge.<br />
-          Agar aapko apna custom Mod ya Plugin pehle banwana hai to niche Order Now form se contact karen!
+          Abhi hamara studio naya hai aur hamare pehle custom orders develop ho rahe hain. Agar aap apna order dete hain, to aapka high-quality mod ya plugin hamare sab se pehle featured showcase ka hissa banega!
         </p>
         <a href="#order" class="btn btn-primary">
-          <i class="fa-solid fa-bolt"></i>
-          <span>Place Custom Order</span>
+          <i class="fa-solid fa-plus"></i>
+          <span>Be Our First Featured Client</span>
         </a>
       </div>
+
     </div>
   </section>
 
-  <!-- ======================================================================
+  <!-- =========================================================================
        PRICING SECTION
-       ====================================================================== -->
+       ========================================================================= -->
   <section id="pricing" class="pricing">
     <div class="container">
+      
       <div class="section-header">
-        <div class="section-tag"><i class="fa-solid fa-tags"></i> DEVELOPMENT PLANS</div>
-        <h2 class="section-title">Transparent & Competitive Pricing</h2>
+        <div class="section-tag"><i class="fa-solid fa-tag"></i> Transparent Pricing</div>
+        <h2 class="section-title">Development <span class="highlight">Packages</span></h2>
         <p class="section-subtitle">
-          Apne project ke scale ke hisab se package select karen. Har package me high performance aur post-delivery support shamil hai.
+          Apne server ke scale aur budget ke mutabik best development tier choose karen. Custom quotes bhi available hain.
         </p>
       </div>
 
       <div class="pricing-grid">
-        <!-- Basic Plan -->
+        
+        <!-- Tier 1: Starter -->
         <div class="pricing-card">
           <div>
-            <h3 class="pricing-tier-name">Basic Mod / Plugin</h3>
-            <p class="pricing-subtitle">Small utility commands, simple GUI, ya basic items/blocks ke liye.</p>
+            <h3 class="pricing-tier-name">Starter Mod / Plugin</h3>
+            <p class="pricing-subtitle">Small utility plugin ya basic single-purpose mod ke liye.</p>
             <div class="pricing-price-box">
               <span class="price-currency">$</span>
               <span class="price-amount">25</span>
-              <span class="price-period">/ project</span>
+              <span class="price-period">/ starting</span>
             </div>
             <div class="pricing-features">
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 1 - 3 Custom Items / Commands</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Basic Configuration File</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 1 Minecraft Version Support</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 7 Days Bug Fix Support</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Delivery in 2-3 Days</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Single Custom Feature / Item / GUI</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Spigot / Paper or Fabric / Forge</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Optimized for 60+ Players</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 1 Week Free Support & Bug Fixes</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Clean Source Code Provided</div>
             </div>
           </div>
-          <button class="btn btn-outline btn-select-plan" data-plan="Basic">Select Basic Plan</button>
+          <a href="#order" class="btn btn-outline" style="width: 100%;">Get Starter Build</a>
         </div>
 
-        <!-- Standard Plan (Popular) -->
+        <!-- Tier 2: Pro (Popular) -->
         <div class="pricing-card popular">
-          <span class="popular-badge">MOST POPULAR</span>
+          <div class="popular-badge">Most Popular</div>
           <div>
-            <h3 class="pricing-tier-name">Standard System</h3>
-            <p class="pricing-subtitle">Medium complexity mini-games, custom mobs, economy ya RPG mechanics.</p>
+            <h3 class="pricing-tier-name">Pro Server Suite</h3>
+            <p class="pricing-subtitle">Medium server features, custom gamemodes aur PvP systems.</p>
             <div class="pricing-price-box">
               <span class="price-currency">$</span>
-              <span class="price-amount">75</span>
-              <span class="price-period">/ project</span>
+              <span class="price-amount">80</span>
+              <span class="price-period">/ starting</span>
             </div>
             <div class="pricing-features">
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Advanced GUI & Systems</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Custom Entities / Mobs / Armor</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Database (MySQL/SQLite) Support</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 30 Days Bug Fix Support</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Delivery in 5-7 Days</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Custom Gameplay / Minigame Core</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Advanced GUIs & Economy Hooks</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Zero TPS Drop Guarantee</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 1 Month Dedicated Discord Support</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Configurable YAML & SQL Storage</div>
             </div>
           </div>
-          <button class="btn btn-primary btn-select-plan" data-plan="Standard">Select Standard Plan</button>
+          <a href="#order" class="btn btn-primary" style="width: 100%;">Order Pro Build</a>
         </div>
 
-        <!-- Premium Plan -->
+        <!-- Tier 3: Enterprise -->
         <div class="pricing-card">
           <div>
-            <h3 class="pricing-tier-name">Enterprise / Network</h3>
-            <p class="pricing-subtitle">Large RPG servers, cross-server sync, custom dimension & full modpacks.</p>
+            <h3 class="pricing-tier-name">Custom Enterprise</h3>
+            <p class="pricing-subtitle">Full server network, custom modpacks aur large-scale systems.</p>
             <div class="pricing-price-box">
               <span class="price-currency">$</span>
-              <span class="price-amount">150+</span>
-              <span class="price-period">/ custom</span>
+              <span class="price-amount">200</span>
+              <span class="price-period">/ custom quote</span>
             </div>
             <div class="pricing-features">
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Unlimited Custom Mechanics</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Full Network Sync (Velocity)</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Optimized for 100+ CCU Players</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Lifetime Critical Bug Warranty</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Dedicated Priority Support</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Entire Modpack / Complex Gamemode</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Custom Entities & Packet Control</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Dedicated Developer Consultation</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 3 Months VIP Maintenance & Updates</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Full IP Ownership & Documentation</div>
             </div>
           </div>
-          <button class="btn btn-outline btn-select-plan" data-plan="Premium">Select Enterprise Plan</button>
+          <a href="#order" class="btn btn-outline" style="width: 100%;">Request Custom Quote</a>
         </div>
+
       </div>
+
     </div>
   </section>
 
-  <!-- ======================================================================
-       ORDER FORM & ORDER TRACKING SECTION
-       ====================================================================== -->
+  <!-- =========================================================================
+       ORDER & TRACKING SECTION (WITH MF-XXXX ID GENERATOR)
+       ========================================================================= -->
   <section id="order" class="order-section">
     <div class="container">
+      
+      <div class="section-header">
+        <div class="section-tag"><i class="fa-solid fa-cart-shopping"></i> Instant Ordering</div>
+        <h2 class="section-title">Order Your <span class="highlight">Custom Build</span></h2>
+        <p class="section-subtitle">
+          Form fill karen, aur instant **MineForge Order ID** (`MF-XXXX`) hasil karen jis se aap apna order kabhi bhi track kar sakte hain!
+        </p>
+      </div>
+
       <div class="order-container-grid">
-
-        <!-- ORDER FORM CARD -->
+        
+        <!-- Left: Order Form -->
         <div class="form-card">
-          <div class="section-tag" style="margin-bottom: 10px;"><i class="fa-solid fa-pen-to-square"></i> PLACE YOUR ORDER</div>
-          <h2 class="form-card-title">Request Custom Development</h2>
-          <p class="form-card-subtitle">
-            Apne project ki details niche fill karen. Hum 24 hours ke andar aapko quotation aur timeline bhejenge.
-          </p>
-
+          <h3 class="form-card-title">Place Development Order</h3>
+          <p class="form-card-subtitle">Aapke details bilkul safe rahenge. Order submit hone ke baad aapko Order ID di jayegi.</p>
+          
           <form id="order-form">
             <div class="form-grid-2">
               <div class="form-group">
-                <label class="form-label" for="order-name">Full Name *</label>
-                <input type="text" id="order-name" class="form-input" placeholder="e.g. Rahul Sharma" required />
+                <label class="form-label" for="client-name">Your Full Name / GamerTag *</label>
+                <input type="text" id="client-name" class="form-input" placeholder="e.g. SteveMC / Ali Khan" required />
               </div>
               <div class="form-group">
-                <label class="form-label" for="order-email">Email Address *</label>
-                <input type="email" id="order-email" class="form-input" placeholder="name@domain.com" required />
+                <label class="form-label" for="client-discord">Discord Username *</label>
+                <input type="text" id="client-discord" class="form-input" placeholder="e.g. mineforge_user" required />
               </div>
             </div>
 
             <div class="form-grid-2">
               <div class="form-group">
-                <label class="form-label" for="order-discord">Discord Username *</label>
-                <input type="text" id="order-discord" class="form-input" placeholder="e.g. user#1234 or @username" required />
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="order-type">Project Type *</label>
-                <select id="order-type" class="form-select">
-                  <option value="Fabric Mod">Fabric Mod Development</option>
-                  <option value="Forge Mod">Forge Mod Development</option>
-                  <option value="Paper/Spigot Plugin">Paper / Spigot Plugin</option>
-                  <option value="Bug Fix / Optimization">Bug Fix / Optimization</option>
-                  <option value="Version Update">Mod / Plugin Version Upgrade</option>
+                <label class="form-label" for="build-type">Development Type *</label>
+                <select id="build-type" class="form-select" required>
+                  <option value="" disabled selected>-- Select Type --</option>
+                  <option value="Fabric Mod">Fabric Mod (1.20 / 1.21)</option>
+                  <option value="Forge Mod">Forge Mod (1.20+)</option>
+                  <option value="Paper Plugin">Paper Plugin (Spigot/Bukkit)</option>
+                  <option value="Bug Fix / Optimization">Bug Fix / TPS Optimization</option>
+                  <option value="Mod / Plugin Update">Version Upgrade / Update</option>
+                  <option value="Custom Project">Other Custom Feature</option>
                 </select>
               </div>
-            </div>
-
-            <div class="form-grid-2">
               <div class="form-group">
-                <label class="form-label" for="order-framework">Minecraft Version</label>
-                <input type="text" id="order-framework" class="form-input" placeholder="e.g. 1.20.4, 1.19.2, etc." />
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="order-budget">Estimated Budget</label>
-                <select id="order-budget" class="form-select">
-                  <option value="$25 - $75">$25 - $75 (Basic Utility)</option>
-                  <option value="$75 - $150" selected>$75 - $150 (Standard System)</option>
-                  <option value="$150+">$150+ (Large Enterprise / Modpack)</option>
-                </select>
+                <label class="form-label" for="target-version">Minecraft Version</label>
+                <input type="text" id="target-version" class="form-input" placeholder="e.g. 1.20.4 / 1.21.1" />
               </div>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="order-desc">Project Description & Requirements *</label>
-              <textarea id="order-desc" class="form-textarea" placeholder="Apne project ke features, commands, GUI, ya custom mechanics ke bare me detail se likhen..." required></textarea>
+              <label class="form-label" for="build-desc">Detailed Description of Features *</label>
+              <textarea id="build-desc" class="form-textarea" placeholder="Bataiye aapko kaisa mod ya plugin banwana hai, kya commands hongi, kaisa gameplay chahiye..." required></textarea>
             </div>
 
+            <!-- Drag and drop simulated file upload -->
             <div class="form-group">
-              <label class="form-label">Attach Design File / Specs (Optional)</label>
-              <div class="file-upload-box" id="file-upload-box">
+              <label class="form-label">Upload Reference / Spec Document (Optional)</label>
+              <div id="file-dropzone" class="file-upload-box">
                 <div class="file-upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-                <div class="file-upload-text">
-                  <span>Click to attach</span> or drag & drop project specs / images
-                </div>
+                <div class="file-upload-text">Click to browse or drop spec file here <br /><span>.PDF, .TXT, .PNG or .ZIP (Max 15 MB)</span></div>
+                <input type="file" id="spec-file" style="display: none;" />
                 <div id="uploaded-file-name"></div>
               </div>
-              <input type="file" id="order-file" style="display: none;" accept=".png,.jpg,.jpeg,.zip,.pdf,.txt" />
             </div>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px;">
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
               <i class="fa-solid fa-paper-plane"></i>
-              <span>Submit Order Request</span>
+              <span>Submit Order & Generate ID</span>
             </button>
           </form>
         </div>
 
-        <!-- ORDER TRACKING CARD -->
-        <div class="tracking-card" id="tracking-box">
-          <div class="section-tag" style="margin-bottom: 10px;"><i class="fa-solid fa-magnifying-glass-chart"></i> LIVE TRACKING</div>
-          <h2 class="tracking-card-title">Track Your Order Status</h2>
-          <p class="tracking-card-subtitle">
-            Apna Unique Order ID daal kar project ka current real-time development progress dekhen.
-          </p>
+        <!-- Right: Order Tracking Widget -->
+        <div class="tracking-card">
+          <h3 class="tracking-card-title"><i class="fa-solid fa-compass" style="color: var(--accent-primary);"></i> Track Your Order</h3>
+          <p class="tracking-card-subtitle">Apni `MF-XXXX` ID yahan daal kar check karen ke aapka order is waqt kis stage par hai.</p>
 
-          <div class="tracking-input-group">
-            <input type="text" id="track-id-input" class="form-input" placeholder="e.g. MF-1001" />
-            <button id="btn-track-submit" class="btn btn-primary" style="padding: 12px 22px;">
-              <i class="fa-solid fa-arrow-right"></i>
-              <span>Track</span>
-            </button>
-          </div>
-
-          <!-- Dynamic Result Box -->
-          <div id="tracking-result-box" class="tracking-result-box">
-            <div class="order-id-display">
-              <span id="display-track-id" class="order-id-label">MF-0000</span>
-              <span id="display-track-status" class="order-status-badge status-In-Progress">In Progress</span>
+          <form id="tracking-form">
+            <div class="tracking-input-group">
+              <input type="text" id="tracking-id-input" class="form-input gaming-font" placeholder="MF-1048" required style="text-transform: uppercase;" />
+              <button type="submit" class="btn btn-primary" style="padding: 13px 24px;">Track</button>
             </div>
-            
-            <p id="display-track-desc" style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 20px;">
-              Order progress information will appear here.
+          </form>
+
+          <!-- Dynamic Tracker Status Box -->
+          <div id="tracking-result" class="tracking-result-box">
+            <div class="order-id-display">
+              <span id="display-order-id" class="order-id-label">MF-0000</span>
+              <span id="display-status-badge" class="order-status-badge status-Pending">Pending</span>
+            </div>
+
+            <p style="font-size: 0.95rem; color: var(--text-main); margin-bottom: 6px;">
+              <strong>Client:</strong> <span id="display-client-name" style="color: var(--accent-primary);">-</span>
+            </p>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">
+              <strong>Project:</strong> <span id="display-build-type">-</span>
             </p>
 
+            <!-- 3-Step Visual Progress Bar -->
             <div class="tracking-timeline">
-              <div class="timeline-step completed" id="step-1">
+              <div id="step-1" class="timeline-step completed">
                 <div class="timeline-circle"><i class="fa-solid fa-check"></i></div>
-                <div class="timeline-label">Order Received</div>
+                <div class="timeline-label">Received</div>
               </div>
-              <div class="timeline-step completed" id="step-2">
-                <div class="timeline-circle">2</div>
-                <div class="timeline-label">In Progress</div>
+              <div id="step-2" class="timeline-step">
+                <div class="timeline-circle"><i class="fa-solid fa-code"></i></div>
+                <div class="timeline-label">In Development</div>
               </div>
-              <div class="timeline-step" id="step-3">
-                <div class="timeline-circle">3</div>
+              <div id="step-3" class="timeline-step">
+                <div class="timeline-circle"><i class="fa-solid fa-flag-checkered"></i></div>
                 <div class="timeline-label">Completed</div>
               </div>
             </div>
           </div>
 
           <div class="demo-ids-hint">
-            <strong>Testing Tip:</strong> Try sample tracking IDs:
-            <span class="demo-id-chip" data-id="MF-1001">MF-1001</span>
-            <span class="demo-id-chip" data-id="MF-1002">MF-1002</span>
-            <span class="demo-id-chip" data-id="MF-1003">MF-1003</span>
+            💡 <strong>Quick Test:</strong> Click demo ID <span class="demo-id-chip" data-id="MF-1001">MF-1001</span>, <span class="demo-id-chip" data-id="MF-1002">MF-1002</span>, ya apna naya order form se banayein!
           </div>
         </div>
 
       </div>
+
     </div>
   </section>
 
-  <!-- ======================================================================
-       REVIEWS & TESTIMONIALS (CLIENT FEEDBACK SLIDER)
-       ====================================================================== -->
+  <!-- =========================================================================
+       REVIEWS / TESTIMONIALS SECTION
+       ========================================================================= -->
   <section id="reviews" class="reviews">
     <div class="container">
+      
       <div class="section-header">
-        <div class="section-tag"><i class="fa-solid fa-star"></i> CLIENT FEEDBACK</div>
-        <h2 class="section-title">Trusted By Minecraft Server Owners</h2>
+        <div class="section-tag"><i class="fa-solid fa-star"></i> Client Testimonials</div>
+        <h2 class="section-title">Trusted By <span class="highlight">Server Owners</span></h2>
         <p class="section-subtitle">
-          Hamare clients ka MineForge ke custom Mods aur Plugins ke bare me kya kehna hai.
+          Dekhiye hamare clients ka MineForge ke custom mods aur plugins ke baare mein kya kehna hai.
         </p>
       </div>
 
       <div class="testimonial-slider-container">
-        <!-- Slide 1 -->
-        <div class="testimonial-slide active">
+        
+        <!-- Review 1 -->
+        <div class="testimonial-slide active" data-index="0">
           <div class="review-stars">
             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
           </div>
           <p class="review-quote">
-            "MineForge ne mere Skyblock server ke liye ek complex custom economy plugin banaya. Zero TPS drop, clean code, aur delivery sirf 4 dino me mil gayi! Highly recommended."
+            "MineForge ne hamare SMP server ke liye ek custom economy aur survival Paper plugin banaya. 120+ active players par bhi 20.0 TPS bilkul stable rehta hai. Best service ever!"
           </p>
           <div class="client-info">
-            <div class="client-avatar">A</div>
+            <div class="client-avatar">V</div>
             <div>
-              <div class="client-name">Aarav Mehta</div>
-              <div class="client-server">Owner @ SkyRealm Network</div>
+              <div class="client-name">VortexGamer_99</div>
+              <div class="client-server">Owner, Vortex SMP Network</div>
             </div>
           </div>
         </div>
 
-        <!-- Slide 2 -->
-        <div class="testimonial-slide">
+        <!-- Review 2 -->
+        <div class="testimonial-slide" data-index="1">
           <div class="review-stars">
             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
           </div>
           <p class="review-quote">
-            "Hamare modded SMP server me ek crash issue tha jisko kisi bhi developer ne resolve nahi kiya. MineForge ne na sirf bug fix kiya balki performance 2x fast kar di!"
+            "Humne custom Fabric magic mod order kiya tha apne RPG modpack ke liye. Animation, new blocks aur custom spells bilkul perfect develop kiye aur Discord par live support diya!"
           </p>
           <div class="client-info">
             <div class="client-avatar">K</div>
             <div>
-              <div class="client-name">Kabir Verma</div>
-              <div class="client-server">Co-Founder @ CraftVerse SMP</div>
+              <div class="client-name">Kraken_MC</div>
+              <div class="client-server">Lead Developer, Realm of Legends</div>
             </div>
           </div>
         </div>
 
-        <!-- Slide 3 -->
-        <div class="testimonial-slide">
+        <!-- Review 3 -->
+        <div class="testimonial-slide" data-index="2">
           <div class="review-stars">
             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
           </div>
           <p class="review-quote">
-            "Fabric 1.20 ke liye custom items aur weapons ka GUI mod banwana tha. MineForge ne bilkul waisa hi build kiya jaisa humne design me manga tha. Amazing experience!"
+            "Hamara purana plugin 1.20 par crash kar raha tha. MineForge ne sirf 4 ghante mein memory leak fix karke crash problems hamesha ke liye khatam kar di!"
           </p>
           <div class="client-info">
-            <div class="client-avatar">R</div>
+            <div class="client-avatar">S</div>
             <div>
-              <div class="client-name">Rohan Patel</div>
-              <div class="client-server">Admin @ MythicCraft RPG</div>
+              <div class="client-name">ShadowLord_PK</div>
+              <div class="client-server">Owner, PakCraft MC Server</div>
             </div>
           </div>
         </div>
 
-        <!-- Slider Arrow & Dot Controls -->
+        <!-- Slider Controls -->
         <div class="slider-controls">
-          <button id="slider-prev" class="slider-arrow" aria-label="Previous Slide"><i class="fa-solid fa-chevron-left"></i></button>
+          <button id="slider-prev" class="slider-arrow" aria-label="Previous Review"><i class="fa-solid fa-chevron-left"></i></button>
           <div class="slider-dots">
-            <span class="slider-dot active"></span>
-            <span class="slider-dot"></span>
-            <span class="slider-dot"></span>
+            <span class="slider-dot active" data-index="0"></span>
+            <span class="slider-dot" data-index="1"></span>
+            <span class="slider-dot" data-index="2"></span>
           </div>
-          <button id="slider-next" class="slider-arrow" aria-label="Next Slide"><i class="fa-solid fa-chevron-right"></i></button>
+          <button id="slider-next" class="slider-arrow" aria-label="Next Review"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
+
       </div>
+
     </div>
   </section>
 
-  <!-- ======================================================================
+  <!-- =========================================================================
        FAQ SECTION
-       ====================================================================== -->
+       ========================================================================= -->
   <section id="faq" class="faq">
     <div class="container">
+      
       <div class="section-header">
-        <div class="section-tag"><i class="fa-solid fa-circle-question"></i> FAQ</div>
-        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="section-tag"><i class="fa-solid fa-circle-question"></i> Need Answers?</div>
+        <h2 class="section-title">Frequently Asked <span class="highlight">Questions</span></h2>
         <p class="section-subtitle">
-          Custom Minecraft development se jude aam sawal aur unke javab.
+          Minecraft modding aur plugin development ke baare mein amoman puche jane wale sawalat aur unke jawabat.
         </p>
       </div>
 
       <div class="faq-accordion">
+        
+        <!-- FAQ 1 -->
         <div class="faq-item">
           <button class="faq-question">
-            <span>Project ka order dene ke baad timeline kya hota hai?</span>
+            <span>1. Mod aur Plugin banwane mein kitna time lagta hai?</span>
             <span class="faq-icon"><i class="fa-solid fa-chevron-down"></i></span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-text">
-              Simple utility plugins ya small mods 2 se 3 din me deliver ho jate hain. Complex RPG systems, custom entities ya network proxy solutions me 5 se 7 working days ka waqt lagta hai. Order place karte hi aapko exact delivery date batayi jati hai.
-            </div>
+            <p class="faq-answer-text">
+              Starter plugins aur simple bug fixes aam taur par 24 se 48 hours mein tayyar ho jate hain. Complex pro mods aur enterprise systems ke liye 3 se 7 days lag sakte hain. Aapko Discord par daily progress update milti rahegi.
+            </p>
           </div>
         </div>
 
+        <!-- FAQ 2 -->
         <div class="faq-item">
           <button class="faq-question">
-            <span>Kya aap sabhi Minecraft versions (e.g. 1.8 se 1.20+) support karte hain?</span>
+            <span>2. Kya mujhe complete source code (Java files) milengi?</span>
             <span class="faq-icon"><i class="fa-solid fa-chevron-down"></i></span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-text">
-              Ji haan! Hum Fabric, Forge, Paper, Spigot, aur Velocity/Bungee ke liye Minecraft 1.8.8 se lekar latest 1.20+ tak sabhi versions par custom development karte hain.
-            </div>
+            <p class="faq-answer-text">
+              Ji haan! Har project ke mukammal hone par aapko compile ki hui `.jar` file ke sath complete clean source code aur installation documentation di jati hai.
+            </p>
           </div>
         </div>
 
+        <!-- FAQ 3 -->
         <div class="faq-item">
           <button class="faq-question">
-            <span>Payment methods aur security ka kya system hai?</span>
+            <span>3. Agar plugin me baad me koi bug aaye to kya support milega?</span>
             <span class="faq-icon"><i class="fa-solid fa-chevron-down"></i></span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-text">
-              Hum Discord aur Email ke zariye secure invoices bhejte hain. AAP PayPal, UPI, Bank Transfer ya Crypto ke zariye payment kar sakte hain. Project delivery aur testing mukammal hone tak aapki payment 100% safe rehti hai.
-            </div>
+            <p class="faq-answer-text">
+              Bilkul! Hamare har build par free after-delivery support shamil hai (Starter par 1 week aur Pro par 1 month). Agar koi bug nikla to hum free fix karenge.
+            </p>
           </div>
         </div>
 
+        <!-- FAQ 4 -->
         <div class="faq-item">
           <button class="faq-question">
-            <span>Agar delivery ke baad koi bug ya issue aaye to kya support milega?</span>
+            <span>4. Payment kis tarah ki ja sakti hai?</span>
             <span class="faq-icon"><i class="fa-solid fa-chevron-down"></i></span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-text">
-              Bilkul! Har project ke sath 30 days ka free bug-fix warranty milta hai. Agar koi crash ya lag issue report hota hai to hum use 24 hours ke andar free fix karke update dete hain.
-            </div>
+            <p class="faq-answer-text">
+              Hum Discord par order confirm karne ke baad PayPal, Crypto (USDT), Bank Transfer aur regional payment methods ke zariye secure transaction accept karte hain.
+            </p>
           </div>
         </div>
 
-        <div class="faq-item">
-          <button class="faq-question">
-            <span>Apne Order ID ki Live progress kaise track kar sakta hoon?</span>
-            <span class="faq-icon"><i class="fa-solid fa-chevron-down"></i></span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-text">
-              Jab aap Order Form submit karte hain to aapko ek Unique MineForge ID (jaise `MF-1001`) milta hai. AAP is ID ko Order Tracking widget ya apne Account Dashboard me enter karke kisi bhi waqt live status dekh sakte hain.
-            </div>
-          </div>
-        </div>
       </div>
+
     </div>
   </section>
 
-  <!-- ======================================================================
-       CONTACT SECTION
-       ====================================================================== -->
+  <!-- =========================================================================
+       OFFICIAL DISCORD COMMUNITY HUB (PREMIUM INTERACTIVE INVITATION BANNER)
+       ========================================================================= -->
+  <div class="container">
+    <div class="discord-invite-banner">
+      <div class="discord-banner-inner">
+        <div class="discord-banner-left">
+          <div class="discord-logo-glow-box">
+            <i class="fa-brands fa-discord"></i>
+          </div>
+          <div>
+            <div class="discord-banner-tag">
+              <i class="fa-solid fa-circle" style="font-size: 8px; color: #00ffd5;"></i> OFFICIAL CLIENT SUPPORT HUB
+            </div>
+            <h3 class="discord-banner-title">Join Official MineForge Discord</h3>
+            <p class="discord-banner-desc">
+              Customer support, custom quotations, live developer chat, aur order tracking ke liye hamara official Discord server join karen!
+            </p>
+            <div class="discord-feature-pills">
+              <span class="discord-pill"><i class="fa-solid fa-bolt"></i> 1-on-1 Developer Chat</span>
+              <span class="discord-pill"><i class="fa-solid fa-shield-halved"></i> Instant Order Support</span>
+              <span class="discord-pill"><i class="fa-solid fa-users"></i> Server Owners Community</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <a href="https://discord.gg/qJYhPEveXP" target="_blank" rel="noopener noreferrer" class="btn-discord-join">
+            <i class="fa-brands fa-discord"></i>
+            <span>JOIN DISCORD SERVER</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       CONTACT SECTION (DISCORD CARD DIRECTLY LINKS TO DISCORD.GG/qJYhPEveXP)
+       ========================================================================= -->
   <section id="contact" class="contact">
     <div class="container">
+      
       <div class="section-header">
-        <div class="section-tag"><i class="fa-solid fa-headset"></i> GET IN TOUCH</div>
-        <h2 class="section-title">Connect With Our Team</h2>
+        <div class="section-tag"><i class="fa-solid fa-envelope"></i> Reach Out</div>
+        <h2 class="section-title">Get In <span class="highlight">Touch</span></h2>
         <p class="section-subtitle">
-          Kisi bhi custom query, partnership, ya urgent server debugging ke liye direct humse rabta karen.
+          Kisi bhi sawal, custom quotation ya consultation ke liye humse direct rabta karen.
         </p>
       </div>
 
       <div class="contact-grid">
+        
+        <!-- Contact 1: Discord (OFFICIAL INVITE LINK) -->
         <div class="contact-card contact-discord">
           <div class="contact-icon"><i class="fa-brands fa-discord"></i></div>
-          <h3 class="contact-title">Discord Server</h3>
-          <p class="contact-handle">discord.gg/mineforge</p>
-          <button class="btn btn-outline btn-copy" data-copy="discord.gg/mineforge">Copy Link</button>
+          <h3 class="contact-title">Official Discord</h3>
+          <p class="contact-handle">discord.gg/qJYhPEveXP</p>
+          <a href="https://discord.gg/qJYhPEveXP" target="_blank" rel="noopener noreferrer" class="btn-contact-action btn-discord-card">
+            <i class="fa-brands fa-discord"></i> Join Server
+          </a>
         </div>
 
+        <!-- Contact 2: Email -->
         <div class="contact-card contact-email">
-          <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
-          <h3 class="contact-title">Email Address</h3>
+          <div class="contact-icon"><i class="fa-solid fa-at"></i></div>
+          <h3 class="contact-title">Email Us</h3>
           <p class="contact-handle">contact@mineforge.dev</p>
-          <button class="btn btn-outline btn-copy" data-copy="contact@mineforge.dev">Copy Email</button>
+          <button class="btn-contact-action btn-outline" onclick="copyToClipboard('contact@mineforge.dev', 'Email address copied!')">
+            Copy Email
+          </button>
         </div>
 
+        <!-- Contact 3: YouTube -->
         <div class="contact-card contact-youtube">
           <div class="contact-icon"><i class="fa-brands fa-youtube"></i></div>
           <h3 class="contact-title">YouTube Channel</h3>
           <p class="contact-handle">@MineForgeDevs</p>
-          <button class="btn btn-outline btn-copy" data-copy="https://youtube.com/@MineForgeDevs">Copy URL</button>
+          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="btn-contact-action btn-outline">
+            Subscribe
+          </a>
         </div>
 
+        <!-- Contact 4: GitHub -->
         <div class="contact-card contact-github">
           <div class="contact-icon"><i class="fa-brands fa-github"></i></div>
           <h3 class="contact-title">GitHub Portfolio</h3>
-          <p class="contact-handle">github.com/mineforge</p>
-          <button class="btn btn-outline btn-copy" data-copy="https://github.com/mineforge">Copy URL</button>
+          <p class="contact-handle">github.com/gamexogamerofficial-hash/MineForge</p>
+          <a href="https://github.com/gamexogamerofficial-hash/MineForge" target="_blank" rel="noopener noreferrer" class="btn-contact-action btn-outline">
+            View Code
+          </a>
         </div>
+
       </div>
+
     </div>
   </section>
 
-  <!-- ======================================================================
-       FOOTER (CIRCULAR GOL LOGO & POLICY LINKS)
-       ====================================================================== -->
+  <!-- =========================================================================
+       FOOTER (GOL / CIRCULAR BRAND LOGO)
+       ========================================================================= -->
   <footer class="footer">
     <div class="container">
+      
       <div class="footer-top">
-        
         <div class="footer-brand">
-          <a href="#home" class="logo">
+          <a href="#hero" class="logo">
             <img src="assets/images/logo.png" alt="MineForge Logo" class="footer-logo-img" />
-            <span>MINE<span class="highlight">FORGE</span></span>
+            <span>MineForge</span>
           </a>
           <p class="footer-desc">
-            MineForge is a premier Minecraft development studio specializing in custom Mods, Plugins, network proxies, and server optimization.
+            Aapke Minecraft servers aur modpacks ke liye trusted custom development studio. Fast delivery, clean code aur dedicated Discord support.
           </p>
-          <div style="display: flex; gap: 14px; font-size: 1.2rem; color: var(--text-muted);">
-            <a href="#" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
-            <a href="https://github.com/mineforge" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
-            <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <div style="display: flex; gap: 14px; font-size: 1.25rem;">
+            <!-- Official Discord Link -->
+            <a href="https://discord.gg/qJYhPEveXP" target="_blank" rel="noopener noreferrer" aria-label="Official Discord" style="color: #5865F2;"><i class="fa-brands fa-discord"></i></a>
+            <a href="https://github.com/gamexogamerofficial-hash/MineForge" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
           </div>
         </div>
 
         <div class="footer-links-group">
           <div>
             <h4 class="footer-col-title">Services</h4>
-            <div class="footer-links">
-              <a href="#services" class="footer-link">Fabric Mod Dev</a>
-              <a href="#services" class="footer-link">Forge Mod Dev</a>
-              <a href="#services" class="footer-link">Paper / Spigot Plugins</a>
-              <a href="#services" class="footer-link">Crash & Bug Fixes</a>
-              <a href="#services" class="footer-link">Version Upgrade</a>
-            </div>
+            <ul class="footer-links">
+              <li><a href="#services" class="footer-link">Fabric Mods</a></li>
+              <li><a href="#services" class="footer-link">Forge Mods</a></li>
+              <li><a href="#services" class="footer-link">Paper Plugins</a></li>
+              <li><a href="#services" class="footer-link">Spigot API</a></li>
+              <li><a href="#services" class="footer-link">Bug Fixes</a></li>
+            </ul>
           </div>
 
           <div>
-            <h4 class="footer-col-title">Quick Links</h4>
-            <div class="footer-links">
-              <a href="#home" class="footer-link">Home</a>
-              <a href="#portfolio" class="footer-link">Portfolio</a>
-              <a href="#pricing" class="footer-link">Pricing Plans</a>
-              <a href="#order" class="footer-link">Order Form</a>
-              <a href="#faq" class="footer-link">FAQ</a>
-            </div>
+            <h4 class="footer-col-title">Navigation</h4>
+            <ul class="footer-links">
+              <li><a href="#hero" class="footer-link">Home</a></li>
+              <li><a href="#pricing" class="footer-link">Packages</a></li>
+              <li><a href="#order" class="footer-link">Order Form</a></li>
+              <li><a href="#reviews" class="footer-link">Reviews</a></li>
+              <li><a href="#faq" class="footer-link">FAQ</a></li>
+            </ul>
           </div>
 
           <div>
-            <h4 class="footer-col-title">Legal & Policies</h4>
-            <div class="footer-links">
-              <span class="footer-link policy-link" data-policy="privacy">Privacy Policy</span>
-              <span class="footer-link policy-link" data-policy="terms">Terms of Service</span>
-              <span class="footer-link policy-link" data-policy="refund">Refund Policy</span>
-            </div>
+            <h4 class="footer-col-title">Client Support</h4>
+            <ul class="footer-links">
+              <li><a href="https://discord.gg/qJYhPEveXP" target="_blank" rel="noopener noreferrer" class="footer-link">Official Discord</a></li>
+              <li><a href="#order" class="footer-link">Track Order</a></li>
+              <li><a href="#contact" class="footer-link">Contact Support</a></li>
+              <li><a href="https://github.com/gamexogamerofficial-hash/MineForge" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub Repo</a></li>
+            </ul>
           </div>
         </div>
-
       </div>
 
       <div class="footer-bottom">
-        <div>© 2026 MineForge. All rights reserved. Not affiliated with Mojang or Microsoft.</div>
-        <div>Crafted with <i class="fa-solid fa-heart" style="color: var(--accent-primary);"></i> for Minecraft Servers</div>
+        <div>&copy; 2026 MineForge Studio. All rights reserved.</div>
+        <div>Not officially affiliated with Mojang AB or Microsoft.</div>
       </div>
+
     </div>
   </footer>
 
-  <!-- ======================================================================
+  <!-- =========================================================================
        SCROLL TO TOP BUTTON
-       ====================================================================== -->
-  <button id="scroll-top-btn" class="scroll-top-btn" aria-label="Scroll to top" title="Scroll to top">
+       ========================================================================= -->
+  <button id="scroll-to-top" class="scroll-top-btn" aria-label="Scroll to top of page">
     <i class="fa-solid fa-arrow-up"></i>
   </button>
 
-  <!-- ======================================================================
-       TOAST / COPY NOTIFICATION
-       ====================================================================== -->
-  <div id="toast-notice" class="toast-notice">Notice message</div>
+  <!-- =========================================================================
+       TOAST NOTIFICATION (FOR COPY ACTIONS)
+       ========================================================================= -->
+  <div id="toast" class="toast-notice">Notice message</div>
 
-  <!-- ======================================================================
-       CLIENT ACCOUNT / DASHBOARD MODAL ("AIK ACCOUNT WALA SYSTEM")
-       ====================================================================== -->
+  <!-- =========================================================================
+       MODAL 1: ORDER CONFIRMATION MODAL (WITH DISCORD BUTTON)
+       ========================================================================= -->
+  <div id="order-confirm-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close-btn" onclick="closeModal('order-confirm-modal')" aria-label="Close Modal"><i class="fa-solid fa-xmark"></i></button>
+
+      <div style="text-align: center; margin-bottom: 24px;">
+        <div style="width: 72px; height: 72px; border-radius: 50%; background: rgba(0,255,213,0.15); color: var(--status-completed); font-size: 2.2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; border: 2px solid var(--status-completed);">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <h3 style="font-size: 1.8rem; margin-bottom: 8px;">Order Successfully Placed!</h3>
+        <p style="color: var(--text-muted); font-size: 0.96rem;">
+          Aapka Minecraft development order hamare server par register ho chuka hai.
+        </p>
+      </div>
+
+      <!-- Generated Order ID Card -->
+      <div style="background: rgba(0, 255, 213, 0.05); border: 2px solid var(--accent-primary); border-radius: var(--radius-md); padding: 24px; text-align: center; margin-bottom: 24px;">
+        <div style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">YOUR TRACKING ID</div>
+        <div id="modal-order-id" class="gaming-font" style="font-size: 2.4rem; color: var(--accent-primary); font-weight: 800; margin-bottom: 12px;">MF-XXXX</div>
+        <p style="font-size: 0.9rem; color: var(--text-main);">
+          Is ID ko note ya save kar len! Aap is ID ke zariye apna order status check kar sakte hain.
+        </p>
+      </div>
+
+      <div style="background: rgba(88, 101, 242, 0.12); border: 1px solid rgba(88, 101, 242, 0.4); border-radius: var(--radius-sm); padding: 18px; margin-bottom: 26px; text-align: center;">
+        <p style="font-size: 0.92rem; color: #d1d9ff; margin-bottom: 14px;">
+          💬 <strong>Next Step:</strong> Hamare developer se direct baat karne aur apna order confirm karne ke liye hamara <strong>Official Discord Server</strong> join karen!
+        </p>
+        <a href="https://discord.gg/qJYhPEveXP" target="_blank" rel="noopener noreferrer" class="btn" style="background: #5865F2; color: #fff; width: 100%;">
+          <i class="fa-brands fa-discord"></i>
+          <span>Join Official Discord (discord.gg/qJYhPEveXP)</span>
+        </a>
+      </div>
+
+      <div style="display: flex; gap: 14px;">
+        <button class="btn btn-outline" style="flex: 1;" onclick="copyOrderIdFromModal()">
+          <i class="fa-solid fa-copy"></i> Copy Order ID
+        </button>
+        <button class="btn btn-primary" style="flex: 1;" onclick="closeModal('order-confirm-modal')">
+          Done
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 2: CLIENT ACCOUNT / DASHBOARD PORTAL MODAL
+       ========================================================================= -->
   <div id="account-modal" class="modal-overlay">
     <div class="account-modal-content">
-      <button class="modal-close-btn" id="account-modal-close" aria-label="Close Account Modal"><i class="fa-solid fa-xmark"></i></button>
+      <button class="modal-close-btn" onclick="closeModal('account-modal')" aria-label="Close Account Modal"><i class="fa-solid fa-xmark"></i></button>
 
-      <!-- Account Tabs -->
-      <div class="account-tabs">
-        <button class="account-tab-btn active" data-tab="login-tab">Login</button>
-        <button class="account-tab-btn" data-tab="register-tab">Sign Up</button>
-        <button class="account-tab-btn" data-tab="dashboard-tab">My Dashboard</button>
+      <!-- VIEW 1: SIGN IN / REGISTER TABS (IF NOT LOGGED IN) -->
+      <div id="auth-view-container">
+        <div class="account-tabs">
+          <button id="tab-btn-login" class="account-tab-btn active" onclick="switchAuthTab('login')">Sign In</button>
+          <button id="tab-btn-signup" class="account-tab-btn" onclick="switchAuthTab('signup')">Create Account</button>
+        </div>
+
+        <!-- Login Pane -->
+        <div id="pane-login" class="account-tab-pane active">
+          <h3 style="font-size: 1.5rem; margin-bottom: 6px;">Client Login</h3>
+          <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 22px;">
+            Apna GamerTag aur Discord handle daal kar apne MineForge dashboard mein login karen.
+          </p>
+
+          <form id="login-form">
+            <div class="form-group">
+              <label class="form-label" for="login-username">Username / GamerTag *</label>
+              <input type="text" id="login-username" class="form-input" placeholder="e.g. SteveMC" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="login-discord">Discord Username *</label>
+              <input type="text" id="login-discord" class="form-input" placeholder="e.g. mineforge_user" required />
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+              <i class="fa-solid fa-right-to-bracket"></i>
+              <span>Sign In to Dashboard</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Sign Up Pane -->
+        <div id="pane-signup" class="account-tab-pane">
+          <h3 style="font-size: 1.5rem; margin-bottom: 6px;">Create Client Profile</h3>
+          <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 22px;">
+            Apni profile banayein taake aapke sabhi custom Minecraft orders automatic save aur sync rahein.
+          </p>
+
+          <form id="signup-form">
+            <div class="form-group">
+              <label class="form-label" for="signup-username">Username / GamerTag *</label>
+              <input type="text" id="signup-username" class="form-input" placeholder="e.g. SteveMC" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="signup-email">Email Address *</label>
+              <input type="email" id="signup-email" class="form-input" placeholder="e.g. steve@mineforge.dev" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="signup-discord">Discord Handle *</label>
+              <input type="text" id="signup-discord" class="form-input" placeholder="e.g. mineforge_user" required />
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+              <i class="fa-solid fa-user-plus"></i>
+              <span>Create MineForge Profile</span>
+            </button>
+          </form>
+        </div>
       </div>
 
-      <!-- Tab 1: LOGIN -->
-      <div id="login-tab" class="account-tab-pane active">
-        <h3 style="font-size: 1.4rem; margin-bottom: 6px;">Welcome Back!</h3>
-        <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 22px;">
-          Apne existing MineForge client account se login karen.
-        </p>
-        <form id="login-form">
-          <div class="form-group">
-            <label class="form-label">Email Address</label>
-            <input type="email" id="login-email" class="form-input" placeholder="your@email.com" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Password</label>
-            <input type="password" id="login-password" class="form-input" placeholder="••••••••" required />
-          </div>
-          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
-            <i class="fa-solid fa-right-to-bracket"></i>
-            <span>Login to Portal</span>
-          </button>
-        </form>
-      </div>
-
-      <!-- Tab 2: SIGN UP -->
-      <div id="register-tab" class="account-tab-pane">
-        <h3 style="font-size: 1.4rem; margin-bottom: 6px;">Create MineForge Account</h3>
-        <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 22px;">
-          Naya client account banayein taake aapke sabhi orders ek jagah save rahen.
-        </p>
-        <form id="register-form">
-          <div class="form-group">
-            <label class="form-label">Full Name</label>
-            <input type="text" id="reg-name" class="form-input" placeholder="Rahul Sharma" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Email Address</label>
-            <input type="email" id="reg-email" class="form-input" placeholder="your@email.com" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Discord Username (for quick developer support)</label>
-            <input type="text" id="reg-discord" class="form-input" placeholder="@username" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Password</label>
-            <input type="password" id="reg-password" class="form-input" placeholder="Create strong password" required />
-          </div>
-          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
-            <i class="fa-solid fa-user-plus"></i>
-            <span>Register Instant Account</span>
-          </button>
-        </form>
-      </div>
-
-      <!-- Tab 3: DASHBOARD -->
-      <div id="dashboard-tab" class="account-tab-pane">
+      <!-- VIEW 2: LOGGED IN USER DASHBOARD (VISIBLE ONCE LOGGED IN) -->
+      <div id="dashboard-view-container" style="display: none;">
+        
         <div class="user-profile-header">
-          <div class="user-avatar-lg" id="dash-user-avatar">M</div>
+          <div id="dash-avatar" class="user-avatar-lg">S</div>
           <div class="user-profile-info">
-            <h3 id="dash-user-name">Guest Client</h3>
-            <p id="dash-user-email">guest@mineforge.dev</p>
-            <p id="dash-user-discord" style="color: var(--accent-primary); font-weight: 600; margin-top: 4px;">Discord: @client</p>
+            <h3 id="dash-username">SteveMC</h3>
+            <p id="dash-discord"><i class="fa-brands fa-discord" style="color: #5865F2;"></i> @mineforge_user</p>
           </div>
         </div>
 
-        <h4 style="font-size: 1.1rem; margin-bottom: 14px;">My Custom Orders (<span style="color: var(--accent-primary);">MF-XXXX</span>)</h4>
-        <div class="user-orders-list" id="dash-orders-list">
-          <!-- Dynamically populated -->
+        <h4 style="font-size: 1.15rem; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
+          <span>Your Custom Orders</span>
+          <span id="dash-order-count" class="service-tag">0 Orders</span>
+        </h4>
+
+        <!-- Orders List Container -->
+        <div id="dash-orders-list" class="user-orders-list">
+          <!-- Populated dynamically via script.js -->
         </div>
 
-        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 16px;">
-          <a href="#order" class="btn btn-outline" style="padding: 8px 18px; font-size: 0.88rem;" onclick="document.getElementById('account-modal').classList.remove('active')">+ Place New Order</a>
-          <button id="btn-logout" class="btn" style="background: rgba(255, 0, 0, 0.15); color: #ff5555; padding: 8px 18px; font-size: 0.88rem;">Logout</button>
+        <!-- Quick Support Banner inside Dashboard -->
+        <div style="background: rgba(88,101,242,0.12); border: 1px solid rgba(88,101,242,0.4); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+          <span style="font-size: 0.9rem; color: #d1d9ff;">Need instant support?</span>
+          <a href="https://discord.gg/qJYhPEveXP" target="_blank" rel="noopener noreferrer" class="btn" style="background: #5865F2; color: #fff; padding: 8px 16px; font-size: 0.85rem;">
+            <i class="fa-brands fa-discord"></i> Join Server
+          </a>
         </div>
+
+        <button class="btn btn-outline" style="width: 100%; border-color: rgba(255,100,100,0.4); color: #ff8080;" onclick="logoutClient()">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Sign Out</span>
+        </button>
+
       </div>
 
     </div>
   </div>
 
-  <!-- ======================================================================
-       ORDER CONFIRMATION MODAL (UNIQUE ID DISPLAY)
-       ====================================================================== -->
-  <div id="order-confirm-modal" class="modal-overlay">
-    <div class="modal-content" style="max-width: 480px; text-align: center;">
-      <div style="width: 70px; height: 70px; border-radius: 50%; background: rgba(0, 255, 213, 0.15); color: var(--accent-primary); font-size: 2.2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 0 25px var(--accent-glow);">
-        <i class="fa-solid fa-circle-check"></i>
-      </div>
-      
-      <h3 style="font-size: 1.8rem; margin-bottom: 10px;">Order Request Received!</h3>
-      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px;">
-        Aapka Minecraft project specification save ho chuka hai. Yeh raha aapka Unique Tracking ID:
-      </p>
-
-      <div style="background: rgba(0, 255, 213, 0.08); border: 2px dashed var(--accent-primary); border-radius: var(--radius-md); padding: 18px; margin-bottom: 24px;">
-        <div style="font-size: 0.82rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">YOUR UNIQUE MINEFORGE ID</div>
-        <div id="generated-order-id" style="font-family: 'Orbitron', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--accent-primary);">MF-0000</div>
-      </div>
-
-      <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 26px;">
-        Hamara developer aapko <strong>Discord / Email</strong> par 24 hours ke andar contact karega.
-      </p>
-
-      <button id="confirm-close-btn" class="btn btn-primary" style="width: 100%;">
-        <span>Done & Track Order</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- ======================================================================
-       FOOTER LEGAL POLICIES MODAL
-       ====================================================================== -->
-  <div id="policy-modal" class="modal-overlay">
-    <div class="modal-content">
-      <button class="modal-close-btn" id="policy-modal-close" aria-label="Close Policy Modal"><i class="fa-solid fa-xmark"></i></button>
-      <h3 id="policy-title" style="font-size: 1.6rem; margin-bottom: 18px; color: var(--accent-primary);">Policy Title</h3>
-      <div id="policy-body" style="color: var(--text-muted); line-height: 1.8; font-size: 0.95rem;">
-        Policy details...
-      </div>
-    </div>
-  </div>
-
-  <!-- Scripts -->
+  <!-- Custom JavaScript Logic -->
   <script src="script.js"></script>
 </body>
 </html>

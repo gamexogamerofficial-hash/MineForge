@@ -27,6 +27,11 @@
   --accent-glow: rgba(0, 255, 213, 0.4);
   --accent-glow-strong: rgba(0, 255, 213, 0.7);
 
+  /* Discord Brand Colors */
+  --discord-blurple: #5865F2;
+  --discord-glow: rgba(88, 101, 242, 0.45);
+  --discord-gradient: linear-gradient(135deg, #5865F2 0%, #00a8ff 100%);
+
   /* Status Colors */
   --status-pending: #ffb703;
   --status-progress: #00ffd5;
@@ -87,7 +92,6 @@ body {
   color: var(--text-main);
   line-height: 1.6;
   overflow-x: hidden;
-  /* Removed heavy color/background transitions on body to eliminate theme switch lag */
 }
 
 /* Custom Gaming Scrollbar */
@@ -399,6 +403,158 @@ img {
   background: var(--text-main);
   border-radius: 4px;
   transition: var(--transition);
+}
+
+/* ==========================================================================
+   OFFICIAL DISCORD COMMUNITY HERO BANNER (PREMIUM INTERACTIVE HUB)
+   ========================================================================== */
+.discord-invite-banner {
+  max-width: 980px;
+  margin: 0 auto 50px;
+  background: linear-gradient(135deg, rgba(88, 101, 242, 0.16) 0%, rgba(0, 255, 213, 0.08) 100%);
+  border: 2px solid rgba(88, 101, 242, 0.45);
+  border-radius: 24px;
+  padding: 44px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(88, 101, 242, 0.25);
+  transition: var(--transition);
+}
+.discord-invite-banner:hover {
+  transform: translateY(-4px);
+  border-color: var(--discord-blurple);
+  box-shadow: 0 0 55px rgba(88, 101, 242, 0.4);
+}
+.discord-banner-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  position: relative;
+  z-index: 2;
+}
+@media (max-width: 768px) {
+  .discord-banner-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+.discord-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+@media (max-width: 576px) {
+  .discord-banner-left {
+    flex-direction: column;
+  }
+}
+.discord-logo-glow-box {
+  width: 82px;
+  height: 82px;
+  border-radius: 20px;
+  background: var(--discord-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.8rem;
+  color: #ffffff;
+  box-shadow: 0 0 30px rgba(88, 101, 242, 0.6);
+  flex-shrink: 0;
+  animation: discordPulse 3s infinite ease-in-out;
+}
+@keyframes discordPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 30px rgba(88, 101, 242, 0.6);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 45px rgba(0, 255, 213, 0.8);
+  }
+}
+.discord-banner-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 14px;
+  background: rgba(88, 101, 242, 0.25);
+  border: 1px solid rgba(88, 101, 242, 0.5);
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #d1d9ff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+.discord-banner-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+.discord-banner-desc {
+  color: #c4d0ff;
+  font-size: 0.96rem;
+  max-width: 500px;
+  line-height: 1.6;
+}
+.discord-feature-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+@media (max-width: 768px) {
+  .discord-feature-pills {
+    justify-content: center;
+  }
+}
+.discord-pill {
+  padding: 5px 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+.discord-pill i {
+  color: var(--accent-primary);
+}
+
+/* BIG PREMIUM DISCORD BUTTON */
+.btn-discord-join {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 34px;
+  background: linear-gradient(135deg, #5865F2 0%, #4752C4 100%);
+  color: #ffffff;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: var(--radius-full);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 30px rgba(88, 101, 242, 0.6);
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.btn-discord-join:hover {
+  background: linear-gradient(135deg, #00ffd5 0%, #5865F2 100%);
+  color: #000000;
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 0 45px rgba(0, 255, 213, 0.85);
+}
+.btn-discord-join i {
+  font-size: 1.4rem;
 }
 
 /* ==========================================================================
@@ -720,7 +876,7 @@ img {
 }
 
 /* ==========================================================================
-   PORTFOLIO SECTION ("COMING SOON" CLEAN STATE - NO PLACEHOLDER MODS)
+   PORTFOLIO SECTION ("COMING SOON" CLEAN STATE)
    ========================================================================== */
 .portfolio {
   padding: 90px 0;
@@ -1283,7 +1439,7 @@ img {
 }
 
 /* ==========================================================================
-   CONTACT SECTION
+   CONTACT SECTION & OFFICIAL DISCORD CARD
    ========================================================================== */
 .contact {
   padding: 90px 0;
@@ -1329,9 +1485,18 @@ img {
   font-size: 1.7rem;
   margin-bottom: 18px;
 }
+.contact-discord {
+  border-color: rgba(88, 101, 242, 0.4);
+  background: linear-gradient(180deg, rgba(88, 101, 242, 0.12) 0%, var(--bg-card) 100%);
+}
+.contact-discord:hover {
+  border-color: #5865F2;
+  box-shadow: 0 0 25px rgba(88, 101, 242, 0.35);
+}
 .contact-discord .contact-icon {
-  background: rgba(88, 101, 242, 0.15);
+  background: rgba(88, 101, 242, 0.25);
   color: #5865F2;
+  box-shadow: 0 0 15px rgba(88, 101, 242, 0.4);
 }
 .contact-email .contact-icon {
   background: rgba(0, 255, 213, 0.15);
@@ -1363,6 +1528,17 @@ img {
   font-weight: 700;
   cursor: pointer;
   border: none;
+}
+.btn-discord-card {
+  background: #5865F2;
+  color: #fff;
+  border: none;
+  box-shadow: 0 0 15px rgba(88, 101, 242, 0.4);
+}
+.btn-discord-card:hover {
+  background: #00ffd5;
+  color: #000;
+  box-shadow: 0 0 20px rgba(0, 255, 213, 0.7);
 }
 
 /* ==========================================================================
