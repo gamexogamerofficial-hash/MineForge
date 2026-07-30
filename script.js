@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initThemeSwitcher();
   initHeaderScroll();
   initMobileNav();
+  initActiveNavHighlight();
   initOrderForm();
   initOrderTracking();
   initAccountPortal();
@@ -176,6 +177,60 @@ function initMobileNav() {
       navLinks.classList.remove('open');
     });
   });
+}
+
+/**
+ * ==========================================================================
+ * 2B. ACTIVE NAVIGATION HIGHLIGHT (CLICK + SCROLLSPY)
+ * ==========================================================================
+ */
+function initActiveNavHighlight() {
+  const navLinks = document.querySelectorAll('#nav-links .nav-link');
+  if (!navLinks || navLinks.length === 0) return;
+
+  // 1. Click Handler: immediately update active class on clicked link
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+    });
+  });
+
+  // 2. ScrollSpy Handler: automatically highlight active link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        let currentSectionId = 'hero';
+        const scrollPosition = window.scrollY + 220; // offset for fixed header
+        const isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 80;
+
+        sections.forEach(sec => {
+          const sectionTop = sec.offsetTop;
+          const sectionHeight = sec.offsetHeight;
+          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            currentSectionId = sec.getAttribute('id');
+          }
+        });
+
+        if (isAtBottom) {
+          currentSectionId = 'contact';
+        }
+
+        navLinks.forEach(link => {
+          const href = link.getAttribute('href');
+          if (href === `#${currentSectionId}`) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
 }
 
 /**
