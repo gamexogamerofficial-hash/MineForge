@@ -385,50 +385,32 @@ function initAccountPortal() {
     });
   }
 
-  if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
+  const discordLoginForm = document.getElementById('discord-login-form');
+  if (discordLoginForm) {
+    discordLoginForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const username = document.getElementById('login-username').value.trim();
-      const discord = document.getElementById('login-discord').value.trim();
+      const discordHandle = document.getElementById('discord-login-handle').value.trim();
+      const username = document.getElementById('discord-login-username').value.trim();
 
       let users = JSON.parse(localStorage.getItem(MF_STORAGE_KEYS.USERS) || '[]');
-      let user = users.find(u => u.username.toLowerCase() === username.toLowerCase());
+      let user = users.find(u => u.discord.toLowerCase() === discordHandle.toLowerCase() || u.username.toLowerCase() === username.toLowerCase());
 
       if (!user) {
         user = {
           username: username,
-          discord: discord,
-          email: `${username.toLowerCase()}@client.mineforge.dev`
+          discord: discordHandle
         };
         users.push(user);
+        localStorage.setItem(MF_STORAGE_KEYS.USERS, JSON.stringify(users));
+      } else {
+        // Keep updated
+        user.username = username;
+        user.discord = discordHandle;
         localStorage.setItem(MF_STORAGE_KEYS.USERS, JSON.stringify(users));
       }
 
       localStorage.setItem(MF_STORAGE_KEYS.CURRENT_USER, JSON.stringify(user));
-      showToast(`Welcome back, ${user.username}!`);
-      renderAccountDashboard();
-    });
-  }
-
-  if (signupForm) {
-    signupForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const username = document.getElementById('signup-username').value.trim();
-      const email = document.getElementById('signup-email').value.trim();
-      const discord = document.getElementById('signup-discord').value.trim();
-
-      let users = JSON.parse(localStorage.getItem(MF_STORAGE_KEYS.USERS) || '[]');
-      const user = {
-        username: username,
-        email: email,
-        discord: discord
-      };
-
-      users.push(user);
-      localStorage.setItem(MF_STORAGE_KEYS.USERS, JSON.stringify(users));
-      localStorage.setItem(MF_STORAGE_KEYS.CURRENT_USER, JSON.stringify(user));
-
-      showToast(`Account created! Welcome, ${user.username}!`);
+      showToast(`Welcome to your Dashboard, ${user.username}!`);
       renderAccountDashboard();
     });
   }

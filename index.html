@@ -830,61 +830,40 @@
     <div class="account-modal-content">
       <button class="modal-close-btn" onclick="closeModal('account-modal')" aria-label="Close Account Modal"><i class="fa-solid fa-xmark"></i></button>
 
-      <!-- VIEW 1: SIGN IN / REGISTER TABS (IF NOT LOGGED IN) -->
+      <!-- VIEW 1: DISCORD ONLY LOGIN (NO EMAIL REQUIRED) -->
       <div id="auth-view-container">
-        <div class="account-tabs">
-          <button id="tab-btn-login" class="account-tab-btn active" onclick="switchAuthTab('login')">Sign In</button>
-          <button id="tab-btn-signup" class="account-tab-btn" onclick="switchAuthTab('signup')">Create Account</button>
+        <div style="text-align: center; margin-bottom: 24px;">
+          <div style="width: 76px; height: 76px; border-radius: 50%; background: rgba(88, 101, 242, 0.15); border: 2px solid #5865F2; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: #5865F2; font-size: 2.2rem; box-shadow: 0 0 25px rgba(88, 101, 242, 0.3);">
+            <i class="fa-brands fa-discord"></i>
+          </div>
+          <h3 style="font-size: 1.7rem; margin-bottom: 8px;">Sign In with Discord</h3>
+          <p style="color: var(--text-muted); font-size: 0.94rem; max-width: 420px; margin: 0 auto;">
+            Bina kisi Email ke — apna Discord Username aur Minecraft GamerTag likhein aur apne MineForge Client Dashboard mein login karen!
+          </p>
         </div>
 
-        <!-- Login Pane -->
-        <div id="pane-login" class="account-tab-pane active">
-          <h3 style="font-size: 1.5rem; margin-bottom: 6px;">Client Login</h3>
-          <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 22px;">
-            Apna GamerTag aur Discord handle daal kar apne MineForge dashboard mein login karen.
-          </p>
+        <form id="discord-login-form">
+          <div class="form-group">
+            <label class="form-label" for="discord-login-handle">Discord Username / Handle *</label>
+            <div style="position: relative;">
+              <input type="text" id="discord-login-handle" class="form-input" placeholder="e.g. gamexo_user ya @gamexo" required style="padding-left: 42px;" />
+              <i class="fa-brands fa-discord" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #5865F2; font-size: 1.2rem;"></i>
+            </div>
+          </div>
 
-          <form id="login-form">
-            <div class="form-group">
-              <label class="form-label" for="login-username">Username / GamerTag *</label>
-              <input type="text" id="login-username" class="form-input" placeholder="e.g. SteveMC" required />
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="login-discord">Discord Username *</label>
-              <input type="text" id="login-discord" class="form-input" placeholder="e.g. gamexo_user" required />
-            </div>
-            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
-              <i class="fa-solid fa-right-to-bracket"></i>
-              <span>Sign In to Dashboard</span>
-            </button>
-          </form>
-        </div>
+          <div class="form-group">
+            <label class="form-label" for="discord-login-username">Your Minecraft GamerTag / Name *</label>
+            <input type="text" id="discord-login-username" class="form-input" placeholder="e.g. SteveMC / Ali Khan" required />
+          </div>
 
-        <!-- Sign Up Pane -->
-        <div id="pane-signup" class="account-tab-pane">
-          <h3 style="font-size: 1.5rem; margin-bottom: 6px;">Create Client Profile</h3>
-          <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 22px;">
-            Apni profile banayein taake aapke sabhi custom Minecraft orders automatic save aur sync rahein.
-          </p>
+          <button type="submit" class="btn" style="background: #5865F2; color: #fff; width: 100%; padding: 15px; font-size: 1.05rem; font-weight: 700; margin-top: 10px; box-shadow: 0 0 20px rgba(88, 101, 242, 0.4);">
+            <i class="fa-brands fa-discord"></i>
+            <span>Continue with Discord</span>
+          </button>
+        </form>
 
-          <form id="signup-form">
-            <div class="form-group">
-              <label class="form-label" for="signup-username">Username / GamerTag *</label>
-              <input type="text" id="signup-username" class="form-input" placeholder="e.g. SteveMC" required />
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="signup-email">Email Address *</label>
-              <input type="email" id="signup-email" class="form-input" placeholder="e.g. gamexogamerofficial@gmail.com" required />
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="signup-discord">Discord Handle *</label>
-              <input type="text" id="signup-discord" class="form-input" placeholder="e.g. gamexo_user" required />
-            </div>
-            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
-              <i class="fa-solid fa-user-plus"></i>
-              <span>Create MineForge Profile</span>
-            </button>
-          </form>
+        <div style="margin-top: 22px; padding: 14px 18px; background: rgba(0, 255, 213, 0.05); border: 1px solid rgba(0, 255, 213, 0.3); border-radius: var(--radius-sm); text-align: center; font-size: 0.88rem; color: var(--text-muted);">
+          🔒 <strong>No Email / Password Required:</strong> Aapka Discord handle hi aapki unique client identity hai jisse aapke saare orders sync honge.
         </div>
       </div>
 
