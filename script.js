@@ -19,7 +19,7 @@ const MF_STORAGE_KEYS = {
 // Replace 'YOUR_DISCORD_CLIENT_ID_HERE' with your real Client ID from https://discord.com/developers/applications
 // ==========================================================================
 const DISCORD_OAUTH_CONFIG = {
-  CLIENT_ID: 'YOUR_DISCORD_CLIENT_ID_HERE', // <-- Paste your 18-digit Discord Client ID here!
+  CLIENT_ID: '1532611015412416752', // MineForge Studio Official Discord Application ID
   SCOPE: 'identify'
 };
 
