@@ -304,7 +304,7 @@ function initActiveNavHighlight() {
   window.addEventListener('scroll', () => {
     if (!ticking) {
       window.requestAnimationFrame(() => {
-        let currentSectionId = 'hero';
+        let currentSectionId = 'home';
         const scrollPosition = window.scrollY + 220; // offset for fixed header
         const isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 80;
 
