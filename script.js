@@ -14,6 +14,15 @@ const MF_STORAGE_KEYS = {
   THEME: 'mineforge_theme'
 };
 
+// ==========================================================================
+// OFFICIAL DISCORD OAUTH2 LOGIN CONFIGURATION (IMPLICIT GRANT)
+// Replace 'YOUR_DISCORD_CLIENT_ID_HERE' with your real Client ID from https://discord.com/developers/applications
+// ==========================================================================
+const DISCORD_OAUTH_CONFIG = {
+  CLIENT_ID: 'YOUR_DISCORD_CLIENT_ID_HERE', // <-- Paste your 18-digit Discord Client ID here!
+  SCOPE: 'identify'
+};
+
 // Default Demo Orders in storage if empty
 const DEFAULT_ORDERS = [
   {
@@ -84,10 +93,103 @@ document.addEventListener('DOMContentLoaded', () => {
   initOrderForm();
   initOrderTracking();
   initAccountPortal();
+  initOfficialDiscordOAuth();
   initTestimonialsSlider();
   initFAQAccordion();
   initScrollToTop();
 });
+
+/**
+ * ==========================================================================
+ * OFFICIAL DISCORD OAUTH2 IMPLICIT GRANT & SETUP GUIDE
+ * ==========================================================================
+ */
+function toggleDiscordSetupGuide() {
+  const guide = document.getElementById('discord-oauth-setup-guide');
+  if (guide) {
+    guide.style.display = guide.style.display === 'none' ? 'block' : 'none';
+  }
+}
+
+function initOfficialDiscordOAuth() {
+  // 1. Check if returning from Discord OAuth2 with access token in URL fragment
+  const hash = window.location.hash;
+  if (hash && hash.includes('access_token=')) {
+    const params = new URLSearchParams(hash.substring(1));
+    const accessToken = params.get('access_token');
+    const tokenType = params.get('token_type') || 'Bearer';
+
+    if (accessToken) {
+      // Clean URL from hash
+      window.history.replaceState({}, document.title, window.location.pathname + window.location.search);
+
+      fetch('https://discord.com/api/users/@me', {
+        headers: {
+          Authorization: `${tokenType} ${accessToken}`
+        }
+      })
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to fetch Discord profile');
+        return res.json();
+      })
+      .then(data => {
+        const officialUsername = data.global_name || data.username;
+        const officialHandle = `@${data.username}`;
+        const avatarUrl = data.avatar
+          ? `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png`
+          : `https://cdn.discordapp.com/embed/avatars/${parseInt(data.id || '0') % 5}.png`;
+
+        let users = JSON.parse(localStorage.getItem(MF_STORAGE_KEYS.USERS) || '[]');
+        let user = users.find(u => u.discord.toLowerCase() === officialHandle.toLowerCase() || u.discordId === data.id);
+
+        if (!user) {
+          user = {
+            username: officialUsername,
+            discord: officialHandle,
+            discordId: data.id,
+            avatar: avatarUrl,
+            verifiedDiscord: true
+          };
+          users.push(user);
+          localStorage.setItem(MF_STORAGE_KEYS.USERS, JSON.stringify(users));
+        } else {
+          user.username = officialUsername;
+          user.discord = officialHandle;
+          user.discordId = data.id;
+          user.avatar = avatarUrl;
+          user.verifiedDiscord = true;
+          localStorage.setItem(MF_STORAGE_KEYS.USERS, JSON.stringify(users));
+        }
+
+        localStorage.setItem(MF_STORAGE_KEYS.CURRENT_USER, JSON.stringify(user));
+        showToast(`Verified Official Discord: Welcome ${officialUsername}!`);
+        renderAccountDashboard();
+        openModal('account-modal');
+      })
+      .catch(err => {
+        console.error('Discord OAuth Error:', err);
+        showToast('Discord authorization failed. Try manual login.');
+      });
+    }
+  }
+
+  // 2. Attach click listener to Official Discord Login button
+  const officialBtn = document.getElementById('btn-official-discord-login');
+  if (officialBtn) {
+    officialBtn.addEventListener('click', () => {
+      if (!DISCORD_OAUTH_CONFIG.CLIENT_ID || DISCORD_OAUTH_CONFIG.CLIENT_ID === 'YOUR_DISCORD_CLIENT_ID_HERE') {
+        showToast('Please paste your Discord Client ID in script.js line 21! See Setup Guide.');
+        const setupBox = document.getElementById('discord-oauth-setup-guide');
+        if (setupBox) setupBox.style.display = 'block';
+        return;
+      }
+
+      const redirectUri = encodeURIComponent(window.location.origin + window.location.pathname);
+      const authUrl = `https://discord.com/oauth2/authorize?client_id=${DISCORD_OAUTH_CONFIG.CLIENT_ID}&response_type=token&redirect_uri=${redirectUri}&scope=${DISCORD_OAUTH_CONFIG.SCOPE}`;
+      window.location.href = authUrl;
+    });
+  }
+}
 
 /**
  * ==========================================================================
@@ -438,8 +540,19 @@ function renderAccountDashboard() {
   if (navLabel) navLabel.textContent = currentUser.username;
 
   document.getElementById('dash-username').textContent = currentUser.username;
-  document.getElementById('dash-discord').innerHTML = `<i class="fa-brands fa-discord" style="color: #5865F2;"></i> @${currentUser.discord || 'discord_user'}`;
-  document.getElementById('dash-avatar').textContent = currentUser.username.charAt(0).toUpperCase();
+  const badgeHtml = currentUser.verifiedDiscord
+    ? `<span style="background: rgba(88, 101, 242, 0.2); color: #5865F2; padding: 2px 8px; border-radius: var(--radius-full); font-size: 0.72rem; margin-left: 6px; font-weight: 700;"><i class="fa-solid fa-check"></i> Official Verified</span>`
+    : '';
+  document.getElementById('dash-discord').innerHTML = `<i class="fa-brands fa-discord" style="color: #5865F2;"></i> ${currentUser.discord || '@discord_user'} ${badgeHtml}`;
+
+  const dashAvatarEl = document.getElementById('dash-avatar');
+  if (dashAvatarEl) {
+    if (currentUser.avatar) {
+      dashAvatarEl.innerHTML = `<img src="${currentUser.avatar}" alt="Avatar" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" />`;
+    } else {
+      dashAvatarEl.textContent = (currentUser.username || 'U').charAt(0).toUpperCase();
+    }
+  }
 
   // Populate client orders
   const allOrders = JSON.parse(localStorage.getItem(MF_STORAGE_KEYS.ORDERS) || '[]');

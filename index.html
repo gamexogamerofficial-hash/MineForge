@@ -838,10 +838,44 @@
           </div>
           <h3 style="font-size: 1.7rem; margin-bottom: 8px;">Sign In with Discord</h3>
           <p style="color: var(--text-muted); font-size: 0.94rem; max-width: 420px; margin: 0 auto;">
-            Bina kisi Email ke — apna Discord Username aur Minecraft GamerTag likhein aur apne MineForge Client Dashboard mein login karen!
+            Official Discord OAuth2 se 1-click verify karen ya manual apna Discord handle likhein!
           </p>
         </div>
 
+        <!-- 1. OFFICIAL DISCORD OAUTH2 BUTTON -->
+        <div style="margin-bottom: 24px;">
+          <button type="button" id="btn-official-discord-login" class="btn" style="background: #5865F2; color: #fff; width: 100%; padding: 15px; font-size: 1.05rem; font-weight: 700; box-shadow: 0 0 25px rgba(88, 101, 242, 0.45); display: flex; align-items: center; justify-content: center; gap: 12px; cursor: pointer; transition: all 0.3s ease;">
+            <i class="fa-brands fa-discord" style="font-size: 1.4rem;"></i>
+            <span>Login with Official Discord (OAuth2)</span>
+          </button>
+          
+          <div style="text-align: center; margin-top: 10px;">
+            <button type="button" onclick="toggleDiscordSetupGuide()" style="background: none; border: none; color: #00ffd5; font-size: 0.85rem; text-decoration: underline; cursor: pointer; font-family: 'Outfit', sans-serif;">
+              <i class="fa-solid fa-circle-question"></i> Official Discord Login Kaise Activate Karen? (Setup Guide)
+            </button>
+          </div>
+
+          <!-- STEP-BY-STEP SETUP GUIDE (HIDDEN BY DEFAULT) -->
+          <div id="discord-oauth-setup-guide" style="display: none; margin-top: 14px; padding: 18px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(88, 101, 242, 0.4); border-radius: var(--radius-md); font-size: 0.88rem; color: var(--text-main); line-height: 1.7; text-align: left;">
+            <h4 style="color: #5865F2; font-size: 1rem; margin-bottom: 8px; font-family: 'Outfit', sans-serif;"><i class="fa-solid fa-gear"></i> Official Discord Login Setup (5 Steps):</h4>
+            <ol style="padding-left: 20px; margin: 0; color: var(--text-muted);">
+              <li><strong style="color: #fff;">Discord Portal:</strong> <a href="https://discord.com/developers/applications" target="_blank" style="color: #00ffd5;">discord.com/developers/applications</a> par ja kar <b>New Application</b> banayein.</li>
+              <li><strong style="color: #fff;">Client ID:</strong> Left menu se <b>OAuth2</b> me jayein aur apni <b>Client ID</b> copy karen.</li>
+              <li><strong style="color: #fff;">Redirect URI:</strong> Wahi OAuth2 me <b>Redirects</b> me apni website ka link (e.g., <code style="color: #00ffd5;">https://gamexogamerofficial-hash.github.io/MineForge/</code>) add kar ke save karen.</li>
+              <li><strong style="color: #fff;">script.js me Paste Karen:</strong> <code style="color: #fff;">script.js</code> ke top par <code style="color: #00ffd5;">DISCORD_OAUTH_CONFIG.CLIENT_ID</code> me apni Client ID paste karen!</li>
+              <li><strong style="color: #fff;">Test:</strong> Button par click karte hi asli Discord OAuth verification popup khul jayega!</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- DIVIDER -->
+        <div style="display: flex; align-items: center; gap: 14px; margin: 20px 0;">
+          <div style="flex: 1; height: 1px; background: var(--border-subtle);"></div>
+          <span style="font-size: 0.82rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">OR MANUAL QUICK LOGIN</span>
+          <div style="flex: 1; height: 1px; background: var(--border-subtle);"></div>
+        </div>
+
+        <!-- 2. MANUAL QUICK DISCORD HANDLE LOGIN (FOR INSTANT USE) -->
         <form id="discord-login-form">
           <div class="form-group">
             <label class="form-label" for="discord-login-handle">Discord Username / Handle *</label>
@@ -856,14 +890,14 @@
             <input type="text" id="discord-login-username" class="form-input" placeholder="e.g. SteveMC / Ali Khan" required />
           </div>
 
-          <button type="submit" class="btn" style="background: #5865F2; color: #fff; width: 100%; padding: 15px; font-size: 1.05rem; font-weight: 700; margin-top: 10px; box-shadow: 0 0 20px rgba(88, 101, 242, 0.4);">
-            <i class="fa-brands fa-discord"></i>
-            <span>Continue with Discord</span>
+          <button type="submit" class="btn btn-outline" style="width: 100%; padding: 13px; font-size: 0.98rem; font-weight: 600; margin-top: 6px;">
+            <i class="fa-solid fa-bolt"></i>
+            <span>Instant Manual Discord Login</span>
           </button>
         </form>
 
         <div style="margin-top: 22px; padding: 14px 18px; background: rgba(0, 255, 213, 0.05); border: 1px solid rgba(0, 255, 213, 0.3); border-radius: var(--radius-sm); text-align: center; font-size: 0.88rem; color: var(--text-muted);">
-          🔒 <strong>No Email / Password Required:</strong> Aapka Discord handle hi aapki unique client identity hai jisse aapke saare orders sync honge.
+          🔒 <strong>100% Secure & Email-Free:</strong> Official Discord verification ya manual GamerTag se saare orders link rahein.
         </div>
       </div>
 
