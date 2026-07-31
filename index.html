@@ -40,14 +40,15 @@
         <span>MineForge</span>
       </a>
 
-      <!-- Clean 4-Link Navigation -->
+      <!-- Clean 5-Link Navigation (Plans & Credits included) -->
       <nav class="nav-menu">
         <ul id="nav-links" class="nav-links">
           <li><a href="#hero" class="nav-link active">Home</a></li>
           <li><a href="#services" class="nav-link">Services</a></li>
-          <li><a href="#pricing" class="nav-link">Pricing</a></li>
+          <li><a href="#pricing" class="nav-link">Plans</a></li>
           <li><a href="#order" class="nav-link">Order & Track</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
+          <li><a href="#" onclick="openModal('credits-modal'); return false;" class="nav-link nav-credits-link"><i class="fa-solid fa-award"></i> Credits</a></li>
         </ul>
       </nav>
 
@@ -56,6 +57,12 @@
         <!-- Theme Toggle Button with Sleek Animation -->
         <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme (Light / Dark)">
           <i class="fa-solid fa-moon"></i>
+        </button>
+
+        <!-- Developer Credits Popup Button -->
+        <button id="btn-open-credits" class="btn-nav-credit" onclick="openModal('credits-modal')" title="Lead Developer GAMEXO Credits">
+          <i class="fa-solid fa-award"></i>
+          <span>Credits</span>
         </button>
 
         <!-- Account / Client Login Button -->
@@ -292,94 +299,108 @@
   </section>
 
   <!-- =========================================================================
-       PRICING SECTION (NEW UPDATED PRICING: $10 STARTER, $25 PRO ⭐, $50 ENTERPRISE)
+       PLANS SECTION (MONTHLY SUBSCRIPTIONS & DIRECT CUSTOM ORDER NOTE)
        ========================================================================= -->
   <section id="pricing" class="pricing">
     <div class="container">
       
       <div class="section-header">
-        <div class="section-tag"><i class="fa-solid fa-tag"></i> Transparent Pricing</div>
-        <h2 class="section-title">Development <span class="highlight">Packages</span></h2>
+        <div class="section-tag"><i class="fa-solid fa-layer-group"></i> Monthly Subscriptions</div>
+        <h2 class="section-title">Development <span class="highlight">Plans</span></h2>
         <p class="section-subtitle">
-          Apne server ke scale aur budget ke mutabik best development tier choose karen. Starter, Pro aur Enterprise plans.
+          Apne server ke scale ke mutabik Monthly Subscription Plans choose karen — ya bina plan ke direct custom order den.
         </p>
       </div>
 
       <div class="pricing-grid">
         
-        <!-- Tier 1: 🟢 Starter ($10 starting / $10–15 value) -->
+        <!-- Tier 1: 🟢 Starter Monthly Plan ($10 / mo) -->
         <div class="pricing-card tier-starter">
           <div>
             <div class="pricing-tier-header">
               <span class="tier-indicator green-dot">🟢</span>
-              <h3 class="pricing-tier-name">Starter</h3>
+              <h3 class="pricing-tier-name">Starter Plan</h3>
             </div>
-            <p class="pricing-subtitle">Small utility plugin ya basic single-purpose mod feature ($10–15 value).</p>
+            <p class="pricing-subtitle">Monthly plan jisme aap har 3 din baad 1 naya mod ya plugin banwa sakte hain!</p>
             <div class="pricing-price-box">
               <span class="price-currency">$</span>
               <span class="price-amount">10</span>
-              <span class="price-period">/ starting</span>
+              <span class="price-period">/ month</span>
             </div>
             <div class="pricing-features">
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 1 Simple Plugin ya Mod Feature</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 1 Minecraft Version Support</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Basic Config Support</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 3 Days Bug Fix Support</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Source Code Included</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 1 Mod ya Plugin Har 3 Din Mein</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Har 3 Din Baad Naya Order Allow</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Monthly Subscription Access</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 1.21 to 26.30+ Version Support</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Source Code &amp; Discord Support</div>
             </div>
           </div>
-          <a href="#order" class="btn btn-outline" style="width: 100%;">Get Starter Build ($10)</a>
+          <a href="#order" class="btn btn-outline" style="width: 100%;">Subscribe Starter ($10/mo)</a>
         </div>
 
-        <!-- Tier 2: 🔵 Pro ⭐ (Most Popular, $25 starting / $30–40 value) -->
+        <!-- Tier 2: 🔵 Pro Monthly Plan ⭐ ($25 / mo) -->
         <div class="pricing-card popular tier-pro">
           <div class="popular-badge">⭐ Most Popular</div>
           <div>
             <div class="pricing-tier-header">
               <span class="tier-indicator blue-dot">🔵</span>
-              <h3 class="pricing-tier-name">Pro</h3>
+              <h3 class="pricing-tier-name">Pro Plan</h3>
             </div>
-            <p class="pricing-subtitle">Medium Plugin/Mod with multiple features, GUI aur optimization ($30–40 value).</p>
+            <p class="pricing-subtitle">Medium Mods/Plugins, Custom GUIs aur optimization ka monthly suite.</p>
             <div class="pricing-price-box">
               <span class="price-currency">$</span>
               <span class="price-amount">25</span>
-              <span class="price-period">/ starting</span>
+              <span class="price-period">/ month</span>
             </div>
             <div class="pricing-features">
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Medium Plugin / Mod Development</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Multiple Features &amp; Custom GUI</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Config Files &amp; Better Optimization</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 14 Days Bug Fix &amp; Dev Support</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Source Code Included</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Medium Mods &amp; Plugins (GUI &amp; Config)</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Fast Priority Monthly Queue</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Monthly Subscription Access</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Better TPS &amp; Memory Optimization</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Source Code &amp; Dedicated Support</div>
             </div>
           </div>
-          <a href="#order" class="btn btn-primary" style="width: 100%;">Order Pro Build ($25)</a>
+          <a href="#order" class="btn btn-primary" style="width: 100%;">Subscribe Pro ($25/mo)</a>
         </div>
 
-        <!-- Tier 3: 🟣 Enterprise ($50 starting / $75+ scale) -->
+        <!-- Tier 3: 🟣 Enterprise Monthly Plan ($50 / mo) -->
         <div class="pricing-card tier-enterprise">
           <div>
             <div class="pricing-tier-header">
               <span class="tier-indicator purple-dot">🟣</span>
-              <h3 class="pricing-tier-name">Enterprise</h3>
+              <h3 class="pricing-tier-name">Enterprise Plan</h3>
             </div>
-            <p class="pricing-subtitle">Large Plugin/Mod, custom systems, DB aur API integration ($75+ scale).</p>
+            <p class="pricing-subtitle">Large Mods, Custom Systems, Database aur API integration ka monthly suite.</p>
             <div class="pricing-price-box">
               <span class="price-currency">$</span>
               <span class="price-amount">50</span>
-              <span class="price-period">/ starting ($75+)</span>
+              <span class="price-period">/ month ($75+ scale)</span>
             </div>
             <div class="pricing-features">
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Large Plugin / Mod Development</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Custom Systems &amp; Database</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Large Mods, Custom Systems &amp; DB</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Unlimited Monthly Custom Scale</div>
               <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> API Integration &amp; Documentation</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 1 Month Full Dev Support</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Source Code Included</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 1 Month VIP Dedicated Support</div>
+              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Complete Source Code Included</div>
             </div>
           </div>
-          <a href="#order" class="btn btn-outline" style="width: 100%;">Order Enterprise ($50+)</a>
+          <a href="#order" class="btn btn-outline" style="width: 100%;">Subscribe Enterprise ($50/mo)</a>
         </div>
 
+      </div>
+
+      <!-- Direct Custom Order Note for Non-Subscribers -->
+      <div class="direct-order-banner">
+        <div class="direct-order-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+        <div class="direct-order-content">
+          <h4 class="direct-order-title">Bina Plan Ke Direct Mod / Plugin Banwayein!</h4>
+          <p class="direct-order-desc">
+            Agar aapne koi Monthly Plan nahi liya hua, tab bhi aap niche <strong>Order Form</strong> se apna custom project submit kar sakte hain. Order submit karne ke baad jab aap <strong>Gamexo Labs Discord</strong> par contact karenge, to hum aapke mod ya plugin ke features ke hisab se direct custom quotation (paise) bata denge!
+          </p>
+        </div>
+        <div>
+          <a href="#order" class="btn btn-outline" style="white-space: nowrap; border-color: var(--accent-primary); color: var(--accent-primary);"><i class="fa-solid fa-cart-plus"></i> Order Without Plan</a>
+        </div>
       </div>
 
     </div>
@@ -404,7 +425,9 @@
         <!-- Left: Order Form -->
         <div class="form-card">
           <h3 class="form-card-title">Place Development Order</h3>
-          <p class="form-card-subtitle">Aapke details bilkul safe rahenge. Order submit hone ke baad aapko Order ID di jayegi.</p>
+          <p class="form-card-subtitle">
+            💡 <strong>Plan Ho Ya Na Ho:</strong> Saari details yahan fill karen. Discord par hum aapke mod ke hisab se price aur delivery align kar lenge!
+          </p>
           
           <form id="order-form">
             <div class="form-grid-2">
@@ -420,15 +443,17 @@
 
             <div class="form-grid-2">
               <div class="form-group">
-                <label class="form-label" for="build-type">Development Type *</label>
+                <label class="form-label" for="build-type">Development Type / Plan *</label>
                 <select id="build-type" class="form-select" required>
                   <option value="" disabled selected>-- Select Type --</option>
-                  <option value="Fabric Mod">Fabric Mod (1.21 — 26.30+ Chaos Cubed)</option>
-                  <option value="Forge Mod">Forge Mod (1.21 — 26.30+)</option>
-                  <option value="Paper Plugin">Paper / Spigot Plugin (1.21 — 26.30+)</option>
+                  <option value="Starter Plan Mod/Plugin">Starter Monthly Plan (3 Days Mod/Plugin)</option>
+                  <option value="Pro Plan Mod/Plugin">Pro Monthly Plan (Medium Mod/Plugin Suite)</option>
+                  <option value="Enterprise Plan Mod/Plugin">Enterprise Monthly Plan (Custom Systems/DB)</option>
+                  <option value="Direct Order - Fabric Mod">Direct Order — Fabric Mod (No Plan)</option>
+                  <option value="Direct Order - Forge Mod">Direct Order — Forge Mod (No Plan)</option>
+                  <option value="Direct Order - Paper Plugin">Direct Order — Paper / Spigot Plugin (No Plan)</option>
                   <option value="Bug Fix / Optimization">Bug Fix / TPS Optimization</option>
-                  <option value="Mod / Plugin Update">Version Upgrade / Migration</option>
-                  <option value="Custom Project">Other Custom Feature</option>
+                  <option value="Custom Quotation Project">Other Custom Project (Price on Discord)</option>
                 </select>
               </div>
               <div class="form-group">
@@ -531,12 +556,12 @@
         <!-- FAQ 1 -->
         <div class="faq-item">
           <button class="faq-question">
-            <span>1. Mod aur Plugin banwane mein kitna time lagta hai?</span>
+            <span>1. Starter Monthly Plan mein 3 din mein 1 mod kaisey banta hai?</span>
             <span class="faq-icon"><i class="fa-solid fa-chevron-down"></i></span>
           </button>
           <div class="faq-answer">
             <p class="faq-answer-text">
-              Starter plugins aur simple bug fixes aam taur par 24 se 48 hours mein tayyar ho jate hain. Complex pro mods aur enterprise systems ke liye 3 se 7 days lag sakte hain. Aapko Gamexo Labs Discord par daily progress update milti rahegi.
+              Starter Plan ($10/mo) lene ke baad aap har 3 din baad naya single-feature mod ya utility plugin banwa sakte hain. Jab pehla mod deliver ho jaye, to 3 din baad aap dubara naya order submit kar sakte hain!
             </p>
           </div>
         </div>
@@ -544,12 +569,12 @@
         <!-- FAQ 2 -->
         <div class="faq-item">
           <button class="faq-question">
-            <span>2. Kya mujhe complete source code (Java files) milengi?</span>
+            <span>2. Agar mene koi Monthly Plan nahi liya hua, kya tab bhi mod banwa sakta hun?</span>
             <span class="faq-icon"><i class="fa-solid fa-chevron-down"></i></span>
           </button>
           <div class="faq-answer">
             <p class="faq-answer-text">
-              Ji haan! Har project ke mukammal hone par aapko compile ki hui `.jar` file ke sath complete clean source code aur installation documentation di jati hai.
+              Ji bilkul! Agar aapne koi plan nahi liya tab bhi aap Order Form se direct order de sakte hain. Form submit karne ke baad jab aap Gamexo Labs Discord par humse contact karenge, to hum aapke features ke hisab se price aur time align kar lenge.
             </p>
           </div>
         </div>
@@ -711,9 +736,10 @@
             <h4 class="footer-col-title">Navigation</h4>
             <ul class="footer-links">
               <li><a href="#hero" class="footer-link">Home</a></li>
-              <li><a href="#pricing" class="footer-link">Packages</a></li>
+              <li><a href="#pricing" class="footer-link">Plans</a></li>
               <li><a href="#order" class="footer-link">Order Form</a></li>
               <li><a href="#faq" class="footer-link">FAQ</a></li>
+              <li><a href="#" onclick="openModal('credits-modal'); return false;" class="footer-link">Developer Credits</a></li>
             </ul>
           </div>
 
@@ -896,6 +922,76 @@
           <span>Sign Out</span>
         </button>
 
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 3: GAMEXO DEVELOPER CREDITS MODAL (STUNNING SHOWCASE)
+       ========================================================================= -->
+  <div id="credits-modal" class="modal-overlay">
+    <div class="modal-content credits-modal-content">
+      <button class="modal-close-btn" onclick="closeModal('credits-modal')" aria-label="Close Credits Modal"><i class="fa-solid fa-xmark"></i></button>
+
+      <div class="credits-header">
+        <div class="credits-avatar-wrapper">
+          <img src="assets/images/gamexo_avatar.jpg" alt="GAMEXO Official Avatar" class="credits-avatar-img" />
+          <div class="credits-glow-ring"></div>
+        </div>
+        <div class="credits-title-area">
+          <div class="credits-studio-tag">
+            <i class="fa-solid fa-circle" style="font-size: 8px; color: #00ffd5;"></i> OFFICIAL STUDIO LEAD &amp; FOUNDER
+          </div>
+          <h3 class="credits-dev-name">GAMEXO <span class="highlight">(@GamexoGamer)</span></h3>
+          <p class="credits-dev-role">Lead Minecraft Developer — MineForge Studio &amp; Gamexo Labs</p>
+        </div>
+      </div>
+
+      <div class="credits-bio-box">
+        <p>
+          <strong>Gamexo</strong> is the creative mastermind and lead developer behind MineForge Studio. Passionate about crafting high-performance Minecraft Java modifications, custom server plugins, and lag-free gaming systems from Minecraft 1.21 to 26.30+ Chaos Cubed.
+        </p>
+        <p style="margin-top: 10px; color: var(--text-muted);">
+          "Hamara maksad har Minecraft server owner aur gamer ko top-tier professional tools aur custom development provide karna hai jisse unka server ek brand ban sake."
+        </p>
+      </div>
+
+      <div class="credits-contact-grid">
+        <!-- Discord -->
+        <a href="https://discord.gg/qJYhPEveXP" target="_blank" rel="noopener noreferrer" class="credits-social-card card-discord">
+          <div class="credits-social-icon"><i class="fa-brands fa-discord"></i></div>
+          <div>
+            <div class="credits-social-title">Gamexo Labs Discord</div>
+            <div class="credits-social-handle">discord.gg/qJYhPEveXP</div>
+          </div>
+          <div class="credits-social-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+        </a>
+
+        <!-- YouTube -->
+        <a href="https://www.youtube.com/@gamexogamer" target="_blank" rel="noopener noreferrer" class="credits-social-card card-youtube">
+          <div class="credits-social-icon"><i class="fa-brands fa-youtube"></i></div>
+          <div>
+            <div class="credits-social-title">YouTube Channel</div>
+            <div class="credits-social-handle">@gamexogamer</div>
+          </div>
+          <div class="credits-social-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+        </a>
+
+        <!-- Email -->
+        <div class="credits-social-card card-email" onclick="copyToClipboard('gamexogamerofficial@gmail.com', 'Gamexo official email copied!')">
+          <div class="credits-social-icon"><i class="fa-solid fa-at"></i></div>
+          <div>
+            <div class="credits-social-title">Official Email</div>
+            <div class="credits-social-handle">gamexogamerofficial@gmail.com</div>
+          </div>
+          <div class="credits-social-arrow"><i class="fa-solid fa-copy"></i></div>
+        </div>
+      </div>
+
+      <div class="credits-footer-bar">
+        <img src="assets/images/logo.png" alt="MineForge Logo" style="width: 28px; height: 28px; border-radius: 50%;" />
+        <span>Designed &amp; Engineered by GAMEXO &copy; 2026 MineForge Studio</span>
       </div>
 
     </div>

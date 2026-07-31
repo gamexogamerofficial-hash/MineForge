@@ -620,7 +620,14 @@ function initScrollToTop() {
  */
 function openModal(modalId) {
   const modal = document.getElementById(modalId);
-  if (modal) modal.classList.add('active');
+  if (modal) {
+    modal.classList.add('active');
+    modal.onclick = (e) => {
+      if (e.target === modal) {
+        closeModal(modalId);
+      }
+    };
+  }
 }
 
 function closeModal(modalId) {
