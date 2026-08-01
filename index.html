@@ -474,6 +474,22 @@
                 <input type="file" id="spec-file" style="display: none;" />
                 <div id="uploaded-file-name"></div>
               </div>
+            <div style="margin: 20px 0; padding: 18px; background: rgba(88, 101, 242, 0.15); border: 2px solid #5865F2; border-radius: var(--radius-md); box-shadow: 0 0 25px rgba(88, 101, 242, 0.25);">
+              <div style="display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px;">
+                <i class="fa-brands fa-discord" style="color: #5865F2; font-size: 1.8rem; margin-top: 2px; flex-shrink: 0;"></i>
+                <div>
+                  <div style="color: #fff; font-weight: 800; font-size: 0.98rem; margin-bottom: 4px; font-family: 'Outfit', sans-serif;">
+                    ⚠️ MANDATORY: Gamexo Labs Discord Join Karna Zaroori Hai!
+                  </div>
+                  <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5; margin: 0;">
+                    Order place karne ke baad hamare official Discord server par join karna lazmi hai kiyunke delivery, live support, aur payment alignment wahi hoti hai.
+                  </p>
+                </div>
+              </div>
+              <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; color: #00ffd5; font-size: 0.92rem; font-weight: 700; background: rgba(0,0,0,0.25); padding: 10px 14px; border-radius: var(--radius-sm);">
+                <input type="checkbox" id="require-discord-join" required style="width: 20px; height: 20px; accent-color: #5865F2; cursor: pointer;" />
+                <span>I agree to join <a href="https://discord.gg/qJYhPEveXP" target="_blank" style="color: #fff; text-decoration: underline;">Gamexo Labs Discord</a> after submitting *</span>
+              </label>
             </div>
 
             <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
@@ -800,13 +816,20 @@
         </p>
       </div>
 
-      <div style="background: rgba(88, 101, 242, 0.12); border: 1px solid rgba(88, 101, 242, 0.4); border-radius: var(--radius-sm); padding: 18px; margin-bottom: 26px; text-align: center;">
-        <p style="font-size: 0.92rem; color: #d1d9ff; margin-bottom: 14px;">
-          💬 <strong>Next Step:</strong> Hamare developer se direct baat karne aur apna order confirm karne ke liye hamara community server <strong>"Gamexo Labs"</strong> join karen!
+      <!-- MANDATORY DISCORD JOIN CALLOUT -->
+      <div style="background: rgba(88, 101, 242, 0.2); border: 2px solid #5865F2; border-radius: var(--radius-md); padding: 22px; margin-bottom: 26px; text-align: center; box-shadow: 0 0 30px rgba(88, 101, 242, 0.35);">
+        <div style="display: inline-block; background: #5865F2; color: #fff; font-size: 0.78rem; font-weight: 800; padding: 4px 12px; border-radius: var(--radius-full); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">
+          ⚠️ MANDATORY STEP FOR ALL CLIENTS
+        </div>
+        <h4 style="color: #fff; font-size: 1.25rem; margin-bottom: 8px; font-family: 'Outfit', sans-serif;">
+          Join "Gamexo Labs" Discord Now!
+        </h4>
+        <p style="font-size: 0.94rem; color: #d1d9ff; margin-bottom: 16px; line-height: 1.6;">
+          Aapka order tabhi start hoga jab aap hamare official Discord server <strong>Gamexo Labs</strong> me join kar ke apna Order ID verify karwayenge!
         </p>
-        <a href="https://discord.gg/qJYhPEveXP" target="_blank" rel="noopener noreferrer" class="btn" style="background: #5865F2; color: #fff; width: 100%;">
-          <i class="fa-brands fa-discord"></i>
-          <span>Join Gamexo Labs Discord (discord.gg/qJYhPEveXP)</span>
+        <a href="https://discord.gg/qJYhPEveXP" target="_blank" rel="noopener noreferrer" class="btn" style="background: #5865F2; color: #fff; width: 100%; padding: 15px; font-size: 1.05rem; font-weight: 700; box-shadow: 0 0 25px rgba(88, 101, 242, 0.5);">
+          <i class="fa-brands fa-discord" style="font-size: 1.4rem;"></i>
+          <span>CLICK HERE TO JOIN GAMEXO LABS DISCORD *</span>
         </a>
       </div>
 
@@ -845,7 +868,7 @@
         <div style="margin-bottom: 18px;">
           <button type="button" id="btn-official-discord-login" class="btn" style="background: #5865F2; color: #fff; width: 100%; padding: 16px; font-size: 1.08rem; font-weight: 700; border-radius: var(--radius-sm); box-shadow: 0 0 28px rgba(88, 101, 242, 0.5); display: flex; align-items: center; justify-content: center; gap: 12px; cursor: pointer; transition: all 0.3s ease;">
             <i class="fa-brands fa-discord" style="font-size: 1.45rem;"></i>
-            <span>Login with Official Discord (OAuth2)</span>
+            <span>Login With Discord</span>
           </button>
         </div>
 

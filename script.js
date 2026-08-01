@@ -184,7 +184,13 @@ function initOfficialDiscordOAuth() {
         return;
       }
 
-      const redirectUri = encodeURIComponent(window.location.origin + window.location.pathname);
+      // Clean base URL without index.html and ensuring trailing slash
+      let cleanUrl = window.location.origin + window.location.pathname.replace(/index\.html$/i, '');
+      if (!cleanUrl.endsWith('/')) {
+        cleanUrl += '/';
+      }
+      console.log('Discord OAuth2 Redirect URI (Must match Discord Developer Portal -> OAuth2 -> Redirects):', cleanUrl);
+      const redirectUri = encodeURIComponent(cleanUrl);
       const authUrl = `https://discord.com/oauth2/authorize?client_id=${DISCORD_OAUTH_CONFIG.CLIENT_ID}&response_type=token&redirect_uri=${redirectUri}&scope=${DISCORD_OAUTH_CONFIG.SCOPE}`;
       window.location.href = authUrl;
     });
