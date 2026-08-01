@@ -531,12 +531,19 @@ function renderAccountDashboard() {
   const authContainer = document.getElementById('auth-view-container');
   const dashContainer = document.getElementById('dashboard-view-container');
   const navLabel = document.getElementById('nav-account-label');
+  const navIcon = document.getElementById('nav-account-icon');
+  const navAvatar = document.getElementById('nav-account-avatar');
   const currentUser = JSON.parse(localStorage.getItem(MF_STORAGE_KEYS.CURRENT_USER) || 'null');
 
   if (!currentUser) {
     if (authContainer) authContainer.style.display = 'block';
     if (dashContainer) dashContainer.style.display = 'none';
     if (navLabel) navLabel.textContent = 'Account';
+    if (navIcon) {
+      navIcon.className = 'fa-solid fa-user-shield';
+      navIcon.style.display = 'inline-block';
+    }
+    if (navAvatar) navAvatar.style.display = 'none';
     return;
   }
 
@@ -544,6 +551,20 @@ function renderAccountDashboard() {
   if (authContainer) authContainer.style.display = 'none';
   if (dashContainer) dashContainer.style.display = 'block';
   if (navLabel) navLabel.textContent = currentUser.username;
+
+  // Set navbar avatar image to user's Discord profile pic
+  if (navAvatar && navIcon) {
+    const avatarUrl = currentUser.avatar || ((currentUser.username && currentUser.username.toLowerCase().includes('gamexo')) ? 'assets/images/gamexo_avatar.jpg' : null);
+    if (avatarUrl) {
+      navAvatar.src = avatarUrl;
+      navAvatar.style.display = 'inline-block';
+      navIcon.style.display = 'none';
+    } else {
+      navAvatar.style.display = 'none';
+      navIcon.className = 'fa-brands fa-discord';
+      navIcon.style.display = 'inline-block';
+    }
+  }
 
   document.getElementById('dash-username').textContent = currentUser.username;
   const badgeHtml = currentUser.verifiedDiscord
@@ -553,19 +574,19 @@ function renderAccountDashboard() {
 
   const dashAvatarEl = document.getElementById('dash-avatar');
   if (dashAvatarEl) {
-    if (currentUser.avatar) {
-      dashAvatarEl.innerHTML = `<img src="${currentUser.avatar}" alt="Avatar" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" />`;
+    const avatarUrl = currentUser.avatar || ((currentUser.username && currentUser.username.toLowerCase().includes('gamexo')) ? 'assets/images/gamexo_avatar.jpg' : null);
+    if (avatarUrl) {
+      dashAvatarEl.innerHTML = `<img src="${avatarUrl}" alt="Avatar" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid #00ffd5;" />`;
     } else {
       dashAvatarEl.textContent = (currentUser.username || 'U').charAt(0).toUpperCase();
     }
   }
 
-  // Populate client orders
+  // Populate client orders (only real orders from this user!)
   const allOrders = JSON.parse(localStorage.getItem(MF_STORAGE_KEYS.ORDERS) || '[]');
   const clientOrders = allOrders.filter(o => 
     o.clientName.toLowerCase() === currentUser.username.toLowerCase() ||
-    (o.discordHandle && currentUser.discord && o.discordHandle.toLowerCase() === currentUser.discord.toLowerCase()) ||
-    o.id === 'MF-1001' || o.id === 'MF-1002' // always show demos for preview
+    (o.discordHandle && currentUser.discord && o.discordHandle.toLowerCase() === currentUser.discord.toLowerCase())
   );
 
   document.getElementById('dash-order-count').textContent = `${clientOrders.length} Orders`;
@@ -574,8 +595,17 @@ function renderAccountDashboard() {
 
   if (clientOrders.length === 0) {
     ordersListElem.innerHTML = `
-      <div style="text-align: center; padding: 24px; color: var(--text-muted);">
-        No orders placed yet. Submit the form on the page to create your first build order!
+      <div style="text-align: center; padding: 32px 18px; background: rgba(255,255,255,0.02); border: 1.5px dashed rgba(255,255,255,0.18); border-radius: var(--radius-md); margin-bottom: 16px;">
+        <div style="font-size: 2.6rem; color: var(--text-muted); margin-bottom: 10px;">
+          <i class="fa-solid fa-box-open"></i>
+        </div>
+        <h5 style="color: #fff; font-size: 1.15rem; margin-bottom: 6px; font-family: 'Outfit', sans-serif;">Order Not Found</h5>
+        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 18px; max-width: 290px; margin-left: auto; margin-right: auto;">
+          Aapne abhi tak koi Minecraft mod ya plugin order nahi kiya hai.
+        </p>
+        <button class="btn btn-primary" style="padding: 10px 22px; font-size: 0.88rem; font-weight: 700;" onclick="closeModal('account-modal'); window.location.hash='#order';">
+          <i class="fa-solid fa-plus"></i> Place New Order
+        </button>
       </div>
     `;
     return;
@@ -759,6 +789,40 @@ function copyOrderIdFromModal() {
   if (idElem) {
     copyToClipboard(idElem.textContent, 'Order ID copied to clipboard!');
   }
+}
+
+function copyEmailWithFeedback() {
+  const emailStr = 'gamexogamerofficial@gmail.com';
+  navigator.clipboard.writeText(emailStr).then(() => {
+    showToast('✅ Official email copied: ' + emailStr);
+    const box = document.getElementById('email-card-box');
+    const handle = document.getElementById('email-handle-text');
+    const icon = document.getElementById('email-copy-icon');
+    if (box && handle && icon) {
+      const origBorder = box.style.borderColor;
+      const origBg = box.style.background;
+      const origHandleText = handle.textContent;
+      const origIconHtml = icon.innerHTML;
+
+      box.style.borderColor = '#00ffd5';
+      box.style.background = 'rgba(0, 255, 213, 0.15)';
+      box.style.boxShadow = '0 0 25px rgba(0, 255, 213, 0.4)';
+      handle.textContent = '✅ Copied to clipboard!';
+      handle.style.color = '#00ffd5';
+      icon.innerHTML = '<i class="fa-solid fa-check" style="color: #00ffd5;"></i>';
+
+      setTimeout(() => {
+        box.style.borderColor = origBorder;
+        box.style.background = origBg;
+        box.style.boxShadow = '';
+        handle.textContent = origHandleText;
+        handle.style.color = '';
+        icon.innerHTML = origIconHtml;
+      }, 2500);
+    }
+  }).catch(() => {
+    showToast('Failed to copy. Try manually: gamexogamerofficial@gmail.com');
+  });
 }
 
 // Close modals when clicking outside modal box

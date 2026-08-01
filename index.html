@@ -65,8 +65,9 @@
         </button>
 
         <!-- Account / Client Login Button -->
-        <button id="btn-open-account" class="btn-nav-account" title="Client Account Dashboard">
-          <i class="fa-solid fa-user-shield"></i>
+        <button id="btn-open-account" class="btn-nav-account" title="Client Account Dashboard" onclick="openModal('account-modal')">
+          <img id="nav-account-avatar" src="assets/images/gamexo_avatar.jpg" alt="Avatar" style="display: none; width: 22px; height: 22px; border-radius: 50%; object-fit: cover; border: 1.5px solid #00ffd5; box-shadow: 0 0 8px rgba(0,255,213,0.5);" />
+          <i class="fa-solid fa-user-shield" id="nav-account-icon"></i>
           <span id="nav-account-label">Account</span>
         </button>
 
@@ -443,17 +444,24 @@
             <div class="form-grid-2">
               <div class="form-group">
                 <label class="form-label" for="build-type">Development Type / Plan *</label>
-                <select id="build-type" class="form-select" required>
-                  <option value="" disabled selected>-- Select Type --</option>
-                  <option value="Starter Plan Mod/Plugin">Starter Monthly Plan (3 Days Mod/Plugin)</option>
-                  <option value="Pro Plan Mod/Plugin">Pro Monthly Plan (Medium Mod/Plugin Suite)</option>
-                  <option value="Enterprise Plan Mod/Plugin">Enterprise Monthly Plan (Custom Systems/DB)</option>
-                  <option value="Direct Order - Fabric Mod">Direct Order — Fabric Mod (No Plan)</option>
-                  <option value="Direct Order - Forge Mod">Direct Order — Forge Mod (No Plan)</option>
-                  <option value="Direct Order - Paper Plugin">Direct Order — Paper / Spigot Plugin (No Plan)</option>
-                  <option value="Bug Fix / Optimization">Bug Fix / TPS Optimization</option>
-                  <option value="Custom Quotation Project">Other Custom Project (Price on Discord)</option>
+                <select id="build-type" class="form-select" required style="font-family: 'Outfit', sans-serif; font-weight: 600;">
+                  <option value="" disabled selected>-- Select Order Type --</option>
+                  <optgroup label="📋 ACTIVE MONTHLY PLAN ORDERS (For Subscribers)">
+                    <option value="Starter Plan Mod/Plugin">Starter Monthly Plan (3 Days Mod/Plugin)</option>
+                    <option value="Pro Plan Mod/Plugin">Pro Monthly Plan (Medium Mod/Plugin Suite)</option>
+                    <option value="Enterprise Plan Mod/Plugin">Enterprise Monthly Plan (Custom Systems/DB)</option>
+                  </optgroup>
+                  <optgroup label="⚡ DIRECT DEVELOPMENT ORDERS (No Plan Required - One Time)">
+                    <option value="Direct Order - Fabric Mod">Direct Order — Fabric Mod (No Plan Required)</option>
+                    <option value="Direct Order - Forge Mod">Direct Order — Forge Mod (No Plan Required)</option>
+                    <option value="Direct Order - Paper Plugin">Direct Order — Paper / Spigot Plugin (No Plan Required)</option>
+                    <option value="Bug Fix / Optimization">Bug Fix / TPS Optimization (One-time Fix)</option>
+                    <option value="Custom Quotation Project">Other Custom Project (Price on Discord)</option>
+                  </optgroup>
                 </select>
+                <div style="font-size: 0.78rem; color: #00ffd5; margin-top: 6px; font-weight: 500;">
+                  💡 <em>Plan nahi liya? Koi masla nahi! "Direct Development Orders" se bina plan ke custom mod order karein.</em>
+                </div>
               </div>
               <div class="form-group">
                 <label class="form-label" for="target-version">Minecraft Version *</label>
@@ -889,7 +897,7 @@
         </div>
 
         <h4 style="font-size: 1.15rem; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
-          <span>Your Custom Orders</span>
+          <span><i class="fa-solid fa-box-open" style="color: var(--accent-primary);"></i> Your Orders</span>
           <span id="dash-order-count" class="service-tag">0 Orders</span>
         </h4>
 
@@ -899,9 +907,12 @@
         </div>
 
         <!-- Quick Support Banner inside Dashboard -->
-        <div style="background: rgba(88,101,242,0.12); border: 1px solid rgba(88,101,242,0.4); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
-          <span style="font-size: 0.9rem; color: #d1d9ff;">Need instant support?</span>
-          <a href="https://discord.gg/qJYhPEveXP" target="_blank" rel="noopener noreferrer" class="btn" style="background: #5865F2; color: #fff; padding: 8px 16px; font-size: 0.85rem;">
+        <div style="background: linear-gradient(135deg, rgba(88,101,242,0.25) 0%, rgba(88,101,242,0.08) 100%); border: 1.5px solid rgba(88,101,242,0.6); border-radius: var(--radius-md); padding: 16px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; box-shadow: 0 4px 15px rgba(88,101,242,0.25);">
+          <div>
+            <div style="font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 2px;">Need Instant Support?</div>
+            <div style="font-size: 0.82rem; color: #d1d9ff;">24/7 Developer chat & live order alignment</div>
+          </div>
+          <a href="https://discord.gg/qJYhPEveXP" target="_blank" rel="noopener noreferrer" class="btn" style="background: #5865F2; color: #fff; padding: 10px 18px; font-size: 0.88rem; font-weight: 700; box-shadow: 0 0 15px rgba(88,101,242,0.4);">
             <i class="fa-brands fa-discord"></i> Join Gamexo Labs
           </a>
         </div>
@@ -968,13 +979,13 @@
         </a>
 
         <!-- Email -->
-        <div class="credits-social-card card-email" onclick="copyToClipboard('gamexogamerofficial@gmail.com', 'Gamexo official email copied!')">
+        <div id="email-card-box" class="credits-social-card card-email" onclick="copyEmailWithFeedback()" style="cursor: pointer; transition: all 0.3s ease;">
           <div class="credits-social-icon"><i class="fa-solid fa-at"></i></div>
           <div>
             <div class="credits-social-title">Official Email</div>
-            <div class="credits-social-handle">gamexogamerofficial@gmail.com</div>
+            <div id="email-handle-text" class="credits-social-handle">gamexogamerofficial@gmail.com</div>
           </div>
-          <div class="credits-social-arrow"><i class="fa-solid fa-copy"></i></div>
+          <div id="email-copy-icon" class="credits-social-arrow" style="font-weight: 700;"><i class="fa-solid fa-copy"></i></div>
         </div>
       </div>
 
