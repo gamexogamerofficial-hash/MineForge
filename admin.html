@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GAMEXO LABS — Master Admin Portal | MineForge Studio</title>
+  <title>MINEFORGE STUDIO — Master Admin Portal</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23060913'/><path d='M20 75 L35 45 L50 65 L65 35 L80 75 Z' fill='%2300ffd5' stroke='%2300ffd5' stroke-width='4'/></svg>" />
@@ -211,7 +211,7 @@
       padding: 16px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.07);
       font-size: 0.9rem;
-      vertical-align: top;
+      vertical-align: middle;
     }
 
     .admin-table tr:hover td {
@@ -244,18 +244,45 @@
       text-align: center;
       box-shadow: 0 0 50px rgba(0, 255, 213, 0.25);
     }
+
+    /* Client User Card Row */
+    .user-row-flex {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .user-row-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 2px solid #00ffd5;
+      object-fit: cover;
+      background: #060913;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #00ffd5;
+      font-size: 1.1rem;
+      overflow: hidden;
+    }
+    .user-row-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   </style>
 </head>
 <body>
 
-  <!-- LOCK / PASSWORD MODAL OVERLAY -->
+  <!-- LOCK / PASSWORD MODAL OVERLAY (Always shown on open/refresh!) -->
   <div id="admin-lock-overlay" class="admin-lock-overlay">
     <div class="admin-lock-box">
       <div style="width: 70px; height: 70px; border-radius: 50%; background: rgba(0, 255, 213, 0.15); border: 2px solid #00ffd5; color: #00ffd5; font-size: 2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 0 25px rgba(0, 255, 213, 0.3);">
         <i class="fa-solid fa-lock"></i>
       </div>
       <h2 id="lock-title" style="font-family: 'Outfit', sans-serif; font-size: 1.55rem; color: #fff; margin-bottom: 8px;">Master Admin Portal</h2>
-      <p id="lock-subtitle" style="font-size: 0.88rem; color: #b4c6e7; margin-bottom: 24px;">Enter your secure GAMEXO LABS Master Password to access studio controls.</p>
+      <p id="lock-subtitle" style="font-size: 0.88rem; color: #b4c6e7; margin-bottom: 24px;">Enter your secure MineForge Studio Master Password to access studio controls.</p>
 
       <form id="admin-auth-form" onsubmit="handleAdminLogin(event)">
         <div style="margin-bottom: 18px; text-align: left;">
@@ -269,7 +296,7 @@
       </form>
 
       <div style="margin-top: 20px; font-size: 0.78rem; color: #64748b;">
-        <i class="fa-solid fa-circle-info"></i> Only authorized studio owner (GAMEXO LABS) can access this page.
+        <i class="fa-solid fa-circle-info"></i> Only authorized MineForge studio owner can access this page.
       </div>
     </div>
   </div>
@@ -285,10 +312,10 @@
         </div>
         <div>
           <h1 style="font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 800; color: #fff; margin: 0;">
-            GAMEXO LABS <span style="color: #00ffd5;">Control Center</span>
+            MINEFORGE <span style="color: #00ffd5;">Control Center</span>
           </h1>
           <p style="font-size: 0.88rem; color: #8ba1cf; margin: 4px 0 0 0;">
-            Live Studio Availability, Client Quotations & Order Management
+            Live Studio Availability, Client Projects & Order Management
           </p>
         </div>
       </div>
@@ -297,6 +324,9 @@
         <a href="index.html" class="btn" style="background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.15); font-size: 0.85rem; padding: 10px 16px; border-radius: 10px; text-decoration: none;">
           <i class="fa-solid fa-arrow-up-right-from-square"></i> View Live Site
         </a>
+        <button onclick="purgeDummyOrders()" class="btn" style="background: rgba(255, 183, 3, 0.15); color: #ffb703; border: 1px solid rgba(255, 183, 3, 0.4); font-size: 0.85rem; padding: 10px 16px; border-radius: 10px; cursor: pointer;" title="Removes test/dummy data">
+          <i class="fa-solid fa-broom"></i> Clean Dummy Orders
+        </button>
         <button onclick="changeMasterPassword()" class="btn" style="background: rgba(0, 255, 213, 0.15); color: #00ffd5; border: 1px solid rgba(0, 255, 213, 0.4); font-size: 0.85rem; padding: 10px 16px; border-radius: 10px; cursor: pointer;">
           <i class="fa-solid fa-key"></i> Change Password
         </button>
@@ -338,6 +368,32 @@
           <div class="num" id="stat-total-users" style="color: #a78bfa;">0</div>
         </div>
         <div class="admin-stat-icon" style="background: rgba(167,139,250,0.1); color: #a78bfa;"><i class="fa-solid fa-users"></i></div>
+      </div>
+    </div>
+
+    <!-- Live Website Announcement Bar Controller (NEW COOL FEATURE!) -->
+    <div class="admin-avail-box" style="border-color: #a78bfa; box-shadow: 0 0 30px rgba(167,139,250,0.15);">
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+        <div>
+          <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.35rem; color: #fff; margin: 0; display: flex; align-items: center; gap: 10px;">
+            <i class="fa-solid fa-bullhorn" style="color: #a78bfa;"></i> Live Website Announcement Banner
+          </h2>
+          <p style="font-size: 0.88rem; color: #b4c6e7; margin: 4px 0 0 0;">
+            Display an important live notice at the very top of your homepage for all visitors.
+          </p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <button id="btn-announce-toggle" onclick="toggleAnnouncementBar()" class="btn" style="padding: 8px 18px; font-weight: 800; border-radius: 99px; font-size: 0.85rem; border: 1.5px solid #a78bfa; background: rgba(167,139,250,0.2); color: #a78bfa;">
+            OFF
+          </button>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <input type="text" id="announce-text-input" placeholder="e.g. 🔥 Spring Custom Mod Season Open — Request Your Free Custom Quote Now!" style="flex: 1; min-width: 280px; padding: 12px 16px; border-radius: 12px; background: #060913; color: #fff; border: 1px solid rgba(167,139,250,0.4); font-size: 0.95rem;" />
+        <button onclick="saveAnnouncementText()" class="btn btn-primary" style="background: linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%); border: none; padding: 12px 24px; font-weight: 700; border-radius: 12px;">
+          <i class="fa-solid fa-floppy-disk"></i> Save & Push Live
+        </button>
       </div>
     </div>
 
@@ -401,7 +457,7 @@
           <thead>
             <tr>
               <th>Order ID</th>
-              <th>Client / Discord</th>
+              <th>Client Profile & Discord</th>
               <th>Project Service Type</th>
               <th>Target Version</th>
               <th>Features / Spec Details</th>
@@ -419,7 +475,7 @@
     <!-- Registered Clients Table -->
     <div class="admin-section-card">
       <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.35rem; color: #fff; margin: 0 0 6px 0; display: flex; align-items: center; gap: 10px;">
-        <i class="fa-solid fa-user-check" style="color: #a78bfa;"></i> Registered Studio Clients
+        <i class="fa-solid fa-user-check" style="color: #a78bfa;"></i> Registered MineForge Clients
       </h2>
       <p style="font-size: 0.88rem; color: #b4c6e7; margin-bottom: 18px;">
         Clients who logged in via Discord or Account Portal.
@@ -429,8 +485,8 @@
         <table class="admin-table">
           <thead>
             <tr>
-              <th>Username</th>
-              <th>Discord Handle</th>
+              <th>Client Profile</th>
+              <th>Discord Username</th>
               <th>Verified Status</th>
               <th>Joined Date</th>
             </tr>
@@ -453,8 +509,9 @@
     const ORDERS_KEY = 'mineforge_orders';
     const USERS_KEY = 'mineforge_users';
     const AVAILABILITY_KEY = 'mineforge_availability';
+    const ANNOUNCE_KEY = 'mineforge_announcement';
 
-    // Check if password exists on load
+    // Check if password exists on load - ALWAYS REQUIRE PASSWORD ON EVERY OPEN/REFRESH!
     window.addEventListener('DOMContentLoaded', () => {
       const existingPass = localStorage.getItem(ADMIN_PASS_KEY);
       const title = document.getElementById('lock-title');
@@ -464,20 +521,20 @@
 
       if (!existingPass) {
         title.textContent = 'Setup Master Admin Password';
-        subtitle.textContent = 'Welcome Gamexo Labs! Set your one-time secure Master Admin Password to lock this portal.';
+        subtitle.textContent = 'Welcome MineForge Studio Admin! Set your one-time secure Master Admin Password to lock this portal.';
         label.textContent = 'Create New Master Password';
         btnText.textContent = 'Save & Open Portal';
       } else {
         title.textContent = 'Master Admin Portal';
-        subtitle.textContent = 'Enter your secure GAMEXO LABS Master Password to access studio controls.';
+        subtitle.textContent = 'Enter your secure MineForge Studio Master Password to access studio controls.';
         label.textContent = 'Master Password';
         btnText.textContent = 'Unlock Portal';
       }
 
-      // Automatically check session
-      if (sessionStorage.getItem('mineforge_admin_unlocked') === 'true') {
-        unlockUI();
-      }
+      // Automatically purge any dummy SteveMC or AlexGamer test orders from localStorage on load
+      purgeDummyOrdersSilent();
+
+      // Note: We deliberately DO NOT auto-unlock from sessionStorage so you ALWAYS have to enter your password on refresh!
     });
 
     function handleAdminLogin(e) {
@@ -491,14 +548,12 @@
       if (!existingPass) {
         // Setup new password
         localStorage.setItem(ADMIN_PASS_KEY, val);
-        sessionStorage.setItem('mineforge_admin_unlocked', 'true');
         showAdminToast('🔐 Master Password successfully created!');
         unlockUI();
       } else {
         // Verify password
         if (val === existingPass) {
-          sessionStorage.setItem('mineforge_admin_unlocked', 'true');
-          showAdminToast('👑 Welcome back, Gamexo Labs Admin!');
+          showAdminToast('👑 Welcome back, MineForge Admin!');
           unlockUI();
         } else {
           showAdminToast('❌ Incorrect Master Password!');
@@ -516,7 +571,6 @@
     }
 
     function lockAdminPortal() {
-      sessionStorage.removeItem('mineforge_admin_unlocked');
       document.getElementById('admin-password-input').value = '';
       document.getElementById('admin-main-content').style.display = 'none';
       document.getElementById('admin-lock-overlay').style.display = 'flex';
@@ -539,6 +593,69 @@
         alert('✅ Master Admin Password changed successfully!');
       } else {
         alert('❌ Password change cancelled or too short.');
+      }
+    }
+
+    function purgeDummyOrdersSilent() {
+      try {
+        let orders = JSON.parse(localStorage.getItem(ORDERS_KEY) || '[]');
+        const filtered = orders.filter(o => o.clientName !== 'SteveMC' && o.clientName !== 'AlexGamer');
+        if (filtered.length !== orders.length) {
+          localStorage.setItem(ORDERS_KEY, JSON.stringify(filtered));
+        }
+      } catch(e) {}
+    }
+
+    function purgeDummyOrders() {
+      let orders = JSON.parse(localStorage.getItem(ORDERS_KEY) || '[]');
+      const beforeCount = orders.length;
+      orders = orders.filter(o => o.clientName !== 'SteveMC' && o.clientName !== 'AlexGamer');
+      localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
+      const removed = beforeCount - orders.length;
+      if (removed > 0) {
+        showAdminToast(`🧹 Cleaned up ${removed} test/dummy order(s)!`);
+      } else {
+        showAdminToast('✅ No test/dummy orders found.');
+      }
+      renderAdminOrders();
+    }
+
+    // Announcement Bar Controller
+    function toggleAnnouncementBar() {
+      let ann = JSON.parse(localStorage.getItem(ANNOUNCE_KEY) || '{"enabled":false,"text":""}');
+      ann.enabled = !ann.enabled;
+      localStorage.setItem(ANNOUNCE_KEY, JSON.stringify(ann));
+      updateAnnounceUI();
+      showAdminToast(ann.enabled ? '📢 Announcement Bar ENABLED on Website!' : '📢 Announcement Bar DISABLED.');
+    }
+
+    function saveAnnouncementText() {
+      const text = document.getElementById('announce-text-input').value.trim();
+      let ann = JSON.parse(localStorage.getItem(ANNOUNCE_KEY) || '{"enabled":true,"text":""}');
+      ann.text = text || '🔥 Custom Minecraft Mods & Plugins — Request Your Quote Today!';
+      ann.enabled = true;
+      localStorage.setItem(ANNOUNCE_KEY, JSON.stringify(ann));
+      updateAnnounceUI();
+      showAdminToast('📢 Announcement text saved and pushed live!');
+    }
+
+    function updateAnnounceUI() {
+      let ann = JSON.parse(localStorage.getItem(ANNOUNCE_KEY) || '{"enabled":false,"text":""}');
+      const btn = document.getElementById('btn-announce-toggle');
+      const input = document.getElementById('announce-text-input');
+      if (ann.enabled) {
+        btn.textContent = '🟢 LIVE ON SITE';
+        btn.style.borderColor = '#00ffd5';
+        btn.style.color = '#00ffd5';
+        btn.style.background = 'rgba(0,255,213,0.2)';
+      } else {
+        btn.textContent = '⚪ DISABLED';
+        btn.style.borderColor = '#64748b';
+        btn.style.color = '#64748b';
+        btn.style.background = 'rgba(100,116,139,0.1)';
+      }
+      if (ann.text && !input.value) {
+        input.value = ann.text;
       }
     }
 
@@ -581,6 +698,7 @@
     function loadAdminDashboard() {
       const avail = localStorage.getItem(AVAILABILITY_KEY) || 'open';
       updateAvailButtonsUI(avail);
+      updateAnnounceUI();
       renderAdminOrders();
       renderAdminUsers();
     }
@@ -590,7 +708,7 @@
       const tbody = document.getElementById('admin-orders-tbody');
       
       document.getElementById('stat-total-orders').textContent = orders.length;
-      document.getElementById('stat-pending-orders').textContent = orders.filter(o => !o.status || o.status === 'Pending').length;
+      document.getElementById('stat-pending-orders').textContent = orders.filter(o => !o.status || o.status === 'Pending Quote' || o.status === 'Pending' || o.status === 'In-Progress').length;
       document.getElementById('stat-completed-orders').textContent = orders.filter(o => o.status === 'Completed').length;
 
       if (orders.length === 0) {
@@ -610,7 +728,7 @@
           month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'
         });
 
-        const badgeColor = (o.status === 'Completed') ? '#00ffd5' : (o.status === 'In Progress' ? '#ffb703' : '#a78bfa');
+        const badgeColor = (o.status === 'Completed') ? '#00ffd5' : (o.status === 'In Progress' || o.status === 'In-Progress' ? '#ffb703' : '#a78bfa');
 
         return `
           <tr>
@@ -619,19 +737,26 @@
               <span style="font-size: 0.75rem; color: #64748b; font-weight: 400;">${dateStr}</span>
             </td>
             <td>
-              <strong style="color: #fff;">${o.clientName || 'Client'}</strong><br/>
-              <span style="color: #5865F2; font-weight: 600;"><i class="fa-brands fa-discord"></i> ${o.clientDiscord || 'N/A'}</span>
+              <div class="user-row-flex">
+                <div class="user-row-avatar">
+                  ${o.clientAvatar ? `<img src="${o.clientAvatar}" alt="Avatar" />` : (o.clientName || 'C').charAt(0).toUpperCase()}
+                </div>
+                <div>
+                  <strong style="color: #fff; font-size: 0.95rem;">${o.clientName || 'Client'}</strong><br/>
+                  <span style="color: #5865F2; font-weight: 700; font-size: 0.82rem;"><i class="fa-brands fa-discord"></i> ${o.clientDiscord || '@discord_user'}</span>
+                </div>
+              </div>
             </td>
-            <td style="font-weight: 600; color: #e2e8f0;">${o.type || 'Custom Quotation'}</td>
-            <td><span style="background: rgba(255,255,255,0.06); padding: 4px 10px; border-radius: 6px; font-size: 0.82rem;">${o.version || 'Any'}</span></td>
+            <td style="font-weight: 600; color: #e2e8f0;">${o.type || o.buildType || 'Custom Quotation'}</td>
+            <td><span style="background: rgba(255,255,255,0.06); padding: 4px 10px; border-radius: 6px; font-size: 0.82rem;">${o.version || o.targetVersion || 'Any'}</span></td>
             <td style="max-width: 250px; color: #cbd5e1; font-size: 0.86rem; line-height: 1.4;">
               ${o.desc || 'No description provided.'}
               ${o.specFile ? `<div style="margin-top: 6px; font-size: 0.78rem; color: #00ffd5;"><i class="fa-solid fa-paperclip"></i> File: ${o.specFile}</div>` : ''}
             </td>
             <td>
               <select onchange="updateOrderStatus('${o.id}', this.value)" style="background: #060913; color: ${badgeColor}; border: 1px solid ${badgeColor}; padding: 6px 10px; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer;">
-                <option value="Pending" ${(!o.status || o.status === 'Pending') ? 'selected' : ''}>Pending Quote</option>
-                <option value="In Progress" ${(o.status === 'In Progress') ? 'selected' : ''}>In Progress</option>
+                <option value="Pending Quote" ${(!o.status || o.status === 'Pending' || o.status === 'Pending Quote') ? 'selected' : ''}>Pending Quote</option>
+                <option value="In Progress" ${(o.status === 'In Progress' || o.status === 'In-Progress') ? 'selected' : ''}>In Progress</option>
                 <option value="Completed" ${(o.status === 'Completed') ? 'selected' : ''}>Completed</option>
               </select>
             </td>
@@ -665,12 +790,21 @@
       tbody.innerHTML = users.map(u => {
         return `
           <tr>
-            <td style="font-weight: 700; color: #fff;">${u.username || 'Client'}</td>
-            <td style="color: #5865F2; font-weight: 600;"><i class="fa-brands fa-discord"></i> ${u.discord || '@discord'}</td>
+            <td>
+              <div class="user-row-flex">
+                <div class="user-row-avatar">
+                  ${u.avatar ? `<img src="${u.avatar}" alt="Avatar" />` : (u.username || 'U').charAt(0).toUpperCase()}
+                </div>
+                <div>
+                  <strong style="color: #fff; font-size: 0.95rem;">${u.username || 'Client'}</strong>
+                </div>
+              </div>
+            </td>
+            <td style="color: #5865F2; font-weight: 700; font-size: 0.9rem;"><i class="fa-brands fa-discord"></i> ${u.discord || '@discord_user'}</td>
             <td>
               ${u.verifiedDiscord 
-                ? '<span style="color: #00ffd5; font-size: 0.8rem; font-weight: 700;"><i class="fa-solid fa-check-circle"></i> Verified OAuth2</span>'
-                : '<span style="color: #8ba1cf; font-size: 0.8rem;">Standard Account</span>'}
+                ? '<span style="color: #00ffd5; font-size: 0.82rem; font-weight: 700;"><i class="fa-solid fa-check-circle"></i> Verified OAuth2</span>'
+                : '<span style="color: #8ba1cf; font-size: 0.82rem;">Standard Account</span>'}
             </td>
             <td style="color: #64748b; font-size: 0.82rem;">Registered Member</td>
           </tr>

@@ -24,36 +24,22 @@ const DISCORD_OAUTH_CONFIG = {
   SCOPE: 'identify'
 };
 
-// Default Demo Orders in storage if empty
-const DEFAULT_ORDERS = [
-  {
-    id: 'MF-1001',
-    clientName: 'SteveMC',
-    discordHandle: 'steve_dev',
-    buildType: 'Fabric Mod Development',
-    targetVersion: '1.21.4',
-    status: 'In-Progress',
-    desc: 'Custom magic spell animations and glowing item models.',
-    date: '2026-08-03',
-    timestamp: Date.now() - (2 * 3600 * 1000)
-  },
-  {
-    id: 'MF-1002',
-    clientName: 'AlexGamer',
-    discordHandle: 'alex_pvp',
-    buildType: 'Paper Plugin Development',
-    targetVersion: '26.30',
-    status: 'In-Progress',
-    desc: 'Economy shop GUI with custom scoreboard rank integration.',
-    date: '2026-08-03',
-    timestamp: Date.now() - (5 * 3600 * 1000)
-  }
-];
+// Default Demo Orders in storage if empty (Now 0 dummy orders!)
+const DEFAULT_ORDERS = [];
 
-// Ensure default storage initialized
+// Ensure default storage initialized & purge old test dummy orders
 function initStorage() {
   if (!localStorage.getItem(MF_STORAGE_KEYS.ORDERS)) {
     localStorage.setItem(MF_STORAGE_KEYS.ORDERS, JSON.stringify(DEFAULT_ORDERS));
+  } else {
+    // Automatically purge old SteveMC / AlexGamer test orders from existing localStorage
+    try {
+      let orders = JSON.parse(localStorage.getItem(MF_STORAGE_KEYS.ORDERS) || '[]');
+      const filtered = orders.filter(o => o.clientName !== 'SteveMC' && o.clientName !== 'AlexGamer');
+      if (filtered.length !== orders.length) {
+        localStorage.setItem(MF_STORAGE_KEYS.ORDERS, JSON.stringify(filtered));
+      }
+    } catch(e) {}
   }
   if (!localStorage.getItem(MF_STORAGE_KEYS.USERS)) {
     localStorage.setItem(MF_STORAGE_KEYS.USERS, JSON.stringify([]));
@@ -594,6 +580,24 @@ function loadAvailabilityBadge() {
     }
     if (heroText) heroText.textContent = heroLabel;
   }
+
+  loadAnnouncementBanner();
+}
+
+function loadAnnouncementBanner() {
+  try {
+    const ann = JSON.parse(localStorage.getItem('mineforge_announcement') || '{"enabled":false,"text":""}');
+    const banner = document.getElementById('live-announcement-banner');
+    const textEl = document.getElementById('live-announcement-text');
+    if (banner && textEl) {
+      if (ann.enabled && ann.text) {
+        textEl.textContent = ann.text;
+        banner.style.display = 'block';
+      } else {
+        banner.style.display = 'none';
+      }
+    }
+  } catch(e) {}
 }
 
 function requestCustomQuote(serviceName) {
@@ -728,16 +732,18 @@ function renderAccountDashboard() {
   if (!ordersListElem) return;
 
   if (clientOrders.length === 0) {
+    ordersListElem.style.overflowY = 'hidden';
+    ordersListElem.style.maxHeight = 'none';
     ordersListElem.innerHTML = `
-      <div style="text-align: center; padding: 32px 18px; background: rgba(255,255,255,0.02); border: 1.5px dashed rgba(255,255,255,0.18); border-radius: var(--radius-md); margin-bottom: 16px;">
-        <div style="font-size: 2.6rem; color: var(--text-muted); margin-bottom: 10px;">
+      <div style="text-align: center; padding: 20px 16px; background: rgba(255,255,255,0.02); border: 1.5px dashed rgba(255,255,255,0.18); border-radius: var(--radius-md); margin-bottom: 8px;">
+        <div style="font-size: 2rem; color: var(--text-muted); margin-bottom: 6px;">
           <i class="fa-solid fa-box-open"></i>
         </div>
-        <h5 style="color: #fff; font-size: 1.15rem; margin-bottom: 6px; font-family: 'Outfit', sans-serif;">Order Not Found</h5>
-        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 18px; max-width: 290px; margin-left: auto; margin-right: auto;">
+        <h5 style="color: #fff; font-size: 1.05rem; margin-bottom: 4px; font-family: 'Outfit', sans-serif;">Order Not Found</h5>
+        <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 12px; max-width: 280px; margin-left: auto; margin-right: auto;">
           Aapne abhi tak koi Minecraft mod ya plugin order nahi kiya hai.
         </p>
-        <button class="btn btn-primary" style="padding: 10px 22px; font-size: 0.88rem; font-weight: 700;" onclick="closeModal('account-modal'); window.location.hash='#order';">
+        <button class="btn btn-primary" style="padding: 8px 18px; font-size: 0.82rem; font-weight: 700;" onclick="closeModal('account-modal'); window.location.hash='#order';">
           <i class="fa-solid fa-plus"></i> Place New Order
         </button>
       </div>
@@ -745,6 +751,8 @@ function renderAccountDashboard() {
     return;
   }
 
+  ordersListElem.style.overflowY = 'auto';
+  ordersListElem.style.maxHeight = '220px';
   const now = Date.now();
   ordersListElem.innerHTML = clientOrders.map(order => {
     const orderTime = order.timestamp || now;
