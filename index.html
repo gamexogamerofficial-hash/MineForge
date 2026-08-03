@@ -34,19 +34,22 @@
   <header id="header" class="header">
     <div class="container nav-container">
       
-      <!-- Brand Logo (Gol / Circular Shape) -->
-      <a href="#home" class="logo">
-        <img src="assets/images/logo.png" alt="MineForge Logo" class="nav-logo-img" />
+      <!-- Brand Logo / Name with Availability Badge -->
+      <a href="#hero" class="nav-brand" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+        <img src="assets/images/logo.png" alt="MineForge Logo" class="brand-logo" />
         <span>MineForge</span>
+        <span id="nav-availability-badge" class="nav-avail-pill" onclick="if(window.isAdminGamexo && window.isAdminGamexo()) { openModal('account-modal'); return false; }" title="Studio Live Status — Admin can switch in dashboard" style="font-size: 0.72rem; font-weight: 700; padding: 4px 12px; border-radius: 99px; background: rgba(0, 255, 213, 0.15); border: 1.5px solid #00ffd5; color: #00ffd5; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+          <span id="nav-avail-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #00ffd5; box-shadow: 0 0 8px #00ffd5; display: inline-block;"></span>
+          <span id="nav-avail-text">Open for Orders</span>
+        </span>
       </a>
 
-      <!-- Clean 5-Link Navigation (Plans included, Credits button in right nav actions) -->
+      <!-- Clean 4-Link Navigation (Plans removed, Custom Quote Workflow) -->
       <nav class="nav-menu">
         <ul id="nav-links" class="nav-links">
           <li><a href="#home" class="nav-link active">Home</a></li>
           <li><a href="#services" class="nav-link">Services</a></li>
-          <li><a href="#pricing" class="nav-link">Plans</a></li>
-          <li><a href="#order" class="nav-link">Order & Track</a></li>
+          <li><a href="#order" class="nav-link">Order & Quote</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
       </nav>
@@ -97,10 +100,10 @@
 
     <div class="container">
       <div class="hero-content">
-        <!-- Badge -->
-        <div class="hero-badge">
-          <span class="hero-badge-dot"></span>
-          <span>Official MineForge Development Studio</span>
+        <!-- Live Availability Badge -->
+        <div id="hero-availability-badge" class="hero-badge" style="cursor: pointer; border: 1.5px solid #00ffd5; background: rgba(0, 255, 213, 0.12); color: #00ffd5; margin-bottom: 14px; display: inline-flex; align-items: center; gap: 8px; font-weight: 700; padding: 6px 18px; border-radius: 99px;" onclick="if(window.isAdminGamexo && window.isAdminGamexo()) openModal('account-modal')">
+          <span id="hero-avail-dot" class="hero-badge-dot" style="background: #00ffd5; box-shadow: 0 0 10px #00ffd5;"></span>
+          <span id="hero-avail-text">🟢 Open for Orders — 100% Custom Quotations</span>
         </div>
 
         <!-- Title -->
@@ -180,9 +183,14 @@
               Lightweight, fast aur modern Fabric mods. Custom items, new blocks, UI changes aur game mechanics optimization for all latest versions.
             </p>
           </div>
-          <div class="service-footer">
-            <span>Client & Server</span>
-            <span class="service-tag">1.21 — 26.30+</span>
+          <div class="service-footer" style="display: flex; align-items: center; justify-content: space-between; margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08);">
+            <div>
+              <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Starting From</div>
+              <div style="font-size: 1.2rem; font-weight: 800; color: #00ffd5; font-family: 'Outfit', sans-serif;">$15 <span style="font-size: 0.72rem; color: #8ba1cf; font-weight: 500;">/ quote</span></div>
+            </div>
+            <button class="btn btn-sm btn-primary" onclick="requestCustomQuote('Fabric Mod Development (Starting From $15)')" style="padding: 8px 16px; font-size: 0.82rem; font-weight: 700; border-radius: var(--radius-sm); box-shadow: 0 0 15px rgba(0, 255, 213, 0.3);">
+              <i class="fa-solid fa-file-invoice-dollar"></i> Request Quote
+            </button>
           </div>
         </div>
 
@@ -195,9 +203,14 @@
               Advanced Forge modifications for survival, RPG aur PvP modpacks. Custom entities, dimensions, biomes aur magic systems.
             </p>
           </div>
-          <div class="service-footer">
-            <span>Heavyweight Mods</span>
-            <span class="service-tag">1.21 — 26.30+</span>
+          <div class="service-footer" style="display: flex; align-items: center; justify-content: space-between; margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08);">
+            <div>
+              <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Starting From</div>
+              <div style="font-size: 1.2rem; font-weight: 800; color: #00ffd5; font-family: 'Outfit', sans-serif;">$20 <span style="font-size: 0.72rem; color: #8ba1cf; font-weight: 500;">/ quote</span></div>
+            </div>
+            <button class="btn btn-sm btn-primary" onclick="requestCustomQuote('Forge Mod Development (Starting From $20)')" style="padding: 8px 16px; font-size: 0.82rem; font-weight: 700; border-radius: var(--radius-sm); box-shadow: 0 0 15px rgba(0, 255, 213, 0.3);">
+              <i class="fa-solid fa-file-invoice-dollar"></i> Request Quote
+            </button>
           </div>
         </div>
 
@@ -210,9 +223,14 @@
               High-performance Paper plugins for survival, economy, factions aur minigame servers with zero TPS drop guarantee.
             </p>
           </div>
-          <div class="service-footer">
-            <span>Server Optimized</span>
-            <span class="service-tag">PaperMC 1.21 — 26.30</span>
+          <div class="service-footer" style="display: flex; align-items: center; justify-content: space-between; margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08);">
+            <div>
+              <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Starting From</div>
+              <div style="font-size: 1.2rem; font-weight: 800; color: #00ffd5; font-family: 'Outfit', sans-serif;">$15 <span style="font-size: 0.72rem; color: #8ba1cf; font-weight: 500;">/ quote</span></div>
+            </div>
+            <button class="btn btn-sm btn-primary" onclick="requestCustomQuote('Paper Plugin Development (Starting From $15)')" style="padding: 8px 16px; font-size: 0.82rem; font-weight: 700; border-radius: var(--radius-sm); box-shadow: 0 0 15px rgba(0, 255, 213, 0.3);">
+              <i class="fa-solid fa-file-invoice-dollar"></i> Request Quote
+            </button>
           </div>
         </div>
 
@@ -225,9 +243,14 @@
               Classic and universal Spigot API plugins. Custom GUIs, player ranks, scoreboard systems aur combat mechanics.
             </p>
           </div>
-          <div class="service-footer">
-            <span>Classic API</span>
-            <span class="service-tag">1.21 — 26.30+</span>
+          <div class="service-footer" style="display: flex; align-items: center; justify-content: space-between; margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08);">
+            <div>
+              <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Starting From</div>
+              <div style="font-size: 1.2rem; font-weight: 800; color: #00ffd5; font-family: 'Outfit', sans-serif;">$15 <span style="font-size: 0.72rem; color: #8ba1cf; font-weight: 500;">/ quote</span></div>
+            </div>
+            <button class="btn btn-sm btn-primary" onclick="requestCustomQuote('Spigot Plugin Development (Starting From $15)')" style="padding: 8px 16px; font-size: 0.82rem; font-weight: 700; border-radius: var(--radius-sm); box-shadow: 0 0 15px rgba(0, 255, 213, 0.3);">
+              <i class="fa-solid fa-file-invoice-dollar"></i> Request Quote
+            </button>
           </div>
         </div>
 
@@ -240,9 +263,14 @@
               Aapke existing laggy plugins ya broken mods ke crash logs fix karna, memory leaks hantana aur lag-free bananna.
             </p>
           </div>
-          <div class="service-footer">
-            <span>Emergency Fix</span>
-            <span class="service-tag">Crash Debugging</span>
+          <div class="service-footer" style="display: flex; align-items: center; justify-content: space-between; margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08);">
+            <div>
+              <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Starting From</div>
+              <div style="font-size: 1.2rem; font-weight: 800; color: #00ffd5; font-family: 'Outfit', sans-serif;">$10 <span style="font-size: 0.72rem; color: #8ba1cf; font-weight: 500;">/ quote</span></div>
+            </div>
+            <button class="btn btn-sm btn-primary" onclick="requestCustomQuote('Bug Fixes & Lag Optimization (Starting From $10)')" style="padding: 8px 16px; font-size: 0.82rem; font-weight: 700; border-radius: var(--radius-sm); box-shadow: 0 0 15px rgba(0, 255, 213, 0.3);">
+              <i class="fa-solid fa-file-invoice-dollar"></i> Request Quote
+            </button>
           </div>
         </div>
 
@@ -255,9 +283,14 @@
               Purane Minecraft versions ko 1.21 Drops (Bundles of Bravery, Garden Awakens) se lekar latest 2026 Drops (26.10, 26.30 Chaos Cubed) par migrate karna.
             </p>
           </div>
-          <div class="service-footer">
-            <span>Version Upgrade</span>
-            <span class="service-tag">All 2024–2026 Drops</span>
+          <div class="service-footer" style="display: flex; align-items: center; justify-content: space-between; margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08);">
+            <div>
+              <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Starting From</div>
+              <div style="font-size: 1.2rem; font-weight: 800; color: #00ffd5; font-family: 'Outfit', sans-serif;">$15 <span style="font-size: 0.72rem; color: #8ba1cf; font-weight: 500;">/ quote</span></div>
+            </div>
+            <button class="btn btn-sm btn-primary" onclick="requestCustomQuote('Plugin & Mod Version Migration (Starting From $15)')" style="padding: 8px 16px; font-size: 0.82rem; font-weight: 700; border-radius: var(--radius-sm); box-shadow: 0 0 15px rgba(0, 255, 213, 0.3);">
+              <i class="fa-solid fa-file-invoice-dollar"></i> Request Quote
+            </button>
           </div>
         </div>
 
@@ -293,114 +326,6 @@
           <i class="fa-solid fa-plus"></i>
           <span>Be Our First Featured Client</span>
         </a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- =========================================================================
-       PLANS SECTION (MONTHLY SUBSCRIPTIONS & DIRECT CUSTOM ORDER NOTE)
-       ========================================================================= -->
-  <section id="pricing" class="pricing">
-    <div class="container">
-      
-      <div class="section-header">
-        <div class="section-tag"><i class="fa-solid fa-layer-group"></i> Monthly Subscriptions</div>
-        <h2 class="section-title">Development <span class="highlight">Plans</span></h2>
-        <p class="section-subtitle">
-          Apne server ke scale ke mutabik Monthly Subscription Plans choose karen — ya bina plan ke direct custom order den.
-        </p>
-      </div>
-
-      <div class="pricing-grid">
-        
-        <!-- Tier 1: 🟢 Starter Monthly Plan ($10 / mo) -->
-        <div class="pricing-card tier-starter">
-          <div>
-            <div class="pricing-tier-header">
-              <span class="tier-indicator green-dot">🟢</span>
-              <h3 class="pricing-tier-name">Starter Plan</h3>
-            </div>
-            <p class="pricing-subtitle">Monthly plan jisme aap har 3 din baad 1 naya mod ya plugin banwa sakte hain!</p>
-            <div class="pricing-price-box">
-              <span class="price-currency">$</span>
-              <span class="price-amount">10</span>
-              <span class="price-period">/ month</span>
-            </div>
-            <div class="pricing-features">
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 1 Mod ya Plugin Har 3 Din Mein</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Har 3 Din Baad Naya Order Allow</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Monthly Subscription Access</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 1.21 to 26.30+ Version Support</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Source Code &amp; Discord Support</div>
-            </div>
-          </div>
-          <a href="#order" class="btn btn-outline" style="width: 100%;">Subscribe Starter ($10/mo)</a>
-        </div>
-
-        <!-- Tier 2: 🔵 Pro Monthly Plan ⭐ ($25 / mo) -->
-        <div class="pricing-card popular tier-pro">
-          <div class="popular-badge">⭐ Most Popular</div>
-          <div>
-            <div class="pricing-tier-header">
-              <span class="tier-indicator blue-dot">🔵</span>
-              <h3 class="pricing-tier-name">Pro Plan</h3>
-            </div>
-            <p class="pricing-subtitle">Medium Mods/Plugins, Custom GUIs aur optimization ka monthly suite.</p>
-            <div class="pricing-price-box">
-              <span class="price-currency">$</span>
-              <span class="price-amount">25</span>
-              <span class="price-period">/ month</span>
-            </div>
-            <div class="pricing-features">
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Medium Mods &amp; Plugins (GUI &amp; Config)</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Fast Priority Monthly Queue</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Monthly Subscription Access</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Better TPS &amp; Memory Optimization</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Source Code &amp; Dedicated Support</div>
-            </div>
-          </div>
-          <a href="#order" class="btn btn-primary" style="width: 100%;">Subscribe Pro ($25/mo)</a>
-        </div>
-
-        <!-- Tier 3: 🟣 Enterprise Monthly Plan ($50 / mo) -->
-        <div class="pricing-card tier-enterprise">
-          <div>
-            <div class="pricing-tier-header">
-              <span class="tier-indicator purple-dot">🟣</span>
-              <h3 class="pricing-tier-name">Enterprise Plan</h3>
-            </div>
-            <p class="pricing-subtitle">Large Mods, Custom Systems, Database aur API integration ka monthly suite.</p>
-            <div class="pricing-price-box">
-              <span class="price-currency">$</span>
-              <span class="price-amount">50</span>
-              <span class="price-period">/ month ($75+ scale)</span>
-            </div>
-            <div class="pricing-features">
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Large Mods, Custom Systems &amp; DB</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Unlimited Monthly Custom Scale</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> API Integration &amp; Documentation</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> 1 Month VIP Dedicated Support</div>
-              <div class="pricing-feature-item"><i class="fa-solid fa-check"></i> Complete Source Code Included</div>
-            </div>
-          </div>
-          <a href="#order" class="btn btn-outline" style="width: 100%;">Subscribe Enterprise ($50/mo)</a>
-        </div>
-
-      </div>
-
-      <!-- Direct Custom Order Note for Non-Subscribers -->
-      <div class="direct-order-banner">
-        <div class="direct-order-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
-        <div class="direct-order-content">
-          <h4 class="direct-order-title">Bina Plan Ke Direct Mod / Plugin Banwayein!</h4>
-          <p class="direct-order-desc">
-            Agar aapne koi Monthly Plan nahi liya hua, tab bhi aap niche <strong>Order Form</strong> se apna custom project submit kar sakte hain. Order submit karne ke baad jab aap <strong>Gamexo Labs Discord</strong> par contact karenge, to hum aapke mod ya plugin ke features ke hisab se direct custom quotation (paise) bata denge!
-          </p>
-        </div>
-        <div>
-          <a href="#order" class="btn btn-outline" style="white-space: nowrap; border-color: var(--accent-primary); color: var(--accent-primary);"><i class="fa-solid fa-cart-plus"></i> Order Without Plan</a>
-        </div>
       </div>
 
     </div>
@@ -443,24 +368,20 @@
 
             <div class="form-grid-2">
               <div class="form-group">
-                <label class="form-label" for="build-type">Development Type / Plan *</label>
+                <label class="form-label" for="build-type">Service / Project Type *</label>
                 <select id="build-type" class="form-select" required style="font-family: 'Outfit', sans-serif; font-weight: 600;">
-                  <option value="" disabled selected>-- Select Order Type --</option>
-                  <optgroup label="📋 ACTIVE MONTHLY PLAN ORDERS (For Subscribers)">
-                    <option value="Starter Plan Mod/Plugin">Starter Monthly Plan (3 Days Mod/Plugin)</option>
-                    <option value="Pro Plan Mod/Plugin">Pro Monthly Plan (Medium Mod/Plugin Suite)</option>
-                    <option value="Enterprise Plan Mod/Plugin">Enterprise Monthly Plan (Custom Systems/DB)</option>
-                  </optgroup>
-                  <optgroup label="⚡ DIRECT DEVELOPMENT ORDERS (No Plan Required - One Time)">
-                    <option value="Direct Order - Fabric Mod">Direct Order — Fabric Mod (No Plan Required)</option>
-                    <option value="Direct Order - Forge Mod">Direct Order — Forge Mod (No Plan Required)</option>
-                    <option value="Direct Order - Paper Plugin">Direct Order — Paper / Spigot Plugin (No Plan Required)</option>
-                    <option value="Bug Fix / Optimization">Bug Fix / TPS Optimization (One-time Fix)</option>
-                    <option value="Custom Quotation Project">Other Custom Project (Price on Discord)</option>
-                  </optgroup>
+                  <option value="" disabled selected>-- Select Service Type --</option>
+                  <option value="Fabric Mod Development (Starting From $15)">Fabric Mod Development (Starting From $15)</option>
+                  <option value="Forge Mod Development (Starting From $20)">Forge Mod Development (Starting From $20)</option>
+                  <option value="Paper Plugin Development (Starting From $15)">Paper Plugin Development (Starting From $15)</option>
+                  <option value="Spigot Plugin Development (Starting From $15)">Spigot Plugin Development (Starting From $15)</option>
+                  <option value="Bug Fixes & Lag Optimization (Starting From $10)">Bug Fixes & Lag Optimization (Starting From $10)</option>
+                  <option value="Plugin & Mod Version Migration (Starting From $15)">Plugin & Mod Version Migration (Starting From $15)</option>
+                  <option value="Custom GUI, Menus & Textures (Custom Quote)">Custom GUI, Menus & Textures (Custom Quote)</option>
+                  <option value="Other Custom Development (Custom Quote)">Other Custom Development (Custom Quote)</option>
                 </select>
                 <div style="font-size: 0.78rem; color: #00ffd5; margin-top: 6px; font-weight: 500;">
-                  💡 <em>Plan nahi liya? Koi masla nahi! "Direct Development Orders" se bina plan ke custom mod order karein.</em>
+                  💡 <em>Fixed pricing nahi! Aapke project ke feature specifications aur complexity ke hisaab se final quote Discord par batai jayegi.</em>
                 </div>
               </div>
               <div class="form-group">
@@ -759,7 +680,6 @@
             <h4 class="footer-col-title">Navigation</h4>
             <ul class="footer-links">
               <li><a href="#hero" class="footer-link">Home</a></li>
-              <li><a href="#pricing" class="footer-link">Plans</a></li>
               <li><a href="#order" class="footer-link">Order Form</a></li>
               <li><a href="#faq" class="footer-link">FAQ</a></li>
               <li><a href="#" onclick="openModal('credits-modal'); return false;" class="footer-link">Developer Credits</a></li>
@@ -904,6 +824,26 @@
         <!-- Orders List Container -->
         <div id="dash-orders-list" class="user-orders-list">
           <!-- Populated dynamically via script.js -->
+        </div>
+
+        <!-- Admin Panel: Studio Availability Badge Control (Visible to Admin/Gamexo) -->
+        <div id="admin-availability-panel" style="display: none; background: rgba(0, 255, 213, 0.08); border: 1.5px solid #00ffd5; border-radius: var(--radius-md); padding: 14px; margin-bottom: 20px; box-shadow: 0 0 20px rgba(0,255,213,0.15);">
+          <div style="font-size: 0.88rem; font-weight: 700; color: #00ffd5; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+            <span><i class="fa-solid fa-user-shield"></i> ADMIN PANEL: Studio Availability</span>
+            <span style="font-size: 0.72rem; background: rgba(0,255,213,0.2); padding: 2px 8px; border-radius: 99px;">GAMEXO LABS</span>
+          </div>
+          <p style="font-size: 0.78rem; color: #b4c6e7; margin-bottom: 10px;">Select badge status to display live on navbar and hero section:</p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
+            <button class="btn btn-sm" style="background: rgba(0,255,213,0.2); color: #00ffd5; border: 1px solid #00ffd5; font-size: 0.75rem; padding: 8px 4px; font-weight: 700;" onclick="setAvailabilityBadge('open')">
+              🟢 Open
+            </button>
+            <button class="btn btn-sm" style="background: rgba(255,183,3,0.2); color: #ffb703; border: 1px solid #ffb703; font-size: 0.75rem; padding: 8px 4px; font-weight: 700;" onclick="setAvailabilityBadge('limited')">
+              🟡 Limited
+            </button>
+            <button class="btn btn-sm" style="background: rgba(255,77,77,0.2); color: #ff4d4d; border: 1px solid #ff4d4d; font-size: 0.75rem; padding: 8px 4px; font-weight: 700;" onclick="setAvailabilityBadge('closed')">
+              🔴 Closed
+            </button>
+          </div>
         </div>
 
         <!-- Quick Support Banner inside Dashboard -->

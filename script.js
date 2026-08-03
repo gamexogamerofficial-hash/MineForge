@@ -11,7 +11,8 @@ const MF_STORAGE_KEYS = {
   USERS: 'mineforge_users',
   CURRENT_USER: 'mineforge_current_user',
   ORDERS: 'mineforge_orders',
-  THEME: 'mineforge_theme'
+  THEME: 'mineforge_theme',
+  AVAILABILITY: 'mineforge_availability'
 };
 
 // ==========================================================================
@@ -29,21 +30,23 @@ const DEFAULT_ORDERS = [
     id: 'MF-1001',
     clientName: 'SteveMC',
     discordHandle: 'steve_dev',
-    buildType: 'Fabric Mod',
-    targetVersion: '1.20.4',
-    status: 'Completed',
+    buildType: 'Fabric Mod Development',
+    targetVersion: '1.21.4',
+    status: 'In-Progress',
     desc: 'Custom magic spell animations and glowing item models.',
-    date: '2026-07-28'
+    date: '2026-08-03',
+    timestamp: Date.now() - (2 * 3600 * 1000)
   },
   {
     id: 'MF-1002',
     clientName: 'AlexGamer',
     discordHandle: 'alex_pvp',
-    buildType: 'Paper Plugin',
-    targetVersion: '1.21.1',
+    buildType: 'Paper Plugin Development',
+    targetVersion: '26.30',
     status: 'In-Progress',
     desc: 'Economy shop GUI with custom scoreboard rank integration.',
-    date: '2026-07-29'
+    date: '2026-08-03',
+    timestamp: Date.now() - (5 * 3600 * 1000)
   }
 ];
 
@@ -97,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTestimonialsSlider();
   initFAQAccordion();
   initScrollToTop();
+  loadAvailabilityBadge();
 });
 
 /**
@@ -386,7 +390,8 @@ function initOrderForm() {
       targetVersion: targetVersion,
       status: 'Pending',
       desc: buildDesc,
-      date: new Date().toISOString().split('T')[0]
+      date: new Date().toISOString().split('T')[0],
+      timestamp: Date.now()
     };
 
     // Save order in storage
@@ -527,6 +532,135 @@ function initAccountPortal() {
   renderAccountDashboard();
 }
 
+function isAdminGamexo(user) {
+  const currentUser = user || JSON.parse(localStorage.getItem(MF_STORAGE_KEYS.CURRENT_USER) || 'null');
+  if (!currentUser) return false;
+  const name = (currentUser.username || '').toLowerCase();
+  const disc = (currentUser.discord || '').toLowerCase();
+  return name.includes('gamexo') || disc.includes('gamexo') || currentUser.isAdmin === true;
+}
+
+function setAvailabilityBadge(status) {
+  localStorage.setItem(MF_STORAGE_KEYS.AVAILABILITY, status);
+  loadAvailabilityBadge();
+  showToast(`👑 Availability Status Updated: ${status.toUpperCase()}`);
+}
+
+function loadAvailabilityBadge() {
+  const status = localStorage.getItem(MF_STORAGE_KEYS.AVAILABILITY) || 'open';
+  const navBadge = document.getElementById('nav-availability-badge');
+  const navDot = document.getElementById('nav-avail-dot');
+  const navText = document.getElementById('nav-avail-text');
+  
+  const heroBadge = document.getElementById('hero-availability-badge');
+  const heroDot = document.getElementById('hero-avail-dot');
+  const heroText = document.getElementById('hero-avail-text');
+  
+  let color = '#00ffd5';
+  let bg = 'rgba(0, 255, 213, 0.15)';
+  let label = 'Open for Orders';
+  let heroLabel = '🟢 Open for Orders — 100% Custom Quotations';
+  
+  if (status === 'limited') {
+    color = '#ffb703';
+    bg = 'rgba(255, 183, 3, 0.15)';
+    label = 'Limited Slots';
+    heroLabel = '🟡 Limited Slots Available — Book Your Custom Quote Now';
+  } else if (status === 'closed') {
+    color = '#ff4d4d';
+    bg = 'rgba(255, 77, 77, 0.15)';
+    label = 'Orders Closed';
+    heroLabel = '🔴 Orders Temporarily Closed — Join Discord for Queue Updates';
+  }
+  
+  if (navBadge) {
+    navBadge.style.borderColor = color;
+    navBadge.style.color = color;
+    navBadge.style.background = bg;
+    if (navDot) {
+      navDot.style.background = color;
+      navDot.style.boxShadow = `0 0 8px ${color}`;
+    }
+    if (navText) navText.textContent = label;
+  }
+  
+  if (heroBadge) {
+    heroBadge.style.borderColor = color;
+    heroBadge.style.color = color;
+    heroBadge.style.background = bg;
+    if (heroDot) {
+      heroDot.style.background = color;
+      heroDot.style.boxShadow = `0 0 10px ${color}`;
+    }
+    if (heroText) heroText.textContent = heroLabel;
+  }
+}
+
+function requestCustomQuote(serviceName) {
+  const orderSection = document.getElementById('order');
+  if (orderSection) {
+    orderSection.scrollIntoView({ behavior: 'smooth' });
+  }
+  const buildTypeSelect = document.getElementById('build-type');
+  if (buildTypeSelect) {
+    buildTypeSelect.value = serviceName;
+    buildTypeSelect.style.transition = 'box-shadow 0.3s ease';
+    buildTypeSelect.style.boxShadow = '0 0 25px rgba(0, 255, 213, 0.8)';
+    setTimeout(() => {
+      buildTypeSelect.style.boxShadow = '';
+    }, 1500);
+  }
+  showToast(`💬 Selected: "${serviceName}" — Submit details for a custom Discord quote!`);
+}
+
+function editUserOrder(orderId) {
+  let allOrders = JSON.parse(localStorage.getItem(MF_STORAGE_KEYS.ORDERS) || '[]');
+  const order = allOrders.find(o => o.id === orderId);
+  if (!order) {
+    showToast('❌ Order not found!');
+    return;
+  }
+  const hoursElapsed = (Date.now() - (order.timestamp || Date.now())) / (1000 * 60 * 60);
+  if (hoursElapsed > 24) {
+    showToast('🔒 24-hour edit window has expired for this order.');
+    return;
+  }
+  const newDesc = prompt(`Edit feature description for ${orderId} (within 24h window):`, order.desc || '');
+  if (newDesc !== null && newDesc.trim() !== '') {
+    order.desc = newDesc.trim();
+    localStorage.setItem(MF_STORAGE_KEYS.ORDERS, JSON.stringify(allOrders));
+    renderAccountDashboard();
+    showToast(`✏️ Order ${orderId} updated successfully!`);
+  }
+}
+
+function deleteUserOrder(orderId) {
+  let allOrders = JSON.parse(localStorage.getItem(MF_STORAGE_KEYS.ORDERS) || '[]');
+  const order = allOrders.find(o => o.id === orderId);
+  if (!order) {
+    showToast('❌ Order not found!');
+    return;
+  }
+  const hoursElapsed = (Date.now() - (order.timestamp || Date.now())) / (1000 * 60 * 60);
+  if (hoursElapsed > 24) {
+    showToast('🔒 24-hour delete window has expired for this order.');
+    return;
+  }
+  if (confirm(`Are you sure you want to delete order ${orderId}?`)) {
+    allOrders = allOrders.filter(o => o.id !== orderId);
+    localStorage.setItem(MF_STORAGE_KEYS.ORDERS, JSON.stringify(allOrders));
+    renderAccountDashboard();
+    showToast(`🗑️ Order ${orderId} has been deleted.`);
+  }
+}
+
+window.isAdminGamexo = isAdminGamexo;
+window.setAvailabilityBadge = setAvailabilityBadge;
+window.loadAvailabilityBadge = loadAvailabilityBadge;
+window.requestCustomQuote = requestCustomQuote;
+window.editUserOrder = editUserOrder;
+window.deleteUserOrder = deleteUserOrder;
+
 function renderAccountDashboard() {
   const authContainer = document.getElementById('auth-view-container');
   const dashContainer = document.getElementById('dashboard-view-container');
@@ -564,6 +698,12 @@ function renderAccountDashboard() {
       navIcon.className = 'fa-brands fa-discord';
       navIcon.style.display = 'inline-block';
     }
+  }
+
+  // Admin Availability Panel visibility
+  const adminPanelEl = document.getElementById('admin-availability-panel');
+  if (adminPanelEl) {
+    adminPanelEl.style.display = isAdminGamexo(currentUser) ? 'block' : 'none';
   }
 
   document.getElementById('dash-username').textContent = currentUser.username;
@@ -611,23 +751,37 @@ function renderAccountDashboard() {
     return;
   }
 
-  ordersListElem.innerHTML = clientOrders.map(order => `
-    <div class="user-order-item">
+  const now = Date.now();
+  ordersListElem.innerHTML = clientOrders.map(order => {
+    const orderTime = order.timestamp || now;
+    const hoursElapsed = (now - orderTime) / (1000 * 60 * 60);
+    const canEditDelete = hoursElapsed <= 24;
+    
+    const editBtnHtml = canEditDelete
+      ? `<button class="btn btn-sm" style="background: rgba(0,255,213,0.15); color: #00ffd5; border: 1px solid #00ffd5; padding: 5px 10px; font-size: 0.75rem; border-radius: 6px;" onclick="editUserOrder('${order.id}')" title="Edit Order (24h window)"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
+         <button class="btn btn-sm" style="background: rgba(255,77,77,0.15); color: #ff4d4d; border: 1px solid #ff4d4d; padding: 5px 10px; font-size: 0.75rem; border-radius: 6px;" onclick="deleteUserOrder('${order.id}')" title="Delete Order (24h window)"><i class="fa-solid fa-trash"></i> Delete</button>`
+      : `<span style="font-size: 0.7rem; color: #8ba1cf; background: rgba(255,255,255,0.05); padding: 3px 8px; border-radius: 4px;" title="24-hour edit window has expired"><i class="fa-solid fa-lock"></i> Locked (24h+)</span>`;
+
+    return `
+    <div class="user-order-item" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
       <div>
         <div style="font-family: 'Orbitron', sans-serif; font-weight: 700; color: var(--accent-primary); font-size: 1.05rem;">
           ${order.id}
         </div>
-        <div style="font-size: 0.9rem; color: var(--text-main);">${order.buildType} (${order.targetVersion})</div>
-        <div style="font-size: 0.78rem; color: var(--text-muted);">${order.date}</div>
+        <div style="font-size: 0.9rem; color: var(--text-main); font-weight: 600;">${order.buildType} (${order.targetVersion})</div>
+        <div style="font-size: 0.78rem; color: var(--text-muted);">${order.date} • <span style="color: #00ffd5;">24h Window Active</span></div>
+        ${order.desc ? `<div style="font-size: 0.8rem; color: #b4c6e7; margin-top: 4px; font-style: italic;">"${order.desc}"</div>` : ''}
       </div>
-      <div style="display: flex; align-items: center; gap: 12px;">
+      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
         <span class="order-status-badge status-${order.status.replace(/\s+/g, '-')}" style="font-size: 0.75rem;">${order.status}</span>
-        <button class="btn btn-outline" style="padding: 6px 12px; font-size: 0.78rem;" onclick="trackFromDashboard('${order.id}')">
+        ${editBtnHtml}
+        <button class="btn btn-outline" style="padding: 5px 12px; font-size: 0.75rem;" onclick="trackFromDashboard('${order.id}')">
           Track
         </button>
       </div>
     </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
 function switchAuthTab(tab) {
