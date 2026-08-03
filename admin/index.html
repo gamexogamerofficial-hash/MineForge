@@ -501,6 +501,51 @@
       </div>
     </div>
 
+    </div>
+
+    <!-- Website Features & Live Changelog Controller -->
+    <div class="admin-section-card">
+      <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.35rem; color: #fff; margin: 0 0 6px 0; display: flex; align-items: center; gap: 10px;">
+        <i class="fa-solid fa-bell" style="color: #ffb703;"></i> Studio Updates &amp; Live Changelog Controller
+      </h2>
+      <p style="font-size: 0.88rem; color: #b4c6e7; margin-bottom: 18px;">
+        Push new bug fix notes, features, and announcements directly to the "Studio Updates" bell modal on the live website.
+      </p>
+
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px;">
+        <select id="changelog-badge-input" style="padding: 10px 14px; border-radius: 12px; background: #060913; color: #fff; border: 1px solid rgba(255,183,3,0.4); font-size: 0.9rem; font-weight: 700;">
+          <option value="✨ NEW FEATURE">✨ NEW FEATURE</option>
+          <option value="🛠️ BUG FIX">🛠️ BUG FIX</option>
+          <option value="🚀 VERSION SUPPORT">🚀 VERSION SUPPORT</option>
+          <option value="📢 ANNOUNCEMENT">📢 ANNOUNCEMENT</option>
+        </select>
+        <input type="text" id="changelog-title-input" placeholder="Title (e.g. TPS Optimization & Zero-Lag Builds)" style="flex: 1; min-width: 220px; padding: 10px 14px; border-radius: 12px; background: #060913; color: #fff; border: 1px solid rgba(255,183,3,0.4); font-size: 0.9rem;" />
+      </div>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <input type="text" id="changelog-desc-input" placeholder="Description (e.g. Fixed memory leaks and improved async handling for MC 26.30)" style="flex: 2; min-width: 280px; padding: 10px 14px; border-radius: 12px; background: #060913; color: #fff; border: 1px solid rgba(255,183,3,0.4); font-size: 0.9rem;" />
+        <button onclick="addCustomChangelogItem()" class="btn btn-primary" style="background: linear-gradient(135deg, #ffb703 0%, #fb8500 100%); border: none; padding: 10px 20px; font-weight: 700; border-radius: 12px; color: #000;">
+          <i class="fa-solid fa-plus"></i> Push to Bell Modal
+        </button>
+        <button onclick="clearCustomChangelogs()" class="btn" style="background: rgba(255,77,77,0.15); color: #ff6b6b; border: 1px solid rgba(255,77,77,0.4); padding: 10px 16px; font-weight: 700; border-radius: 12px;" title="Reset custom changelogs">
+          <i class="fa-solid fa-trash"></i> Reset List
+        </button>
+      </div>
+
+      <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <h4 style="margin: 0; color: #fff; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-circle" style="color: #00ffd5; font-size: 10px;"></i> Circular MineForge Logo Mouse Follower
+          </h4>
+          <p style="margin: 4px 0 0 0; font-size: 0.84rem; color: #b4c6e7;">
+            Toggle the glowing MineForge logo badge that follows the user's cursor across the entire website.
+          </p>
+        </div>
+        <button id="btn-follower-toggle" onclick="toggleMouseFollower()" class="btn" style="padding: 8px 18px; font-weight: 800; border-radius: 99px; font-size: 0.85rem; border: 1.5px solid #00ffd5; background: rgba(0,255,213,0.2); color: #00ffd5;">
+          🟢 ON (LIVE)
+        </button>
+      </div>
+    </div>
+
   </div>
 
   <!-- Toast Container -->
@@ -856,6 +901,56 @@
         setTimeout(() => toast.remove(), 300);
       }, 3500);
     }
+
+    function addCustomChangelogItem() {
+      const badge = document.getElementById('changelog-badge-input').value;
+      const title = document.getElementById('changelog-title-input').value.trim();
+      const desc = document.getElementById('changelog-desc-input').value.trim();
+      if (!title || !desc) {
+        showAdminToast('Please provide both Title and Description for the studio update.');
+        return;
+      }
+      let items = JSON.parse(localStorage.getItem('mineforge_custom_changelogs') || '[]');
+      items.unshift({ badge, title, desc, time: 'Live Now' });
+      localStorage.setItem('mineforge_custom_changelogs', JSON.stringify(items));
+      document.getElementById('changelog-title-input').value = '';
+      document.getElementById('changelog-desc-input').value = '';
+      showAdminToast('✨ New studio update pushed live to Bell Modal!');
+    }
+
+    function clearCustomChangelogs() {
+      if (!confirm('Are you sure you want to reset all custom studio changelog notes?')) return;
+      localStorage.removeItem('mineforge_custom_changelogs');
+      showAdminToast('🗑️ Reset custom changelogs to studio default list.');
+    }
+
+    function toggleMouseFollower() {
+      let enabled = localStorage.getItem('mineforge_follower_enabled') !== 'false';
+      enabled = !enabled;
+      localStorage.setItem('mineforge_follower_enabled', enabled ? 'true' : 'false');
+      const btn = document.getElementById('btn-follower-toggle');
+      if (btn) {
+        btn.innerHTML = enabled ? '🟢 ON (LIVE)' : '🔴 OFF (DISABLED)';
+        btn.style.color = enabled ? '#00ffd5' : '#ff6b6b';
+        btn.style.borderColor = enabled ? '#00ffd5' : '#ff6b6b';
+        btn.style.background = enabled ? 'rgba(0,255,213,0.2)' : 'rgba(255,107,107,0.15)';
+      }
+      showAdminToast(enabled ? '✨ Circular MineForge Logo Mouse Follower Enabled' : '🔴 Mouse Follower Disabled');
+    }
+
+    // Initialize follower button state on load
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const enabled = localStorage.getItem('mineforge_follower_enabled') !== 'false';
+        const btn = document.getElementById('btn-follower-toggle');
+        if (btn) {
+          btn.innerHTML = enabled ? '🟢 ON (LIVE)' : '🔴 OFF (DISABLED)';
+          btn.style.color = enabled ? '#00ffd5' : '#ff6b6b';
+          btn.style.borderColor = enabled ? '#00ffd5' : '#ff6b6b';
+          btn.style.background = enabled ? 'rgba(0,255,213,0.2)' : 'rgba(255,107,107,0.15)';
+        }
+      }, 100);
+    });
   </script>
 </body>
 </html>

@@ -623,7 +623,28 @@ function dismissAnnouncement() {
 function openNotificationsModal() {
   localStorage.setItem('mineforge_last_seen_notif', String(Date.now()));
   checkUnreadNotifications();
+  renderCustomChangelogCards();
   openModal('notifications-modal');
+}
+
+function renderCustomChangelogCards() {
+  const container = document.getElementById('dynamic-changelog-list');
+  if (!container) return;
+  const items = JSON.parse(localStorage.getItem('mineforge_custom_changelogs') || '[]');
+  container.innerHTML = items.map(item => {
+    const badgeColor = item.badge.includes('BUG FIX') ? '#ff6b6b' : item.badge.includes('NEW FEATURE') ? '#00ffd5' : '#ffb703';
+    const bgAlpha = item.badge.includes('BUG FIX') ? 'rgba(255,107,107,0.12)' : item.badge.includes('NEW FEATURE') ? 'rgba(0,255,213,0.12)' : 'rgba(255,183,3,0.12)';
+    return `
+      <div style="padding: 14px 16px; border-radius: 12px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(0, 255, 213, 0.3); box-shadow: 0 0 15px rgba(0,255,213,0.1);">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+          <span style="font-size: 0.74rem; font-weight: 700; color: ${badgeColor}; background: ${bgAlpha}; padding: 3px 8px; border-radius: 6px;">${item.badge}</span>
+          <span style="font-size: 0.74rem; color: #64748b;">${item.time || 'Live'}</span>
+        </div>
+        <h4 style="color: #fff; font-size: 0.95rem; margin: 0 0 4px 0; font-family: 'Outfit', sans-serif;">${item.title}</h4>
+        <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.4; margin: 0;">${item.desc}</p>
+      </div>
+    `;
+  }).join('');
 }
 
 function checkUnreadNotifications() {
@@ -1032,45 +1053,44 @@ window.addEventListener('click', (e) => {
 });
 
 // =========================================================================
-// INTERACTIVE MINECRAFT HERO CURSOR FOLLOWER (RESTRICTED TO HERO SECTION)
+// INTERACTIVE CIRCULAR MINEFORGE LOGO CURSOR FOLLOWER (ACROSS ENTIRE WEBSITE)
 // =========================================================================
 document.addEventListener('DOMContentLoaded', () => {
-  const heroSection = document.getElementById('home');
-  const follower = document.getElementById('mc-hero-cursor-follower');
-  if (heroSection && follower) {
-    let mouseX = 0, mouseY = 0;
-    let followerX = 0, followerY = 0;
-    let isInsideHero = false;
+  const follower = document.getElementById('mineforge-cursor-logo');
+  if (follower) {
+    let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+    let followerX = mouseX, followerY = mouseY;
+    let isMoving = false;
 
-    heroSection.addEventListener('mouseenter', () => {
-      isInsideHero = true;
-      follower.style.opacity = '1';
-    });
-
-    heroSection.addEventListener('mouseleave', () => {
-      isInsideHero = false;
-      follower.style.opacity = '0';
-    });
-
-    heroSection.addEventListener('mousemove', (e) => {
-      const rect = heroSection.getBoundingClientRect();
-      mouseX = e.clientX - rect.left;
-      mouseY = e.clientY - rect.top;
-      if (!isInsideHero) {
-        isInsideHero = true;
+    window.addEventListener('mousemove', (e) => {
+      const enabled = localStorage.getItem('mineforge_follower_enabled') !== 'false';
+      if (!enabled) {
+        follower.style.opacity = '0';
+        return;
+      }
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!isMoving) {
+        isMoving = true;
         follower.style.opacity = '1';
       }
     });
 
+    window.addEventListener('mouseleave', () => {
+      follower.style.opacity = '0';
+      isMoving = false;
+    });
+
     function animateFollower() {
-      if (isInsideHero) {
-        followerX += (mouseX - followerX) * 0.18;
-        followerY += (mouseY - followerY) * 0.18;
-        const deltaX = mouseX - followerX;
-        const tilt = Math.max(-15, Math.min(15, deltaX * 0.3));
+      const enabled = localStorage.getItem('mineforge_follower_enabled') !== 'false';
+      if (enabled && isMoving) {
+        followerX += (mouseX - followerX) * 0.22;
+        followerY += (mouseY - followerY) * 0.22;
         follower.style.left = `${followerX}px`;
         follower.style.top = `${followerY}px`;
-        follower.style.transform = `translate(-50%, -140%) rotate(${tilt}deg)`;
+        follower.style.opacity = '1';
+      } else {
+        follower.style.opacity = '0';
       }
       requestAnimationFrame(animateFollower);
     }
