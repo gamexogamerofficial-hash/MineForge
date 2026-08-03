@@ -559,18 +559,18 @@ function loadAvailabilityBadge() {
   let color = '#00ffd5';
   let bg = 'rgba(0, 255, 213, 0.15)';
   let label = 'Open';
-  let heroLabel = '🟢 Open for Orders — 100% Custom Quotations';
+  let heroLabel = '🟢 Open — Currently accepting new projects.';
   
   if (status === 'limited') {
     color = '#ffb703';
     bg = 'rgba(255, 183, 3, 0.15)';
     label = 'Limited';
-    heroLabel = '🟡 Limited Slots Available — Book Your Custom Quote Now';
+    heroLabel = '🟡 Limited — Only a few slots are available.';
   } else if (status === 'closed') {
     color = '#ff4d4d';
     bg = 'rgba(255, 77, 77, 0.15)';
     label = 'Closed';
-    heroLabel = '🔴 Orders Temporarily Closed — Join Discord for Queue Updates';
+    heroLabel = '🔴 Closed — Orders are temporarily closed. Please check back later.';
   }
   
   if (navBadge) {
@@ -698,12 +698,6 @@ function renderAccountDashboard() {
       navIcon.className = 'fa-brands fa-discord';
       navIcon.style.display = 'inline-block';
     }
-  }
-
-  // Admin Availability Panel visibility
-  const adminPanelEl = document.getElementById('admin-availability-panel');
-  if (adminPanelEl) {
-    adminPanelEl.style.display = isAdminGamexo(currentUser) ? 'block' : 'none';
   }
 
   document.getElementById('dash-username').textContent = currentUser.username;

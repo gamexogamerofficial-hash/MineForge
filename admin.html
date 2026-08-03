@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GAMEXO LABS — Master Admin Portal | MineForge Studio</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23060913'/><path d='M20 75 L35 45 L50 65 L65 35 L80 75 Z' fill='%2300ffd5' stroke='%2300ffd5' stroke-width='4'/></svg>" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- CSS Styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    body {
+      background-color: #060913;
+      color: #ffffff;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .admin-container {
+      max-width: 1250px;
+      margin: 0 auto;
+      padding: 30px 20px 60px;
+    }
+
+    .admin-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .admin-title-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .admin-logo-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00ffd5 0%, #00a8ff 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #060913;
+      font-size: 1.4rem;
+      font-weight: 800;
+      box-shadow: 0 0 20px rgba(0, 255, 213, 0.4);
+    }
+
+    /* Stats Grid */
+    .admin-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .admin-stat-card {
+      background: #0f1526;
+      border: 1px solid rgba(0, 255, 213, 0.2);
+      border-radius: 16px;
+      padding: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s ease;
+    }
+    .admin-stat-card:hover {
+      transform: translateY(-3px);
+      border-color: #00ffd5;
+    }
+
+    .admin-stat-info h4 {
+      font-size: 0.82rem;
+      color: #8ba1cf;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .admin-stat-info .num {
+      font-size: 1.85rem;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      color: #00ffd5;
+    }
+
+    .admin-stat-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(0, 255, 213, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #00ffd5;
+    }
+
+    /* Availability Panel */
+    .admin-avail-box {
+      background: #0f1526;
+      border: 1.5px solid #00ffd5;
+      border-radius: 20px;
+      padding: 26px;
+      margin-bottom: 34px;
+      box-shadow: 0 0 30px rgba(0, 255, 213, 0.15);
+    }
+
+    .avail-btn-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .avail-option-btn {
+      padding: 16px 20px;
+      border-radius: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.03);
+      color: #ffffff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+      transition: all 0.22s ease;
+      text-align: left;
+    }
+
+    .avail-option-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .avail-option-btn.active-open {
+      border-color: #00ffd5;
+      background: rgba(0, 255, 213, 0.18);
+      box-shadow: 0 0 20px rgba(0, 255, 213, 0.4);
+    }
+    .avail-option-btn.active-limited {
+      border-color: #ffb703;
+      background: rgba(255, 183, 3, 0.18);
+      box-shadow: 0 0 20px rgba(255, 183, 3, 0.4);
+    }
+    .avail-option-btn.active-closed {
+      border-color: #ff4d4d;
+      background: rgba(255, 77, 77, 0.18);
+      box-shadow: 0 0 20px rgba(255, 77, 77, 0.4);
+    }
+
+    .avail-subtext {
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: #b4c6e7;
+    }
+
+    /* Orders Section */
+    .admin-section-card {
+      background: #0f1526;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 26px;
+      margin-bottom: 34px;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
+    }
+
+    .admin-table-wrapper {
+      overflow-x: auto;
+      margin-top: 18px;
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 750px;
+    }
+
+    .admin-table th {
+      text-align: left;
+      padding: 14px 16px;
+      background: rgba(0, 255, 213, 0.08);
+      color: #00ffd5;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      border-bottom: 2px solid rgba(0, 255, 213, 0.3);
+    }
+
+    .admin-table td {
+      padding: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      font-size: 0.9rem;
+      vertical-align: top;
+    }
+
+    .admin-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Password Modal Protection */
+    .admin-lock-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(6, 9, 19, 0.98);
+      backdrop-filter: blur(15px);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .admin-lock-box {
+      background: #0f1526;
+      border: 2px solid #00ffd5;
+      border-radius: 24px;
+      padding: 36px 32px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 50px rgba(0, 255, 213, 0.25);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOCK / PASSWORD MODAL OVERLAY -->
+  <div id="admin-lock-overlay" class="admin-lock-overlay">
+    <div class="admin-lock-box">
+      <div style="width: 70px; height: 70px; border-radius: 50%; background: rgba(0, 255, 213, 0.15); border: 2px solid #00ffd5; color: #00ffd5; font-size: 2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 0 25px rgba(0, 255, 213, 0.3);">
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <h2 id="lock-title" style="font-family: 'Outfit', sans-serif; font-size: 1.55rem; color: #fff; margin-bottom: 8px;">Master Admin Portal</h2>
+      <p id="lock-subtitle" style="font-size: 0.88rem; color: #b4c6e7; margin-bottom: 24px;">Enter your secure GAMEXO LABS Master Password to access studio controls.</p>
+
+      <form id="admin-auth-form" onsubmit="handleAdminLogin(event)">
+        <div style="margin-bottom: 18px; text-align: left;">
+          <label style="display: block; font-size: 0.8rem; color: #00ffd5; font-weight: 700; margin-bottom: 8px; text-transform: uppercase;" id="lock-input-label">Master Password</label>
+          <input type="password" id="admin-password-input" class="form-input" placeholder="••••••••••••" required style="width: 100%; padding: 14px; font-size: 1rem; border-radius: 12px; background: #060913; color: #fff; border: 1px solid rgba(0, 255, 213, 0.4);" />
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 1rem; font-weight: 800; border-radius: 12px; box-shadow: 0 0 20px rgba(0, 255, 213, 0.4);">
+          <i class="fa-solid fa-shield-halved"></i> <span id="lock-btn-text">Unlock Portal</span>
+        </button>
+      </form>
+
+      <div style="margin-top: 20px; font-size: 0.78rem; color: #64748b;">
+        <i class="fa-solid fa-circle-info"></i> Only authorized studio owner (GAMEXO LABS) can access this page.
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN ADMIN PORTAL CONTENT -->
+  <div class="admin-container" id="admin-main-content" style="display: none;">
+    
+    <!-- Top Header -->
+    <header class="admin-header">
+      <div class="admin-title-group">
+        <div class="admin-logo-badge">
+          <i class="fa-solid fa-terminal"></i>
+        </div>
+        <div>
+          <h1 style="font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 800; color: #fff; margin: 0;">
+            GAMEXO LABS <span style="color: #00ffd5;">Control Center</span>
+          </h1>
+          <p style="font-size: 0.88rem; color: #8ba1cf; margin: 4px 0 0 0;">
+            Live Studio Availability, Client Quotations & Order Management
+          </p>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+        <a href="index.html" class="btn" style="background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.15); font-size: 0.85rem; padding: 10px 16px; border-radius: 10px; text-decoration: none;">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> View Live Site
+        </a>
+        <button onclick="changeMasterPassword()" class="btn" style="background: rgba(0, 255, 213, 0.15); color: #00ffd5; border: 1px solid rgba(0, 255, 213, 0.4); font-size: 0.85rem; padding: 10px 16px; border-radius: 10px; cursor: pointer;">
+          <i class="fa-solid fa-key"></i> Change Password
+        </button>
+        <button onclick="lockAdminPortal()" class="btn" style="background: rgba(255, 77, 77, 0.15); color: #ff6b6b; border: 1px solid rgba(255, 77, 77, 0.4); font-size: 0.85rem; padding: 10px 16px; border-radius: 10px; cursor: pointer;">
+          <i class="fa-solid fa-lock"></i> Lock
+        </button>
+      </div>
+    </header>
+
+    <!-- Stat Cards -->
+    <div class="admin-stats-grid">
+      <div class="admin-stat-card">
+        <div class="admin-stat-info">
+          <h4>Total Client Orders</h4>
+          <div class="num" id="stat-total-orders">0</div>
+        </div>
+        <div class="admin-stat-icon"><i class="fa-solid fa-layer-group"></i></div>
+      </div>
+
+      <div class="admin-stat-card">
+        <div class="admin-stat-info">
+          <h4>Pending Quotes</h4>
+          <div class="num" id="stat-pending-orders" style="color: #ffb703;">0</div>
+        </div>
+        <div class="admin-stat-icon" style="background: rgba(255,183,3,0.1); color: #ffb703;"><i class="fa-solid fa-clock"></i></div>
+      </div>
+
+      <div class="admin-stat-card">
+        <div class="admin-stat-info">
+          <h4>Completed Projects</h4>
+          <div class="num" id="stat-completed-orders" style="color: #00ffd5;">0</div>
+        </div>
+        <div class="admin-stat-icon"><i class="fa-solid fa-check-double"></i></div>
+      </div>
+
+      <div class="admin-stat-card">
+        <div class="admin-stat-info">
+          <h4>Registered Clients</h4>
+          <div class="num" id="stat-total-users" style="color: #a78bfa;">0</div>
+        </div>
+        <div class="admin-stat-icon" style="background: rgba(167,139,250,0.1); color: #a78bfa;"><i class="fa-solid fa-users"></i></div>
+      </div>
+    </div>
+
+    <!-- Studio Availability Controller -->
+    <div class="admin-avail-box">
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.35rem; color: #fff; margin: 0; display: flex; align-items: center; gap: 10px;">
+            <i class="fa-solid fa-sliders" style="color: #00ffd5;"></i> Studio Availability Badge & Status Message
+          </h2>
+          <p style="font-size: 0.88rem; color: #b4c6e7; margin: 4px 0 0 0;">
+            Changes here apply instantly across the entire MineForge website (Hero & Navbar).
+          </p>
+        </div>
+        <div id="current-badge-pill" style="font-weight: 800; font-size: 0.88rem; padding: 6px 14px; border-radius: 99px; background: rgba(0,255,213,0.2); color: #00ffd5; border: 1px solid #00ffd5;">
+          🟢 LIVE: OPEN
+        </div>
+      </div>
+
+      <div class="avail-btn-grid">
+        <!-- Open Button -->
+        <button class="avail-option-btn" id="btn-avail-open" onclick="updateStudioAvailability('open')">
+          <div style="font-size: 1.05rem;"><span style="color: #00ffd5;">🟢</span> Open</div>
+          <div class="avail-subtext">"Currently accepting new projects."</div>
+        </button>
+
+        <!-- Limited Button -->
+        <button class="avail-option-btn" id="btn-avail-limited" onclick="updateStudioAvailability('limited')">
+          <div style="font-size: 1.05rem;"><span style="color: #ffb703;">🟡</span> Limited</div>
+          <div class="avail-subtext">"Only a few slots are available."</div>
+        </button>
+
+        <!-- Closed Button -->
+        <button class="avail-option-btn" id="btn-avail-closed" onclick="updateStudioAvailability('closed')">
+          <div style="font-size: 1.05rem;"><span style="color: #ff4d4d;">🔴</span> Closed</div>
+          <div class="avail-subtext">"Orders are temporarily closed. Please check back later."</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- All Client Orders Table -->
+    <div class="admin-section-card">
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
+        <div>
+          <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.35rem; color: #fff; margin: 0; display: flex; align-items: center; gap: 10px;">
+            <i class="fa-solid fa-list-check" style="color: #00ffd5;"></i> Live Client Project Quotations
+          </h2>
+          <p style="font-size: 0.88rem; color: #b4c6e7; margin: 4px 0 0 0;">
+            Manage all incoming order requests submitted by clients.
+          </p>
+        </div>
+        <div>
+          <button onclick="renderAdminOrders()" class="btn" style="background: rgba(255,255,255,0.08); color: #fff; padding: 8px 14px; font-size: 0.8rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15);">
+            <i class="fa-solid fa-arrows-rotate"></i> Refresh
+          </button>
+        </div>
+      </div>
+
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Client / Discord</th>
+              <th>Project Service Type</th>
+              <th>Target Version</th>
+              <th>Features / Spec Details</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="admin-orders-tbody">
+            <!-- Populated dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Registered Clients Table -->
+    <div class="admin-section-card">
+      <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.35rem; color: #fff; margin: 0 0 6px 0; display: flex; align-items: center; gap: 10px;">
+        <i class="fa-solid fa-user-check" style="color: #a78bfa;"></i> Registered Studio Clients
+      </h2>
+      <p style="font-size: 0.88rem; color: #b4c6e7; margin-bottom: 18px;">
+        Clients who logged in via Discord or Account Portal.
+      </p>
+
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Discord Handle</th>
+              <th>Verified Status</th>
+              <th>Joined Date</th>
+            </tr>
+          </thead>
+          <tbody id="admin-users-tbody">
+            <!-- Populated dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script>
+    // Storage Keys
+    const ADMIN_PASS_KEY = 'mineforge_admin_password';
+    const ORDERS_KEY = 'mineforge_orders';
+    const USERS_KEY = 'mineforge_users';
+    const AVAILABILITY_KEY = 'mineforge_availability';
+
+    // Check if password exists on load
+    window.addEventListener('DOMContentLoaded', () => {
+      const existingPass = localStorage.getItem(ADMIN_PASS_KEY);
+      const title = document.getElementById('lock-title');
+      const subtitle = document.getElementById('lock-subtitle');
+      const btnText = document.getElementById('lock-btn-text');
+      const label = document.getElementById('lock-input-label');
+
+      if (!existingPass) {
+        title.textContent = 'Setup Master Admin Password';
+        subtitle.textContent = 'Welcome Gamexo Labs! Set your one-time secure Master Admin Password to lock this portal.';
+        label.textContent = 'Create New Master Password';
+        btnText.textContent = 'Save & Open Portal';
+      } else {
+        title.textContent = 'Master Admin Portal';
+        subtitle.textContent = 'Enter your secure GAMEXO LABS Master Password to access studio controls.';
+        label.textContent = 'Master Password';
+        btnText.textContent = 'Unlock Portal';
+      }
+
+      // Automatically check session
+      if (sessionStorage.getItem('mineforge_admin_unlocked') === 'true') {
+        unlockUI();
+      }
+    });
+
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const input = document.getElementById('admin-password-input');
+      const val = input.value.trim();
+      if (!val) return;
+
+      const existingPass = localStorage.getItem(ADMIN_PASS_KEY);
+
+      if (!existingPass) {
+        // Setup new password
+        localStorage.setItem(ADMIN_PASS_KEY, val);
+        sessionStorage.setItem('mineforge_admin_unlocked', 'true');
+        showAdminToast('🔐 Master Password successfully created!');
+        unlockUI();
+      } else {
+        // Verify password
+        if (val === existingPass) {
+          sessionStorage.setItem('mineforge_admin_unlocked', 'true');
+          showAdminToast('👑 Welcome back, Gamexo Labs Admin!');
+          unlockUI();
+        } else {
+          showAdminToast('❌ Incorrect Master Password!');
+          input.value = '';
+          input.style.borderColor = '#ff4d4d';
+          setTimeout(() => input.style.borderColor = '', 1500);
+        }
+      }
+    }
+
+    function unlockUI() {
+      document.getElementById('admin-lock-overlay').style.display = 'none';
+      document.getElementById('admin-main-content').style.display = 'block';
+      loadAdminDashboard();
+    }
+
+    function lockAdminPortal() {
+      sessionStorage.removeItem('mineforge_admin_unlocked');
+      document.getElementById('admin-password-input').value = '';
+      document.getElementById('admin-main-content').style.display = 'none';
+      document.getElementById('admin-lock-overlay').style.display = 'flex';
+      showAdminToast('🔒 Portal Locked');
+    }
+
+    function changeMasterPassword() {
+      const current = localStorage.getItem(ADMIN_PASS_KEY);
+      const inputOld = prompt('Enter your CURRENT Master Admin Password:');
+      if (inputOld === null) return;
+
+      if (inputOld !== current) {
+        alert('❌ Incorrect Current Password!');
+        return;
+      }
+
+      const inputNew = prompt('Enter your NEW Master Admin Password:');
+      if (inputNew && inputNew.trim().length >= 4) {
+        localStorage.setItem(ADMIN_PASS_KEY, inputNew.trim());
+        alert('✅ Master Admin Password changed successfully!');
+      } else {
+        alert('❌ Password change cancelled or too short.');
+      }
+    }
+
+    // Availability Controller
+    function updateStudioAvailability(status) {
+      localStorage.setItem(AVAILABILITY_KEY, status);
+      updateAvailButtonsUI(status);
+      showAdminToast(`👑 Availability Status updated to: ${status.toUpperCase()}`);
+    }
+
+    function updateAvailButtonsUI(status) {
+      document.getElementById('btn-avail-open').classList.remove('active-open');
+      document.getElementById('btn-avail-limited').classList.remove('active-limited');
+      document.getElementById('btn-avail-closed').classList.remove('active-closed');
+
+      const badgePill = document.getElementById('current-badge-pill');
+
+      if (status === 'open') {
+        document.getElementById('btn-avail-open').classList.add('active-open');
+        badgePill.innerHTML = '🟢 LIVE: OPEN';
+        badgePill.style.color = '#00ffd5';
+        badgePill.style.borderColor = '#00ffd5';
+        badgePill.style.background = 'rgba(0,255,213,0.2)';
+      } else if (status === 'limited') {
+        document.getElementById('btn-avail-limited').classList.add('active-limited');
+        badgePill.innerHTML = '🟡 LIVE: LIMITED';
+        badgePill.style.color = '#ffb703';
+        badgePill.style.borderColor = '#ffb703';
+        badgePill.style.background = 'rgba(255,183,3,0.2)';
+      } else if (status === 'closed') {
+        document.getElementById('btn-avail-closed').classList.add('active-closed');
+        badgePill.innerHTML = '🔴 LIVE: CLOSED';
+        badgePill.style.color = '#ff4d4d';
+        badgePill.style.borderColor = '#ff4d4d';
+        badgePill.style.background = 'rgba(255,77,77,0.2)';
+      }
+    }
+
+    // Render Dashboard & Orders
+    function loadAdminDashboard() {
+      const avail = localStorage.getItem(AVAILABILITY_KEY) || 'open';
+      updateAvailButtonsUI(avail);
+      renderAdminOrders();
+      renderAdminUsers();
+    }
+
+    function renderAdminOrders() {
+      const orders = JSON.parse(localStorage.getItem(ORDERS_KEY) || '[]');
+      const tbody = document.getElementById('admin-orders-tbody');
+      
+      document.getElementById('stat-total-orders').textContent = orders.length;
+      document.getElementById('stat-pending-orders').textContent = orders.filter(o => !o.status || o.status === 'Pending').length;
+      document.getElementById('stat-completed-orders').textContent = orders.filter(o => o.status === 'Completed').length;
+
+      if (orders.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align: center; padding: 40px; color: #64748b;">
+              <i class="fa-solid fa-box-open" style="font-size: 2.5rem; margin-bottom: 12px; display: block;"></i>
+              No client orders submitted yet.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = orders.slice().reverse().map(o => {
+        const dateStr = new Date(o.timestamp || Date.now()).toLocaleDateString('en-US', {
+          month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'
+        });
+
+        const badgeColor = (o.status === 'Completed') ? '#00ffd5' : (o.status === 'In Progress' ? '#ffb703' : '#a78bfa');
+
+        return `
+          <tr>
+            <td style="font-weight: 800; color: #00ffd5; font-family: 'Outfit', sans-serif;">
+              ${o.id || '#MF-NEW'}<br/>
+              <span style="font-size: 0.75rem; color: #64748b; font-weight: 400;">${dateStr}</span>
+            </td>
+            <td>
+              <strong style="color: #fff;">${o.clientName || 'Client'}</strong><br/>
+              <span style="color: #5865F2; font-weight: 600;"><i class="fa-brands fa-discord"></i> ${o.clientDiscord || 'N/A'}</span>
+            </td>
+            <td style="font-weight: 600; color: #e2e8f0;">${o.type || 'Custom Quotation'}</td>
+            <td><span style="background: rgba(255,255,255,0.06); padding: 4px 10px; border-radius: 6px; font-size: 0.82rem;">${o.version || 'Any'}</span></td>
+            <td style="max-width: 250px; color: #cbd5e1; font-size: 0.86rem; line-height: 1.4;">
+              ${o.desc || 'No description provided.'}
+              ${o.specFile ? `<div style="margin-top: 6px; font-size: 0.78rem; color: #00ffd5;"><i class="fa-solid fa-paperclip"></i> File: ${o.specFile}</div>` : ''}
+            </td>
+            <td>
+              <select onchange="updateOrderStatus('${o.id}', this.value)" style="background: #060913; color: ${badgeColor}; border: 1px solid ${badgeColor}; padding: 6px 10px; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer;">
+                <option value="Pending" ${(!o.status || o.status === 'Pending') ? 'selected' : ''}>Pending Quote</option>
+                <option value="In Progress" ${(o.status === 'In Progress') ? 'selected' : ''}>In Progress</option>
+                <option value="Completed" ${(o.status === 'Completed') ? 'selected' : ''}>Completed</option>
+              </select>
+            </td>
+            <td>
+              <button onclick="deleteClientOrder('${o.id}')" class="btn" style="background: rgba(255,77,77,0.15); color: #ff6b6b; border: 1px solid rgba(255,77,77,0.3); padding: 6px 10px; border-radius: 6px; font-size: 0.8rem; cursor: pointer;" title="Delete Order">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderAdminUsers() {
+      const users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+      const tbody = document.getElementById('admin-users-tbody');
+
+      document.getElementById('stat-total-users').textContent = users.length;
+
+      if (users.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="4" style="text-align: center; padding: 30px; color: #64748b;">
+              No registered client accounts found.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = users.map(u => {
+        return `
+          <tr>
+            <td style="font-weight: 700; color: #fff;">${u.username || 'Client'}</td>
+            <td style="color: #5865F2; font-weight: 600;"><i class="fa-brands fa-discord"></i> ${u.discord || '@discord'}</td>
+            <td>
+              ${u.verifiedDiscord 
+                ? '<span style="color: #00ffd5; font-size: 0.8rem; font-weight: 700;"><i class="fa-solid fa-check-circle"></i> Verified OAuth2</span>'
+                : '<span style="color: #8ba1cf; font-size: 0.8rem;">Standard Account</span>'}
+            </td>
+            <td style="color: #64748b; font-size: 0.82rem;">Registered Member</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function updateOrderStatus(orderId, newStatus) {
+      let orders = JSON.parse(localStorage.getItem(ORDERS_KEY) || '[]');
+      const target = orders.find(o => o.id === orderId);
+      if (target) {
+        target.status = newStatus;
+        localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
+        showAdminToast(`Updated order ${orderId} status to: ${newStatus}`);
+        renderAdminOrders();
+      }
+    }
+
+    function deleteClientOrder(orderId) {
+      if (!confirm(`Are you sure you want to delete order ${orderId}?`)) return;
+      let orders = JSON.parse(localStorage.getItem(ORDERS_KEY) || '[]');
+      orders = orders.filter(o => o.id !== orderId);
+      localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
+      showAdminToast(`Deleted order ${orderId}`);
+      renderAdminOrders();
+    }
+
+    function showAdminToast(msg) {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      const toast = document.createElement('div');
+      toast.className = 'toast show';
+      toast.innerHTML = msg;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+  </script>
+</body>
+</html>
