@@ -28,13 +28,6 @@
     <div class="loader-text">MINEFORGE STUDIO</div>
   </div>
 
-  <!-- =========================================================================
-       LIVE ANNOUNCEMENT BANNER (CONTROLLED DYNAMICALLY FROM ADMIN PORTAL)
-       ========================================================================= -->
-  <div id="live-announcement-banner" style="display: none; background: linear-gradient(90deg, #5865F2 0%, #7c3aed 50%, #00ffd5 100%); color: #ffffff; text-align: center; padding: 10px 16px; font-weight: 700; font-size: 0.88rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 10000; position: relative;">
-    <span id="live-announcement-text">🔥 Welcome to MineForge Studio — 100% Custom Minecraft Mods & Plugins</span>
-  </div>
-
   <header id="header" class="header">
     <div class="container nav-container">
       
@@ -61,6 +54,12 @@
           <span id="nav-avail-dot" style="width: 7px; height: 7px; border-radius: 50%; background: #00ffd5; box-shadow: 0 0 8px #00ffd5; display: inline-block;"></span>
           <span id="nav-avail-text">Open</span>
         </span>
+
+        <!-- Notification Bell Icon (With Dynamic Red Dot Badge) -->
+        <button id="btn-notifications-bell" class="theme-toggle-btn" onclick="openNotificationsModal()" title="Studio Announcements & Updates" style="position: relative;">
+          <i class="fa-solid fa-bell"></i>
+          <span id="bell-red-dot" style="display: none; position: absolute; top: 6px; right: 6px; width: 9px; height: 9px; background: #ff4d4d; border-radius: 50%; box-shadow: 0 0 10px #ff4d4d; border: 1.5px solid #060913;"></span>
+        </button>
 
         <!-- Theme Toggle Button with Clean, Subtle Animation -->
         <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme (Light / Dark)">
@@ -104,8 +103,25 @@
     <div class="hero-bg" style="background-image: url('assets/images/home_bg.png');"></div>
     <div class="hero-overlay"></div>
 
+    <!-- Interactive Minecraft Diamond Sword / Glowing Forge Pet Cursor Follower (ONLY IN HERO SECTION) -->
+    <div id="mc-hero-cursor-follower" style="position: absolute; top: 0; left: 0; pointer-events: none; z-index: 20; opacity: 0; transition: opacity 0.3s ease, transform 0.12s ease-out; display: flex; align-items: center; gap: 8px; background: rgba(6, 9, 19, 0.85); border: 1.5px solid #00ffd5; padding: 6px 14px; border-radius: 99px; box-shadow: 0 0 25px rgba(0, 255, 213, 0.6); backdrop-filter: blur(8px); transform: translate(-50%, -50%);">
+      <span style="font-size: 1.3rem; filter: drop-shadow(0 0 8px #00ffd5);">⚔️</span>
+      <span style="font-family: 'Outfit', sans-serif; font-size: 0.78rem; font-weight: 700; color: #00ffd5; letter-spacing: 0.5px; white-space: nowrap;">✨ MineForge Pet</span>
+    </div>
+
     <div class="container">
       <div class="hero-content">
+        <!-- Live Website Announcement Banner (Cleanly Integrated Below Navbar with Close Button) -->
+        <div id="live-announcement-banner" style="display: none; background: linear-gradient(90deg, #5865F2 0%, #7c3aed 50%, #00ffd5 100%); color: #ffffff; padding: 10px 20px; border-radius: 99px; font-weight: 700; font-size: 0.88rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3); margin-bottom: 18px; max-width: 750px; margin-left: auto; margin-right: auto; position: relative; align-items: center; justify-content: space-between; gap: 12px; border: 1px solid rgba(255,255,255,0.2);">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.1rem;">📢</span>
+            <span id="live-announcement-text">🔥 Welcome to MineForge Studio — 100% Custom Minecraft Mods & Plugins</span>
+          </div>
+          <button onclick="dismissAnnouncement()" style="background: rgba(0,0,0,0.3); border: none; color: #fff; width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.9rem;" title="Close Announcement">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
         <!-- Live Availability Badge -->
         <div id="hero-availability-badge" class="hero-badge" style="cursor: pointer; border: 1.5px solid #00ffd5; background: rgba(0, 255, 213, 0.12); color: #00ffd5; margin-bottom: 14px; display: inline-flex; align-items: center; gap: 8px; font-weight: 700; padding: 6px 18px; border-radius: 99px;" onclick="if(window.isAdminGamexo && window.isAdminGamexo()) openModal('account-modal')">
           <span id="hero-avail-dot" class="hero-badge-dot" style="background: #00ffd5; box-shadow: 0 0 10px #00ffd5;"></span>
@@ -139,7 +155,7 @@
           </a>
           <a href="https://discord.gg/qJYhPEveXP" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="border-color: #5865F2; color: #fff;">
             <i class="fa-brands fa-discord" style="color: #5865F2;"></i>
-            <span>Join Gamexo Labs Discord</span>
+            <span>Join MineForge Discord</span>
           </a>
         </div>
 
@@ -151,7 +167,7 @@
           </div>
           <div class="stat-box">
             <div class="stat-number">24/7</div>
-            <div class="stat-label">Gamexo Labs Community</div>
+            <div class="stat-label">MineForge Studio Support</div>
           </div>
           <div class="stat-box">
             <div class="stat-number">99.9%</div>
@@ -506,12 +522,12 @@
         <!-- FAQ 1 -->
         <div class="faq-item">
           <button class="faq-question">
-            <span>1. Starter Monthly Plan mein 3 din mein 1 mod kaisey banta hai?</span>
+            <span>1. Custom Minecraft Mod ya Plugin ka order kaise place karein?</span>
             <span class="faq-icon"><i class="fa-solid fa-chevron-down"></i></span>
           </button>
           <div class="faq-answer">
             <p class="faq-answer-text">
-              Starter Plan ($10/mo) lene ke baad aap har 3 din baad naya single-feature mod ya utility plugin banwa sakte hain. Jab pehla mod deliver ho jaye, to 3 din baad aap dubara naya order submit kar sakte hain!
+              Aap hamare "Order &amp; Quote" form me apni service type, Minecraft version aur project specifications submit kar sakte hain. Submitting ke baad hum aapke project ka review karenge aur custom quotation wa delivery time provide karenge.
             </p>
           </div>
         </div>
@@ -519,12 +535,12 @@
         <!-- FAQ 2 -->
         <div class="faq-item">
           <button class="faq-question">
-            <span>2. Agar mene koi Monthly Plan nahi liya hua, kya tab bhi mod banwa sakta hun?</span>
+            <span>2. Project ki keemat (price) aur delivery time kaise decide hota hai?</span>
             <span class="faq-icon"><i class="fa-solid fa-chevron-down"></i></span>
           </button>
           <div class="faq-answer">
             <p class="faq-answer-text">
-              Ji bilkul! Agar aapne koi plan nahi liya tab bhi aap Order Form se direct order de sakte hain. Form submit karne ke baad jab aap Gamexo Labs Discord par humse contact karenge, to hum aapke features ke hisab se price aur time align kar lenge.
+              Har mod ya plugin ki complexity aur features ke hisab se custom price decide ki jaati hai. Koi fixed plans ya forced packages nahi hain — aapko sirf apne project ke mutabiq fair quote milta hai. Basic plugins 1-3 din aur advanced mods me requirements ke mutabiq time lagta hai.
             </p>
           </div>
         </div>
@@ -532,12 +548,12 @@
         <!-- FAQ 3 -->
         <div class="faq-item">
           <button class="faq-question">
-            <span>3. Kya aap 1.21 ke sath naye 2026 Game Drops (26.10, 26.30 Chaos Cubed) support karte hain?</span>
+            <span>3. Kya aap Minecraft 1.21 aur naye 2026 Game Drops (26.10, 26.30 Chaos Cubed) support karte hain?</span>
             <span class="faq-icon"><i class="fa-solid fa-chevron-down"></i></span>
           </button>
           <div class="faq-answer">
             <p class="faq-answer-text">
-              Bilkul! Hum 1.21.X (Bundles of Bravery, Garden Awakens, Spring to Life, Chase the Skies, The Copper Age, Mounts of Mayhem) se lekar naye saal ke numbering system — 26.10 (Tiny Takeover), 26.30 (Chaos Cubed) aur 26.50+ tak sabhi versions par mods aur plugins tayyar karte hain.
+              Ji haan! Hum 1.21.X se lekar naye saal ke numbering system — 26.10 (Tiny Takeover), 26.30 (Chaos Cubed) aur 26.50+ tak sabhi versions aur platforms (Fabric, Forge, Paper, Purpur, Spigot) par fully optimized mods aur plugins tayyar karte hain.
             </p>
           </div>
         </div>
@@ -545,12 +561,38 @@
         <!-- FAQ 4 -->
         <div class="faq-item">
           <button class="faq-question">
-            <span>4. Payment kis tarah ki ja sakti hai?</span>
+            <span>4. Order submit karne ke baad kya karna hoga?</span>
             <span class="faq-icon"><i class="fa-solid fa-chevron-down"></i></span>
           </button>
           <div class="faq-answer">
             <p class="faq-answer-text">
-              Hum Discord par order confirm karne ke baad PayPal, Crypto (USDT), Bank Transfer aur regional payment methods ke zariye secure transaction accept karte hain.
+              Order submit karne ke baad aapko apni unique Order ID milegi. Hamare official Discord server par join karke Order ID share karein taake hum aapke sath custom quote aur development progress live share kar saken.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>5. Payment kis tarah ki ja sakti hai?</span>
+            <span class="faq-icon"><i class="fa-solid fa-chevron-down"></i></span>
+          </button>
+          <div class="faq-answer">
+            <p class="faq-answer-text">
+              Hum PayPal, Stripe, Crypto (USDT), Bank Transfer aur regional payment methods ke zariye secure transactions accept karte hain. Quote confirm hone ke baad payment details share ki jaati hain.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 6 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>6. Kya mod ya plugin banne ke baad bug fixes aur support milta hai?</span>
+            <span class="faq-icon"><i class="fa-solid fa-chevron-down"></i></span>
+          </button>
+          <div class="faq-answer">
+            <p class="faq-answer-text">
+              Ji bilkul! Hum har custom project ke sath free technical support aur bug fixes provide karte hain taake aapka Minecraft server hamesha crash-free aur smooth chale.
             </p>
           </div>
         </div>
@@ -921,6 +963,67 @@
         <span>Designed &amp; Engineered by GAMEXO &copy; 2026 MineForge Studio</span>
       </div>
 
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 4: STUDIO ANNOUNCEMENTS & NOTIFICATIONS MODAL (BELL ICON)
+       ========================================================================= -->
+  <div id="notifications-modal" class="modal-overlay">
+    <div class="modal-content account-modal-content" style="max-width: 480px !important;">
+      <button class="modal-close-btn" onclick="closeModal('notifications-modal')" aria-label="Close Notifications Modal"><i class="fa-solid fa-xmark"></i></button>
+
+      <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 22px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 16px;">
+        <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(0, 255, 213, 0.15); border: 1px solid #00ffd5; color: #00ffd5; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+          <i class="fa-solid fa-bell"></i>
+        </div>
+        <div>
+          <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.3rem; margin: 0; color: #fff;">Studio <span class="highlight">Updates</span></h3>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin: 2px 0 0 0;">Live announcements &amp; development news</p>
+        </div>
+      </div>
+
+      <div id="notif-modal-list" style="display: flex; flex-direction: column; gap: 14px; max-height: 380px; overflow-y: auto;">
+        <!-- Live Admin Announcement Card (Shown if active) -->
+        <div id="notif-admin-card" style="display: none; padding: 16px; border-radius: 14px; background: linear-gradient(135deg, rgba(88,101,242,0.18) 0%, rgba(124,58,237,0.18) 100%); border: 1.5px solid #a78bfa; box-shadow: 0 0 20px rgba(167,139,250,0.2);">
+          <div style="display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 0.78rem; color: #a78bfa; text-transform: uppercase; margin-bottom: 6px;">
+            <i class="fa-solid fa-bullhorn"></i> SPECIAL STUDIO NOTICE
+          </div>
+          <div id="notif-admin-text" style="color: #fff; font-size: 0.92rem; font-weight: 600; line-height: 1.4;">
+            Custom Mod Season Open!
+          </div>
+        </div>
+
+        <!-- Studio Update 1 -->
+        <div style="padding: 14px 16px; border-radius: 12px; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-subtle);">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+            <span style="font-size: 0.76rem; font-weight: 700; color: #00ffd5; background: rgba(0,255,213,0.1); padding: 3px 8px; border-radius: 6px;">NEW VERSION</span>
+            <span style="font-size: 0.74rem; color: #64748b;">2026</span>
+          </div>
+          <h4 style="color: #fff; font-size: 0.95rem; margin: 0 0 4px 0; font-family: 'Outfit', sans-serif;">Minecraft 26.30 Chaos Cubed Supported!</h4>
+          <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.4; margin: 0;">
+            1.21.X to 26.30 Chaos Cubed &amp; 26.50+ are now fully supported across Fabric, Forge, Paper and Spigot.
+          </p>
+        </div>
+
+        <!-- Studio Update 2 -->
+        <div style="padding: 14px 16px; border-radius: 12px; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-subtle);">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+            <span style="font-size: 0.76rem; font-weight: 700; color: #ffb703; background: rgba(255,183,3,0.1); padding: 3px 8px; border-radius: 6px;">SYSTEM UPDATE</span>
+            <span style="font-size: 0.74rem; color: #64748b;">Live</span>
+          </div>
+          <h4 style="color: #fff; font-size: 0.95rem; margin: 0 0 4px 0; font-family: 'Outfit', sans-serif;">100% Custom Quotation System</h4>
+          <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.4; margin: 0;">
+            No forced packages! Submit your project details and get a custom, fair quotation directly.
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top: 20px; text-align: center;">
+        <button class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 0.9rem;" onclick="closeModal('notifications-modal'); window.location.hash='#order';">
+          <i class="fa-solid fa-bolt"></i> Request Custom Quote
+        </button>
+      </div>
     </div>
   </div>
 

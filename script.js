@@ -589,12 +589,53 @@ function loadAnnouncementBanner() {
     const ann = JSON.parse(localStorage.getItem('mineforge_announcement') || '{"enabled":false,"text":""}');
     const banner = document.getElementById('live-announcement-banner');
     const textEl = document.getElementById('live-announcement-text');
+    const notifCard = document.getElementById('notif-admin-card');
+    const notifText = document.getElementById('notif-admin-text');
+
     if (banner && textEl) {
-      if (ann.enabled && ann.text) {
+      if (ann.enabled && ann.text && !sessionStorage.getItem('mineforge_banner_dismissed')) {
         textEl.textContent = ann.text;
-        banner.style.display = 'block';
+        banner.style.display = 'flex';
       } else {
         banner.style.display = 'none';
+      }
+    }
+
+    if (notifCard && notifText) {
+      if (ann.enabled && ann.text) {
+        notifText.textContent = ann.text;
+        notifCard.style.display = 'block';
+      } else {
+        notifCard.style.display = 'none';
+      }
+    }
+
+    checkUnreadNotifications();
+  } catch(e) {}
+}
+
+function dismissAnnouncement() {
+  sessionStorage.setItem('mineforge_banner_dismissed', '1');
+  const banner = document.getElementById('live-announcement-banner');
+  if (banner) banner.style.display = 'none';
+}
+
+function openNotificationsModal() {
+  localStorage.setItem('mineforge_last_seen_notif', String(Date.now()));
+  checkUnreadNotifications();
+  openModal('notifications-modal');
+}
+
+function checkUnreadNotifications() {
+  try {
+    const lastSeen = Number(localStorage.getItem('mineforge_last_seen_notif') || 0);
+    const notifTime = Number(localStorage.getItem('mineforge_notif_time') || 1785000000000);
+    const redDot = document.getElementById('bell-red-dot');
+    if (redDot) {
+      if (notifTime > lastSeen) {
+        redDot.style.display = 'block';
+      } else {
+        redDot.style.display = 'none';
       }
     }
   } catch(e) {}
@@ -988,4 +1029,54 @@ window.addEventListener('click', (e) => {
       modal.classList.remove('active');
     }
   });
+});
+
+// =========================================================================
+// INTERACTIVE MINECRAFT HERO CURSOR FOLLOWER (RESTRICTED TO HERO SECTION)
+// =========================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  const heroSection = document.getElementById('home');
+  const follower = document.getElementById('mc-hero-cursor-follower');
+  if (heroSection && follower) {
+    let mouseX = 0, mouseY = 0;
+    let followerX = 0, followerY = 0;
+    let isInsideHero = false;
+
+    heroSection.addEventListener('mouseenter', () => {
+      isInsideHero = true;
+      follower.style.opacity = '1';
+    });
+
+    heroSection.addEventListener('mouseleave', () => {
+      isInsideHero = false;
+      follower.style.opacity = '0';
+    });
+
+    heroSection.addEventListener('mousemove', (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
+      if (!isInsideHero) {
+        isInsideHero = true;
+        follower.style.opacity = '1';
+      }
+    });
+
+    function animateFollower() {
+      if (isInsideHero) {
+        followerX += (mouseX - followerX) * 0.18;
+        followerY += (mouseY - followerY) * 0.18;
+        const deltaX = mouseX - followerX;
+        const tilt = Math.max(-15, Math.min(15, deltaX * 0.3));
+        follower.style.left = `${followerX}px`;
+        follower.style.top = `${followerY}px`;
+        follower.style.transform = `translate(-50%, -140%) rotate(${tilt}deg)`;
+      }
+      requestAnimationFrame(animateFollower);
+    }
+    animateFollower();
+  }
+
+  // Initialize notification bell red dot check
+  checkUnreadNotifications();
 });

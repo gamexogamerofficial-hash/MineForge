@@ -391,8 +391,11 @@
 
       <div style="display: flex; gap: 10px; flex-wrap: wrap;">
         <input type="text" id="announce-text-input" placeholder="e.g. 🔥 Spring Custom Mod Season Open — Request Your Free Custom Quote Now!" style="flex: 1; min-width: 280px; padding: 12px 16px; border-radius: 12px; background: #060913; color: #fff; border: 1px solid rgba(167,139,250,0.4); font-size: 0.95rem;" />
-        <button onclick="saveAnnouncementText()" class="btn btn-primary" style="background: linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%); border: none; padding: 12px 24px; font-weight: 700; border-radius: 12px;">
+        <button onclick="saveAnnouncementText()" class="btn btn-primary" style="background: linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%); border: none; padding: 12px 22px; font-weight: 700; border-radius: 12px;">
           <i class="fa-solid fa-floppy-disk"></i> Save & Push Live
+        </button>
+        <button onclick="deleteAnnouncementText()" class="btn" style="background: rgba(255, 77, 77, 0.15); color: #ff6b6b; border: 1px solid rgba(255, 77, 77, 0.4); padding: 12px 18px; font-weight: 700; border-radius: 12px;" title="Completely remove announcement from website">
+          <i class="fa-solid fa-trash-can"></i> Remove
         </button>
       </div>
     </div>
@@ -635,8 +638,17 @@
       ann.text = text || '🔥 Custom Minecraft Mods & Plugins — Request Your Quote Today!';
       ann.enabled = true;
       localStorage.setItem(ANNOUNCE_KEY, JSON.stringify(ann));
+      localStorage.setItem('mineforge_notif_time', String(Date.now()));
       updateAnnounceUI();
       showAdminToast('📢 Announcement text saved and pushed live!');
+    }
+
+    function deleteAnnouncementText() {
+      let ann = { enabled: false, text: '' };
+      localStorage.setItem(ANNOUNCE_KEY, JSON.stringify(ann));
+      document.getElementById('announce-text-input').value = '';
+      updateAnnounceUI();
+      showAdminToast('🗑️ Announcement completely cleared & removed from website!');
     }
 
     function updateAnnounceUI() {
