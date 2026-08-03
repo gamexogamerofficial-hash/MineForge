@@ -558,18 +558,18 @@ function loadAvailabilityBadge() {
   
   let color = '#00ffd5';
   let bg = 'rgba(0, 255, 213, 0.15)';
-  let label = 'Open for Orders';
+  let label = 'Open';
   let heroLabel = '🟢 Open for Orders — 100% Custom Quotations';
   
   if (status === 'limited') {
     color = '#ffb703';
     bg = 'rgba(255, 183, 3, 0.15)';
-    label = 'Limited Slots';
+    label = 'Limited';
     heroLabel = '🟡 Limited Slots Available — Book Your Custom Quote Now';
   } else if (status === 'closed') {
     color = '#ff4d4d';
     bg = 'rgba(255, 77, 77, 0.15)';
-    label = 'Orders Closed';
+    label = 'Closed';
     heroLabel = '🔴 Orders Temporarily Closed — Join Discord for Queue Updates';
   }
   

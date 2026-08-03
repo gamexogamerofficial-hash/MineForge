@@ -34,17 +34,13 @@
   <header id="header" class="header">
     <div class="container nav-container">
       
-      <!-- Brand Logo / Name with Availability Badge -->
-      <a href="#hero" class="nav-brand" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
-        <img src="assets/images/logo.png" alt="MineForge Logo" class="brand-logo" />
-        <span>MineForge</span>
-        <span id="nav-availability-badge" class="nav-avail-pill" onclick="if(window.isAdminGamexo && window.isAdminGamexo()) { openModal('account-modal'); return false; }" title="Studio Live Status — Admin can switch in dashboard" style="font-size: 0.72rem; font-weight: 700; padding: 4px 12px; border-radius: 99px; background: rgba(0, 255, 213, 0.15); border: 1.5px solid #00ffd5; color: #00ffd5; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
-          <span id="nav-avail-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #00ffd5; box-shadow: 0 0 8px #00ffd5; display: inline-block;"></span>
-          <span id="nav-avail-text">Open for Orders</span>
-        </span>
+      <!-- Brand Logo / Name (Circular 40x40 Gol Logo) -->
+      <a href="#hero" class="nav-brand" style="display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0;">
+        <img src="assets/images/logo.png" alt="MineForge Logo" class="brand-logo nav-logo-img" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #00ffd5; box-shadow: 0 0 10px rgba(0,255,213,0.4);" />
+        <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.35rem; letter-spacing: 0.5px;">MineForge</span>
       </a>
 
-      <!-- Clean 4-Link Navigation (Plans removed, Custom Quote Workflow) -->
+      <!-- Clean 4-Link Navigation -->
       <nav class="nav-menu">
         <ul id="nav-links" class="nav-links">
           <li><a href="#home" class="nav-link active">Home</a></li>
@@ -55,8 +51,14 @@
       </nav>
 
       <!-- Right Navigation Actions -->
-      <div class="nav-actions">
-        <!-- Theme Toggle Button with Sleek Animation -->
+      <div class="nav-actions" style="display: flex; align-items: center; gap: 12px; flex-shrink: 0;">
+        <!-- Compact Studio Availability Pill -->
+        <span id="nav-availability-badge" class="nav-avail-pill" onclick="if(window.isAdminGamexo && window.isAdminGamexo()) { openModal('account-modal'); return false; }" title="Studio Live Status — Admin can switch in dashboard" style="font-size: 0.74rem; font-weight: 700; padding: 5px 12px; border-radius: 99px; background: rgba(0, 255, 213, 0.15); border: 1.5px solid #00ffd5; color: #00ffd5; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; white-space: nowrap;">
+          <span id="nav-avail-dot" style="width: 7px; height: 7px; border-radius: 50%; background: #00ffd5; box-shadow: 0 0 8px #00ffd5; display: inline-block;"></span>
+          <span id="nav-avail-text">Open</span>
+        </span>
+
+        <!-- Theme Toggle Button with Clean, Subtle Animation -->
         <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme (Light / Dark)">
           <i class="fa-solid fa-moon"></i>
         </button>
